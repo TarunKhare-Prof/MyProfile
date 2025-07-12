@@ -45,15 +45,13 @@ nav button:hover {
   transform: scale(1.05);
 }
 
-.tab-content {
-  display: none;
-  padding: 30px;
-  margin: 20px auto;
-  max-width: 900px;
-  background-color: rgba(255, 255, 255, 0.85);
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+/* Fix for paragraph content truncation */
+.tab-content p {
+  overflow: visible;
+  text-overflow: unset;
+  white-space: normal;
 }
+
 
 .tab-content.active {
   display: block;
