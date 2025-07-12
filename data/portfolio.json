@@ -12,7 +12,7 @@
 		"Proven expertise in SIL-level testing, remote MPU/DDU validation, and integrated testing pipelines using TestStand and Windchill Modeler. ",
 		"Additionally, self-driven in exploring emerging technologies through personal projects such as Python-Flask-based stock and crypto screeners ",
 		"using Dhan and Delta APIs, ESP-based IoT systems, smart home automation using Sinric Pro, and 3D printing for functional prototypes.",
-		"Passionate about building robust software-hardware integrated systems and mentoring teams to leverage automation and innovation for efficiency and scalability.",
+		"Passionate about building robust software-hardware integrated systems and mentoring teams to leverage automation and innovation for efficiency and scalability."
       ]
     },
     {
@@ -47,10 +47,8 @@
 		  "title": "1000W Stereo Audio Amplifier with Transistors 2SC5200 and 2SA1943",
 		  "type": "image",
 		  "src": "images/1000W Stereo Audio Amplifier with Transistors 2SC5200 and 2SA1943.jpg",
-		  "description": ["This PCB Design was made during my college days, for one of my junior, its an audion amplified",
-		                 "can handle upto 1000w speakers with noise suppression",
-						 "created using Transistors 2SC5200 and 2SA1943 , PCB Designed using Diptrace [two layer]",
-						 ]
+		  "description": "This PCB Design was made during my college days, can handle upto 1000W speakers with noise suppression. Created using Transistors 2SC5200 and 2SA1943, PCB designed in Diptrace (2-layer)."
+
 		}
 	,
 		{
