@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tarun Khare - Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #ffffff;
+      color: #333;
+    }
+
+    header {
+      background-color: rgba(0, 0, 0, 0.05);
+      padding: 20px;
+      text-align: center;
+      font-size: 32px;
+      font-weight: bold;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.05);
+      padding: 10px;
+      gap: 10px;
+    }
+
+    nav button {
+      background-color: rgba(0, 0, 0, 0.05);
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+
+    nav button:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .tab-content {
+      display: none;
+      padding: 20px;
+    }
+
+    .active {
+      display: block;
+    }
+
+    h2 {
+      color: #004080;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>Tarun Khare - Sr. Software Engineer</header>
+  <nav>
+    <button onclick="showTab('summary')">Profile Summary</button>
+    <button onclick="showTab('experience')">Work Experience</button>
+    <button onclick="showTab('projects')">Projects</button>
+    <button onclick="showTab('skills')">Skills</button>
+    <button onclick="showTab('education')">Education</button>
+    <button onclick="showTab('contact')">Contact</button>
+  </nav>
+
+  <div id="summary" class="tab-content active">
+    <h2>Profile Summary</h2>
+    <p>Technically diverse Senior Software Engineer with over 6.5 years of experience in full-stack software development, embedded automation, and validation frameworks across the transportation and fintech domains. Adept at developing tools using C#, Python, and VB.NET for automation, testing, data processing, and UI applications.</p>
+    <p>Proven expertise in SIL-level testing, remote MPU/DDU validation, and integrated testing pipelines using TestStand and Windchill Modeler. Built Python-Flask stock and crypto screeners, ESP-based IoT systems, and 3D printing projects.</p>
+  </div>
+
+  <div id="experience" class="tab-content">
+    <h2>Work Experience</h2>
+    <h3>Sr Software Engineer - Alstom (2023-10 to Present)</h3>
+    <ul>
+      <li>Built real-time diagnostics and validation tools in C# and Python.</li>
+      <li>Automated documentation using VB.NET and Excel Macros (60% effort saved).</li>
+      <li>Created reusable backend logic using Flask and WinForms.</li>
+      <li>Used Windchill Modeler for architecture modeling.</li>
+      <li>Led SIL, MPU, DDU validation workflows.</li>
+    </ul>
+    <h3>Software Engineer - Tech Mahindra (2022-02 to 2023-10)</h3>
+    <ul>
+      <li>Developed automation using C#, Excel Interop, VB.NET.</li>
+    </ul>
+    <h3>Software Engineer - Cyient (2018-11 to 2022-02)</h3>
+    <ul>
+      <li>Designed test plans for 24+ train features.</li>
+      <li>Built Excel tools for logging/validation.</li>
+      <li>Performed black-box testing; logged 150+ issues.</li>
+      <li>Developed automation tools for QA.</li>
+    </ul>
+  </div>
+
+  <div id="projects" class="tab-content">
+    <h2>Projects</h2>
+    <ul>
+      <li>Python-Flask based stock and crypto screeners using Dhan and Delta APIs</li>
+      <li>ESP-based IoT systems with Sinric Pro</li>
+      <li>3D printing for prototyping</li>
+      <li>Train software testing tools using C#, Python, WinForms</li>
+    </ul>
+  </div>
+
+  <div id="skills" class="tab-content">
+    <h2>Skills</h2>
+    <ul>
+      <li><strong>Languages & Frameworks:</strong> C#, Python, VB.NET, HTML, CSS, JavaScript (basic), Tkinter, WinForms</li>
+      <li><strong>Backend & APIs:</strong> Flask, SQL, REST APIs, Excel Automation</li>
+      <li><strong>Tools & Platforms:</strong> TestStand, Windchill Modeler, Excel Macros, Git, GitHub, GitLab, IBM EWM</li>
+      <li><strong>Testing:</strong> SIL-level, black-box, Codesys HMI</li>
+      <li><strong>IoT:</strong> ESP32, ESP8266, Sinric Pro</li>
+    </ul>
+  </div>
+
+  <div id="education" class="tab-content">
+    <h2>Education</h2>
+    <ul>
+      <li><strong>Bachelor of Engineering:</strong> Electrical & Electronics, LNCT, Indore (2017-08)</li>
+      <li><strong>Senior Secondary:</strong> PCM + Computer Science, St. Michael's School, Satna (2013-07)</li>
+      <li><strong>Higher Secondary:</strong> St. Michael's School, Satna (2011-07)</li>
+    </ul>
+  </div>
+
+  <div id="contact" class="tab-content">
+    <h2>Contact</h2>
+    <p><strong>Location:</strong> Bengaluru, India 560102</p>
+    <p><strong>Phone:</strong> 7338071923</p>
+    <p><strong>Email:</strong> tarun.vbc.gg@gmail.com</p>
+  </div>
+
+  <script>
+    function showTab(tabId) {
+      const contents = document.querySelectorAll('.tab-content');
+      contents.forEach((el) => el.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+    }
+  </script>
+</body>
+
+</html>
