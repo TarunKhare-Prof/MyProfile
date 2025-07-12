@@ -1,21 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tarun Khare - Portfolio</title>
+  <title>Tarun Khare – Portfolio</title>
+
+  <!-- Main stylesheet -->
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
-  <!-- ===== HEADER WITH IMAGE & NAME ===== -->
+  <!-- ===== HEADER ===== -->
   <header>
+    <!-- Decorative wave -->
+    <svg class="wave" viewBox="0 0 1440 90" preserveAspectRatio="none">
+      <path d="M0,50 C400,140 1040,-40 1440,50 L1440,90 L0,90 Z"></path>
+    </svg>
+
     <div class="header-content">
-      <img src="images/profile.jpg" alt="Tarun Khare" class="profile-pic" id="profileImage" />
+      <img src="images/profile.jpg" alt="Tarun Khare" class="profile-pic" />
       <div class="text-content">
         <h1>Tarun Khare</h1>
         <h2>Sr. Software Engineer</h2>
+        <a class="resume-btn"
+           href="assets/TarunKhare_Resume.pdf" download>
+           <i class="fa-solid fa-file-arrow-down"></i> Download Resume
+        </a>
       </div>
     </div>
   </header>
@@ -23,67 +37,121 @@
   <!-- ===== NAVIGATION ===== -->
   <nav id="tabs"></nav>
 
-  <!-- ===== MAIN TAB CONTAINER ===== -->
-  <div id="tabWrapper"></div>
+  <!-- ===== MAIN TAB WRAPPER ===== -->
+  <main id="tabWrapper"></main>
 
-  <!-- ===== JAVASCRIPT ===== -->
+  <!-- ===== LIGHTBOX MODAL ===== -->
+  <div id="lightbox" class="hidden">
+    <span class="close">&times;</span>
+    <div class="lightbox-content"></div>
+  </div>
+
+  <!-- ===== JS ===== -->
   <script>
-    async function fetchJSON(path) {
-      const res = await fetch(path);
-      if (!res.ok) {
-        alert(`Failed to load ${path}`);
-        throw new Error(`Failed to load ${path}`);
-      }
-      return res.json();
+    // Utility to fetch JSON
+    const fetchJSON = async (p) => (await fetch(p)).json();
+
+    /* ---------- SHOW/HIDE TABS ---------- */
+    function showTab(id) {
+      document.querySelectorAll('.tab-content')
+              .forEach(el=>el.classList.toggle('active',el.id===id));
     }
 
-    function showTab(tabId) {
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-      const target = document.getElementById(tabId);
-      if (target) target.classList.add('active');
+    /* ---------- LIGHTBOX ---------- */
+    function openLightbox(html) {
+      const lb = document.getElementById('lightbox');
+      lb.querySelector('.lightbox-content').innerHTML = html;
+      lb.classList.remove('hidden');
     }
+    document.querySelector('#lightbox .close')
+            .onclick = () => document.getElementById('lightbox')
+                                      .classList.add('hidden');
 
-    async function initPortfolio() {
+    /* ---------- BUILD PAGE ---------- */
+    (async () => {
       const data = await fetchJSON('data/portfolio.json');
 
-      const nav = document.getElementById('tabs');
-      const wrapper = document.getElementById('tabWrapper');
+      /* Inject nav buttons & tabs */
+      const nav   = document.getElementById('tabs');
+      const wrap  = document.getElementById('tabWrapper');
 
-      data.tabs.forEach((tab, idx) => {
-        const btn = document.createElement('button');
-        btn.textContent = tab.label;
-        btn.onclick = () => showTab(tab.id);
+      data.tabs.forEach((tab, i) => {
+        /* ---- nav button ---- */
+        const btn      = document.createElement('button');
+        btn.innerHTML  = `<i class="fa-regular fa-circle"></i> ${tab.label}`;
+        btn.onclick    = () => showTab(tab.id);
         nav.appendChild(btn);
 
-        const section = document.createElement('div');
-        section.className = 'tab-content';
-        section.id = tab.id;
-        section.innerHTML = `<h2>${tab.title}</h2>`;
+        /* ---- content section ---- */
+        const sec      = document.createElement('section');
+        sec.className  = 'tab-content';
+        sec.id         = tab.id;
+        sec.innerHTML  = `<h2>${tab.title}</h2>`;
 
+        /* Projects grid or paragraph list */
         if (tab.id === 'personal' && tab.projects) {
           const grid = document.createElement('div');
           grid.className = 'projects-grid';
           grid.innerHTML = tab.projects.map(p => `
-            <div class="project-card">
+            <div class="project-card" data-src="${p.src}" data-type="${p.type}">
               <h4>${p.title}</h4>
               ${p.type === 'video'
-                ? `<video controls><source src="${p.src}" type="video/mp4"></video>`
+                ? `<video preload="metadata" muted poster="" >
+                     <source src="${p.src}" type="video/mp4">
+                   </video>`
                 : `<img src="${p.src}" alt="${p.title}">`}
-              ${p.description ? `<p>${p.description}</p>` : ''}
-            </div>
-          `).join('');
-          section.appendChild(grid);
-        } else if (tab.content) {
-          section.innerHTML += tab.content.map(text => `<p>${text}</p>`).join('');
+            </div>`).join('');
+          sec.appendChild(grid);
+        }
+        /* Skills progress bars */
+        else if (tab.skills) {
+          sec.innerHTML += `<div class="skills-bars">
+            ${tab.skills.map(sk => `
+              <div class="skill-bar">
+                <span>${sk.name}</span>
+                <div class="bar"><div class="fill" style="width:${sk.level}%"></div></div>
+              </div>`).join('')}
+          </div>`;
+        }
+        /* Plain content paragraphs */
+        else if (tab.content) {
+          sec.innerHTML += tab.content.map(t=>`<p>${t}</p>`).join('');
         }
 
-        wrapper.appendChild(section);
-        if (idx === 0) section.classList.add('active');
+        wrap.appendChild(sec);
+        if (i === 0) sec.classList.add('active');
       });
-    }
 
-    initPortfolio();
+      /* Lightbox click handler */
+      document.querySelectorAll('.project-card').forEach(card=>{
+        card.onclick = () => {
+          const src  = card.dataset.src;
+          const type = card.dataset.type;
+          openLightbox(
+            type==='video'
+              ? `<video controls autoplay><source src="${src}" type="video/mp4"></video>`
+              : `<img src="${src}" alt="preview">`
+          );
+        };
+      });
+    })();
   </script>
-</body>
 
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>Made with &#x1F4BB; by Tarun Khare &copy; <span id="year"></span></p>
+    <div class="social">
+      <a href="https://github.com/TarunKhare-Prof" aria-label="GitHub">
+        <i class="fa-brands fa-github"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/tarun-khare-98ab5085/" aria-label="LinkedIn">
+        <i class="fa-brands fa-linkedin"></i>
+      </a>
+      <a href="https://www.youtube.com/channel/UC7ef8pdQ2PywMZy3IoFlZLw" aria-label="YouTube">
+        <i class="fa-brands fa-youtube"></i>
+      </a>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
 </html>
