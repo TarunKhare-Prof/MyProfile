@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tarun Khare - Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
 <body>
-  <header>Tarun Khare - Sr. Software Engineer</header>
+  <header>
+    <img src="https://avatars.githubusercontent.com/u/000000?v=4" alt="Tarun Khare" class="profile-pic">
+    Tarun Khare - Sr. Software Engineer
+  </header>
 
-  <nav id="tabs">
-    <!-- Buttons will be injected from config -->
+  <nav>
+    <button onclick="showTab('summary')">Profile Summary</button>
+    <button onclick="showTab('experience')">Work Experience</button>
+    <button onclick="showTab('projects')">Projects</button>
+    <button onclick="showTab('personal')">Personal Projects</button>
+    <button onclick="showTab('skills')">Skills</button>
+    <button onclick="showTab('education')">Education</button>
+    <button onclick="showTab('contact')">Contact</button>
   </nav>
 
   <div class="profile-wrapper">
