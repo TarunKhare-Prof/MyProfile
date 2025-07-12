@@ -56,33 +56,14 @@
 
   // Lightbox display at position near clicked element
   function openLightbox(html, triggerElement) {
-    const lb = document.getElementById('lightbox');
-    const content = lb.querySelector('.lightbox-content');
-    content.innerHTML = html;
+	  const lb = document.getElementById('lightbox');
+	  const content = lb.querySelector('.lightbox-content');
+	  content.innerHTML = html;
 
-    // Temporarily display to calculate size
-    lb.style.display = 'block';
+	  lb.style.display = 'flex';
+	  lb.classList.remove('hidden');
+	}
 
-    const rect = triggerElement.getBoundingClientRect();
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-
-    const topOffset = rect.top + scrollTop - lb.offsetHeight - 10;
-    const fallbackTop = rect.bottom + scrollTop + 10;
-    const finalTop = topOffset > scrollTop ? topOffset : fallbackTop;
-
-    lb.style.position = 'absolute';
-    lb.style.top = finalTop + 'px';
-    lb.style.left = (rect.left + scrollLeft) + 'px';
-
-    const rightEdge = rect.left + scrollLeft + lb.offsetWidth;
-    const maxRight = document.body.offsetWidth - 20;
-    if (rightEdge > maxRight) {
-      lb.style.left = (maxRight - lb.offsetWidth) + 'px';
-    }
-
-    lb.classList.remove('hidden');
-  }
 
   // Build page from portfolio.json
   (async () => {
@@ -152,11 +133,12 @@
         const src = card.dataset.src;
         const type = card.dataset.type;
         openLightbox(
-          type === 'video'
-            ? `<video controls autoplay><source src="${src}" type="video/mp4"></video>`
-            : `<img src="${src}" alt="preview">`,
-          card
-        );
+		  type === 'video'
+			? `<video controls autoplay><source src="${src}" type="video/mp4"></video>`
+			: `<img src="${src}" alt="preview">`,
+		  card
+		);
+
       };
     });
 

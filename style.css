@@ -190,39 +190,43 @@ footer .social a:hover {
   color: #0074cc;
 }
 
-/* Picture-in-Picture style lightbox */
+/* Lightbox Fullscreen Overlay */
 #lightbox {
-  position: absolute; /* was fixed */
-  width: 320px;
-  max-height: 240px;
-  z-index: 9999;
-  background: #fff;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
-  border-radius: 12px;
-  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.85);
   display: none;
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
+#lightbox .lightbox-content {
+  max-width: 90%;
+  max-height: 90%;
+  overflow: auto;
+}
 
-#lightbox .lightbox-content video,
-#lightbox .lightbox-content img {
+#lightbox .lightbox-content img,
+#lightbox .lightbox-content video {
   width: 100%;
   height: auto;
-  display: block;
+  border-radius: 10px;
 }
 
 #lightbox .close {
   position: absolute;
-  top: 4px;
-  right: 8px;
-  font-size: 18px;
+  top: 16px;
+  right: 20px;
+  font-size: 28px;
+  color: white;
   cursor: pointer;
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 50%;
-  padding: 2px 6px;
   z-index: 10000;
 }
-.hidden {
-  display: none !important;
+#lightbox .lightbox-content {
+  transition: all 0.3s ease;
 }
