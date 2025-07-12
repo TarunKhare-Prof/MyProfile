@@ -6,125 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tarun Khare - Portfolio</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    body {
-      margin: 0;
-      font-family: "Segoe UI", sans-serif;
-      background: linear-gradient(to bottom right, #f2f6fc, #ffffff);
-      color: #333;
-    }
-
-    /* ---------- HEADER ---------- */
-    header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      background: rgba(0, 85, 170, 0.9);
-      color: #fff;
-      padding: 35px 20px 45px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    header .profile-pic {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 4px solid #fff;
-      object-fit: cover;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 32px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      text-align: center;
-    }
-
-    /* ---------- NAVIGATION ---------- */
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-      padding: 15px;
-      position: sticky;
-      top: 0;
-      background: #ffffffee;
-      backdrop-filter: blur(6px);
-      z-index: 1000;
-    }
-
-    nav button {
-      background: #f3f4f7;
-      border: 1px solid #cdd1e1;
-      padding: 8px 18px;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.25s, transform 0.25s;
-    }
-
-    nav button:hover {
-      background: #004080;
-      color: #fff;
-      transform: translateY(-2px);
-    }
-
-    /* ---------- CONTENT SECTIONS ---------- */
-    .tab-content p {
-	  overflow: visible;
-	  text-overflow: unset;
-	  white-space: normal;
-	}
-
-    .tab-content.active {
-      display: block;
-    }
-
-    h2 {
-      color: #004080;
-      margin-top: 0;
-      border-bottom: 2px solid #004080;
-      padding-bottom: 6px;
-    }
-
-    h3 {
-      margin: 18px 0 10px;
-      color: #0066cc;
-    }
-
-    /* ---------- PERSONAL PROJECTS GRID ---------- */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-
-    .project-card {
-      border: 1px solid #e0e3eb;
-      border-radius: 10px;
-      background: #fafbfe;
-      padding: 15px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    }
-
-    .project-card img,
-    .project-card video {
-      width: 100%;
-      border-radius: 6px;
-      max-height: 180px;
-      object-fit: cover;
-    }
-  </style>
 </head>
 
 <body>
-  <!-- ===== HEADER WITH IMAGE & TITLE ===== -->
+  <!-- ===== HEADER WITH IMAGE & NAME ===== -->
   <header>
-    <img src="images/profile.jpg" alt="Tarun Khare" class="profile-pic" id="profileImage" />
-    <h1>Tarun Khare - Sr. Software Engineer</h1>
+    <div class="header-content">
+      <img src="images/profile.jpg" alt="Tarun Khare" class="profile-pic" id="profileImage" />
+      <div class="text-content">
+        <h1>Tarun Khare</h1>
+        <h2>Sr. Software Engineer</h2>
+      </div>
+    </div>
   </header>
 
   <!-- ===== NAVIGATION ===== -->
@@ -133,15 +26,16 @@
   <!-- ===== MAIN TAB CONTAINER ===== -->
   <div id="tabWrapper"></div>
 
+  <!-- ===== JAVASCRIPT ===== -->
   <script>
     async function fetchJSON(path) {
-		const res = await fetch(path);
-		if (!res.ok) {
-		  alert(`Failed to load ${path}`);
-		  throw new Error(`Failed to load ${path}`);
-		}
-		return res.json();
-	  }
+      const res = await fetch(path);
+      if (!res.ok) {
+        alert(`Failed to load ${path}`);
+        throw new Error(`Failed to load ${path}`);
+      }
+      return res.json();
+    }
 
     function showTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -152,18 +46,15 @@
     async function initPortfolio() {
       const data = await fetchJSON('data/portfolio.json');
 
-      /* -------- BUILD NAV & CONTENT -------- */
       const nav = document.getElementById('tabs');
       const wrapper = document.getElementById('tabWrapper');
 
       data.tabs.forEach((tab, idx) => {
-        /* Nav buttons */
         const btn = document.createElement('button');
         btn.textContent = tab.label;
         btn.onclick = () => showTab(tab.id);
         nav.appendChild(btn);
 
-        /* Section */
         const section = document.createElement('div');
         section.className = 'tab-content';
         section.id = tab.id;
@@ -187,8 +78,6 @@
         }
 
         wrapper.appendChild(section);
-
-        /* Activate first tab */
         if (idx === 0) section.classList.add('active');
       });
     }
