@@ -148,7 +148,6 @@ nav button:hover {
   cursor: pointer;
 }
 
-}
 
 /* Footer */
 footer {
@@ -163,6 +162,7 @@ footer {
   align-items: center;
   justify-content: center;
   width: 100%;
+  max-width: 100%;
   box-sizing: border-box;
 }
 footer p {
@@ -182,4 +182,5 @@ footer .social a {
 footer .social a:hover {
   color: #0074cc;
 }
+
 
