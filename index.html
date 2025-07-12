@@ -43,12 +43,30 @@
               .forEach(el => el.classList.toggle('active', el.id === id));
     }
 
-    function openLightbox(html) {
+    function openLightbox(html, triggerElement) {
       const lb = document.getElementById('lightbox');
       const content = lb.querySelector('.lightbox-content');
       content.innerHTML = html;
+
+      const rect = triggerElement.getBoundingClientRect();
+      lb.style.top = window.scrollY + rect.top + 'px';
+      lb.style.left = window.scrollX + rect.left + 'px';
+
       lb.classList.remove('hidden');
       lb.style.display = 'flex';
+    }
+
+    function closeLightbox() {
+      const lb = document.getElementById('lightbox');
+      const content = lb.querySelector('.lightbox-content');
+      const video = content.querySelector('video');
+      if (video) {
+        video.pause();
+        video.currentTime = 0;
+      }
+      lb.classList.add('hidden');
+      lb.style.display = 'none';
+      content.innerHTML = ''; // remove content
     }
 
     (async () => {
@@ -108,25 +126,22 @@
           const type = card.dataset.type;
           openLightbox(
             type === 'video'
-              ? `<video controls autoplay><source src="${src}" type="video/mp4">Your browser does not support video.</video>`
-              : `<img src="${src}" alt="preview">`
+              ? `<video controls autoplay><source src="${src}" type="video/mp4"></video>`
+              : `<img src="${src}" alt="preview">`,
+            card
           );
         };
       });
 
       document.getElementById('lightbox').addEventListener('click', (e) => {
         if (e.target.id === 'lightbox' || e.target.classList.contains('close')) {
-          const lb = document.getElementById('lightbox');
-          lb.classList.add('hidden');
-          lb.style.display = 'none';
+          closeLightbox();
         }
       });
 
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-          const lb = document.getElementById('lightbox');
-          lb.classList.add('hidden');
-          lb.style.display = 'none';
+          closeLightbox();
         }
       });
     })();
