@@ -268,16 +268,17 @@
       ]
     },
     {
-      "id": "education",
-      "label": "Education",
-      "title": "Education",
-      "content": [
-	    "PG-Diploma, Embedded System and Design, CDAC-Knowledge Park Bangalore",
-        "Bachelor of Engineering, Electrical & Electronics, LNCT Indore",
-        "Senior Secondary - PCM + Computer Science, St. Michael’s, Satna",
-        "Higher Secondary - St. Michael’s, Satna"
-      ]
-    },
+	  "id": "education",
+	  "label": "Education",
+	  "title": "Education",
+	  "content": [
+		"PG-Diploma, Embedded System and Design, CDAC-Knowledge Park Bangalore",
+		"Bachelor of Engineering, Electrical & Electronics, LNCT Indore",
+		"Senior Secondary - PCM + Computer Science, St. Michael’s, Satna",
+		"Higher Secondary - St. Michael’s, Satna"
+	  ]
+	}
+	,
     {
       "id": "contact",
       "label": "Contact",
