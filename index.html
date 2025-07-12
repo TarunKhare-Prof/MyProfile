@@ -60,17 +60,33 @@
 	  const content = lb.querySelector('.lightbox-content');
 	  content.innerHTML = html;
 
-	  // Get card position
+	  // Temporarily display to calculate dimensions
+	  lb.style.display = 'block';
+
 	  const rect = triggerElement.getBoundingClientRect();
 	  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 	  const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
 
-	  // Set lightbox position near clicked element
+	  // Optional: If lightbox goes off screen above, place it below
+	  const topOffset = rect.top + scrollTop - lb.offsetHeight - 10;
+	  const fallbackTop = rect.bottom + scrollTop + 10;
+
+	  const finalTop = topOffset > scrollTop ? topOffset : fallbackTop;
+
 	  lb.style.position = 'absolute';
-	  lb.style.top = (rect.top + scrollTop - lb.offsetHeight - 10) + 'px';
+	  lb.style.top = finalTop + 'px';
 	  lb.style.left = (rect.left + scrollLeft) + 'px';
+
+	  // Optional: adjust if going off right side
+	  const rightEdge = rect.left + scrollLeft + lb.offsetWidth;
+	  const maxRight = document.body.offsetWidth - 20;
+	  if (rightEdge > maxRight) {
+		lb.style.left = (maxRight - lb.offsetWidth) + 'px';
+	  }
+
 	  lb.classList.remove('hidden');
 	}
+
 
 
 
@@ -138,17 +154,12 @@
 		  });
 
 		  // Lightbox
-		  document.querySelectorAll('.project-card').forEach(card => {
-			  card.onclick = () => {
-				const src = card.dataset.src;
-				const type = card.dataset.type;
-				openLightbox(
-				  type === 'video'
-					? `<video controls autoplay><source src="${src}" type="video/mp4"></video>`
-					: `<img src="${src}" alt="preview">`,
-				  card
-				);
-			  };
+		  document.querySelector('#lightbox .close').onclick = () => {
+			  const lb = document.getElementById('lightbox');
+			  lb.classList.add('hidden');
+			  lb.style.display = 'none';
+			};
+
 			});
 
 		})();
