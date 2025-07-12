@@ -1,39 +1,4 @@
 {
-  "profileImage": "images/profile.jpg",
-  "tabs": [
-    {
-      "id": "summary",
-      "label": "Profile Summary",
-      "title": "Profile Summary",
-      "content": [
-        "Multifaceted Senior Software Engineer with over 6.5 years of experience...",
-        "Skilled in embedded automation, validation, API development, and IoT systems..."
-      ]
-    },
-    {
-      "id": "experience",
-      "label": "Work Experience",
-      "title": "Work Experience",
-      "content": [
-        "<strong>Sr Software Engineer - Alstom</strong> (2023-10 to Present)",
-        "Developed reusable backend logic with Flask, automated reports using VB.NET and Excel.",
-        "<strong>Software Engineer - Tech Mahindra</strong> (2022-02 to 2023-10)",
-        "Created automation tools using Excel Interop and VB.NET.",
-        "<strong>Software Engineer - Cyient</strong> (2018-11 to 2022-02)",
-        "Designed test plans for 24+ subsystems and built validation utilities."
-      ]
-    },
-    {
-      "id": "projects",
-      "label": "Projects",
-      "title": "Projects",
-      "content": [
-        "Python-Flask based stock screener using Dhan APIs",
-        "ESP-based smart home LED control with Sinric Pro and OTA",
-        "3D printed cases for sensor mounts and enclosures"
-      ]
-    },
-    {
   "title": "Personal Projects",
   "projects": [
     {
@@ -251,42 +216,6 @@
       "type": "video",
       "src": "images\\Wallet Box Stereo.mp4",
       "description": ""
-    }
-  ]
-}
-,
-    {
-      "id": "skills",
-      "label": "Skills",
-      "title": "Skills",
-      "content": [
-        "Python, C#, VB.NET, JavaScript, HTML, CSS, Flask, WinForms",
-        "Excel automation, SQL, GitHub CI/CD, TestStand, Windchill",
-        "ESP32/8266, Sinric Pro, OTA firmware, WebSockets"
-      ]
-    },
-    {
-      "id": "education",
-      "label": "Education",
-      "title": "Education",
-      "content": [
-        "Bachelor of Engineering, Electrical & Electronics, LNCT Indore",
-        "Senior Secondary - PCM + Computer Science, St. Michael’s, Satna",
-        "Higher Secondary - St. Michael’s, Satna"
-      ]
-    },
-    {
-      "id": "contact",
-      "label": "Contact",
-      "title": "Contact",
-      "content": [
-        "Bengaluru, India 560102",
-        "Phone: 7338071923",
-        "Email: tarun.vbc.gg@gmail.com",
-        "Naukri: ",
-        "LinkedIn: https://www.linkedin.com/in/tarun-khare-98ab5085/",
-		"Youtube : https://www.youtube.com/channel/UC7ef8pdQ2PywMZy3IoFlZLw"
-      ]
     }
   ]
 }
