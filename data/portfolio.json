@@ -47,9 +47,10 @@
 		  "title": "1000W Stereo Audio Amplifier with Transistors 2SC5200 and 2SA1943",
 		  "type": "image",
 		  "src": "images/1000W Stereo Audio Amplifier with Transistors 2SC5200 and 2SA1943.jpg",
-		  "description": "This PCB Design was made during my college days, for one of my junior, its an audion amplified",
+		  "description": ["This PCB Design was made during my college days, for one of my junior, its an audion amplified",
 		                 "can handle upto 1000w speakers with noise suppression",
 						 "created using Transistors 2SC5200 and 2SA1943 , PCB Designed using Diptrace [two layer]",
+						 ]
 		}
 	,
 		{
