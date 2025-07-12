@@ -45,6 +45,30 @@ header .wave {
   color: #cce4ff;
   font-weight: 500;
 }
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.skills-grid h3 {
+  grid-column: 1 / -1;
+  margin: 10px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.skill {
+  background: #e0ecff;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  text-align: center;
+  font-weight: 500;
+  color: #003366;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
 
 nav {
   display: flex;
