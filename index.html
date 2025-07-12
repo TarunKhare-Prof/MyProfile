@@ -43,18 +43,15 @@
               .forEach(el => el.classList.toggle('active', el.id === id));
     }
 
-    function openLightbox(html, triggerElement) {
-      const lb = document.getElementById('lightbox');
-      const content = lb.querySelector('.lightbox-content');
-      content.innerHTML = html;
+    function openLightbox(html) {
+	  const lb = document.getElementById('lightbox');
+	  const content = lb.querySelector('.lightbox-content');
+	  content.innerHTML = html;
 
-      const rect = triggerElement.getBoundingClientRect();
-      lb.style.top = window.scrollY + rect.top + 'px';
-      lb.style.left = window.scrollX + rect.left + 'px';
+	  lb.classList.remove('hidden');
+	  lb.style.display = 'flex';
+	}
 
-      lb.classList.remove('hidden');
-      lb.style.display = 'flex';
-    }
 
     function closeLightbox() {
       const lb = document.getElementById('lightbox');
