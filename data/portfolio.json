@@ -320,10 +320,10 @@
 	  "label": "Education",
 	  "title": "Education",
 	  "content": [
-		"PG-Diploma, Embedded System and Design, CDAC-Knowledge Park Bangalore",
-		"Bachelor of Engineering, Electrical & Electronics, LNCT Indore",
-		"Senior Secondary - PCM + Computer Science, St. Michael’s, Satna",
-		"Higher Secondary - St. Michael’s, Satna"
+		"<strong>Diploma:</strong> PG-Diploma, Embedded System and Design, CDAC-Knowledge Park Bangalore",
+		"<strong>Graduation:</strong> Bachelor of Engineering, Electrical & Electronics, LNCT Indore",
+		"<strong>Senior Secondary:</strong> - PCM + Computer Science, St. Michael’s, Satna",
+		"<strong>Higher Secondary:</strong> - St. Michael’s, Satna"
 	  ]
 	}
 	,
