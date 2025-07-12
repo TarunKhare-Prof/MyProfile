@@ -94,6 +94,20 @@
       text-align: center;
       margin-top: 20px;
     }
+
+    .project-card {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      padding: 15px;
+      background-color: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .project-card img {
+      max-width: 100%;
+      border-radius: 6px;
+    }
   </style>
 </head>
 
@@ -115,51 +129,64 @@
 
   <div id="summary" class="tab-content active">
     <h2>Profile Summary</h2>
-    <p>Technically diverse Senior Software Engineer with over 6.5 years of experience in full-stack software development, embedded automation, and validation frameworks across the transportation and fintech domains. Adept at developing tools using C#, Python, and VB.NET for automation, testing, data processing, and UI applications.</p>
-    <p>Proven expertise in SIL-level testing, remote MPU/DDU validation, and integrated testing pipelines using TestStand and Windchill Modeler. Built Python-Flask stock and crypto screeners, ESP-based IoT systems, and 3D printing projects.</p>
+    <p>Multifaceted Senior Software Engineer with over 6.5 years of experience in full-stack development, embedded automation, and validation across transportation, fintech, and IoT domains. Skilled in building tools using C#, Python, VB.NET, Flask, SQL, and WinForms.</p>
+    <p>Hands-on experience in SIL-level testing, Windchill Modeler, TestStand, automation pipelines, and remote MPU/DDU validation. Developed Python-Flask-based stock and crypto screeners using Dhan/Delta APIs and IoT systems using ESP32/ESP8266 integrated with Sinric Pro. Skilled in GitHub/GitLab CI/CD and requirement traceability with Windchill + IBM EWM. Passionate about 3D printing, smart home automation, and software+hardware integration.</p>
   </div>
 
   <div id="experience" class="tab-content">
     <h2>Work Experience</h2>
     <h3>Sr Software Engineer - Alstom (2023-10 to Present)</h3>
     <ul>
-      <li>Built real-time diagnostics and validation tools in C# and Python.</li>
-      <li>Automated documentation using VB.NET and Excel Macros (60% effort saved).</li>
-      <li>Created reusable backend logic using Flask and WinForms.</li>
-      <li>Used Windchill Modeler for architecture modeling.</li>
-      <li>Led SIL, MPU, DDU validation workflows.</li>
+      <li>Built internal toolkits in C# and Python for train diagnostics and validation.</li>
+      <li>Excel & VB.NET-based documentation automation (reduced 60% manual effort).</li>
+      <li>Flask/WinForms backend for reusable logic across train systems.</li>
+      <li>Windchill Modeler used for SIL + subsystem architecture modeling.</li>
+      <li>Led validation efforts across DDU, MPU, HMI interfaces.</li>
     </ul>
     <h3>Software Engineer - Tech Mahindra (2022-02 to 2023-10)</h3>
     <ul>
-      <li>Developed automation using C#, Excel Interop, VB.NET.</li>
+      <li>Automation system design using C#, Excel Interop, and .NET macros.</li>
     </ul>
     <h3>Software Engineer - Cyient (2018-11 to 2022-02)</h3>
     <ul>
-      <li>Designed test plans for 24+ train features.</li>
-      <li>Built Excel tools for logging/validation.</li>
-      <li>Performed black-box testing; logged 150+ issues.</li>
-      <li>Developed automation tools for QA.</li>
+      <li>Designed test pipelines for 24+ safety-critical train features.</li>
+      <li>Regression test support and black-box validation (150+ issues tracked).</li>
+      <li>Developed toolchains for QA, reporting, and analytics.</li>
     </ul>
   </div>
 
   <div id="projects" class="tab-content">
     <h2>Projects</h2>
-    <ul>
-      <li>Python-Flask based stock and crypto screeners using Dhan and Delta APIs</li>
-      <li>ESP-based IoT systems with Sinric Pro</li>
-      <li>3D printing for prototyping</li>
-      <li>Train software testing tools using C#, Python, WinForms</li>
-    </ul>
+    <div class="project-card">
+      <h3>Stock & Crypto Screener</h3>
+      <img src="https://via.placeholder.com/600x300?text=Stock+Crypto+Screener" alt="Stock Screener">
+      <p>Python Flask-based tool using Dhan & Delta Exchange APIs to fetch and screen real-time financial data. Includes custom strategies, filters, and UI.</p>
+      <a href="#">View Repository</a>
+    </div>
+
+    <div class="project-card">
+      <h3>Smart Home LED Controller</h3>
+      <img src="https://via.placeholder.com/600x300?text=IoT+LED+Control" alt="IoT Controller">
+      <p>ESP8266 project with OTA, web UI, Sinric Pro integration to manage home lighting patterns, brightness, and effects using local or Alexa-based triggers.</p>
+      <a href="#">View Project</a>
+    </div>
+
+    <div class="project-card">
+      <h3>3D Printing Utilities</h3>
+      <img src="https://via.placeholder.com/600x300?text=3D+Printing+Setup" alt="3D Printing">
+      <p>Functional enclosures and automation mounts for IoT sensors, designed using Fusion360 and printed on Anycubic Kobra. Integrated with ESP32 nodes.</p>
+      <a href="#">View Photos</a>
+    </div>
   </div>
 
   <div id="skills" class="tab-content">
     <h2>Skills</h2>
     <ul>
-      <li><strong>Languages & Frameworks:</strong> C#, Python, VB.NET, HTML, CSS, JavaScript (basic), Tkinter, WinForms</li>
-      <li><strong>Backend & APIs:</strong> Flask, SQL, REST APIs, Excel Automation</li>
-      <li><strong>Tools & Platforms:</strong> TestStand, Windchill Modeler, Excel Macros, Git, GitHub, GitLab, IBM EWM</li>
-      <li><strong>Testing:</strong> SIL-level, black-box, Codesys HMI</li>
-      <li><strong>IoT:</strong> ESP32, ESP8266, Sinric Pro</li>
+      <li><strong>Languages & Frameworks:</strong> Python, C#, VB.NET, HTML, CSS, JavaScript, Flask, Tkinter, WinForms</li>
+      <li><strong>Testing Tools:</strong> TestStand, Codesys HMI, Excel Automation, Validation Pipelines</li>
+      <li><strong>Embedded & IoT:</strong> ESP8266, ESP32, Arduino, OTA, Sinric Pro, WebSockets</li>
+      <li><strong>Dev & CI/CD:</strong> GitHub, GitLab, IBM EWM, Git Actions, WinMerge, DiffTools</li>
+      <li><strong>3D/Design:</strong> Fusion360, STL tweaking, enclosure prototyping</li>
     </ul>
   </div>
 
@@ -177,6 +204,8 @@
     <p><strong>Location:</strong> Bengaluru, India 560102</p>
     <p><strong>Phone:</strong> 7338071923</p>
     <p><strong>Email:</strong> tarun.vbc.gg@gmail.com</p>
+    <p><strong>LinkedIn:</strong> <a href="#">linkedin.com/in/tarunkhare</a></p>
+    <p><strong>GitHub:</strong> <a href="#">github.com/tarunkhare</a></p>
   </div>
 
   <script>
