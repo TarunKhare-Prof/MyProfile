@@ -4,29 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tarun Khare – Portfolio</title>
-
-  <!-- Main stylesheet -->
   <link rel="stylesheet" href="style.css" />
-
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
-
 <body>
   <!-- ===== HEADER ===== -->
   <header>
-    <!-- Decorative wave -->
     <svg class="wave" viewBox="0 0 1440 90" preserveAspectRatio="none">
       <path d="M0,50 C400,140 1040,-40 1440,50 L1440,90 L0,90 Z"></path>
     </svg>
-
     <div class="header-content">
       <img src="images/profile.jpg" alt="Tarun Khare" class="profile-pic" />
       <div class="text-content">
         <h1>Tarun Khare</h1>
         <h2>Sr. Software Engineer</h2>
-        
       </div>
     </div>
   </header>
@@ -43,132 +34,120 @@
     <div class="lightbox-content"></div>
   </div>
 
-  <!-- ===== JS ===== -->
+  <!-- ===== JS TO BUILD PAGE ===== -->
   <script>
-  // Utility to fetch JSON
-  const fetchJSON = async (p) => (await fetch(p)).json();
+    const fetchJSON = async (p) => (await fetch(p)).json();
 
-  // Show/Hide tab content
-  function showTab(id) {
-    document.querySelectorAll('.tab-content')
-            .forEach(el => el.classList.toggle('active', el.id === id));
-  }
+    function showTab(id) {
+      document.querySelectorAll('.tab-content')
+              .forEach(el => el.classList.toggle('active', el.id === id));
+    }
 
-  // Lightbox display at position near clicked element
-  function openLightbox(html, triggerElement) {
-	  const lb = document.getElementById('lightbox');
-	  const content = lb.querySelector('.lightbox-content');
-	  content.innerHTML = html;
-
-	  lb.style.display = 'flex';
-	  lb.classList.remove('hidden');
-	}
-
-
-  // Build page from portfolio.json
-  (async () => {
-    const data = await fetchJSON('data/portfolio.json');
-    const nav = document.getElementById('tabs');
-    const wrap = document.getElementById('tabWrapper');
-
-    data.tabs.forEach((tab, i) => {
-      const btn = document.createElement('button');
-      btn.innerHTML = `<i class="fa-regular fa-circle"></i> ${tab.label}`;
-      btn.onclick = () => showTab(tab.id);
-      nav.appendChild(btn);
-
-      const sec = document.createElement('section');
-      sec.className = 'tab-content';
-      sec.id = tab.id;
-      sec.innerHTML = `<h2>${tab.title}</h2>`;
-
-      // Grouped skills view
-      if (tab.skillsGrouped) {
-        Object.entries(tab.skillsGrouped).forEach(([category, skills]) => {
-          const grid = document.createElement('div');
-          grid.className = 'skills-grid';
-          grid.innerHTML = `<h3>${category}</h3>` +
-            skills.map(sk => `<div class="skill">${sk.name}</div>`).join('');
-          sec.appendChild(grid);
-        });
-      }
-
-      // Plain skill bars
-      else if (tab.skills) {
-        sec.innerHTML += `<div class="skills-bars">
-          ${tab.skills.map(sk => `
-            <div class="skill-bar">
-              <span>${sk.name}</span>
-              <div class="bar"><div class="fill" style="width:${sk.level}%"></div></div>
-            </div>`).join('')}
-        </div>`;
-      }
-
-      // Projects section
-      else if (tab.id === 'personal' && tab.projects) {
-        const grid = document.createElement('div');
-        grid.className = 'projects-grid';
-        grid.innerHTML = tab.projects.map(p => `
-          <div class="project-card" data-src="${p.src}" data-type="${p.type}">
-            <h4>${p.title}</h4>
-            ${p.type === 'video'
-              ? `<video preload="metadata" muted poster=""><source src="${p.src}" type="video/mp4"></video>`
-              : `<img src="${p.src}" alt="${p.title}">`}
-          </div>`).join('');
-        sec.appendChild(grid);
-      }
-
-      // Content as paragraphs
-      else if (tab.content) {
-        sec.innerHTML += tab.content.map(t => `<p>${t}</p>`).join('');
-      }
-
-      wrap.appendChild(sec);
-      if (i === 0) sec.classList.add('active');
-    });
-
-    // Attach lightbox to each project-card
-    document.querySelectorAll('.project-card').forEach(card => {
-      card.onclick = () => {
-        const src = card.dataset.src;
-        const type = card.dataset.type;
-        openLightbox(
-		  type === 'video'
-			? `<video controls autoplay><source src="${src}" type="video/mp4"></video>`
-			: `<img src="${src}" alt="preview">`,
-		  card
-		);
-
-      };
-    });
-
-    // Lightbox close handler
-    document.querySelector('#lightbox .close').onclick = () => {
+    function openLightbox(html) {
       const lb = document.getElementById('lightbox');
-      lb.classList.add('hidden');
-      lb.style.display = 'none';
-    };
-  })();
-</script>
+      const content = lb.querySelector('.lightbox-content');
+      content.innerHTML = html;
+      lb.classList.remove('hidden');
+      lb.style.display = 'flex';
+    }
 
+    (async () => {
+      const data = await fetchJSON('data/portfolio.json');
+      const nav = document.getElementById('tabs');
+      const wrap = document.getElementById('tabWrapper');
+
+      data.tabs.forEach((tab, i) => {
+        const btn = document.createElement('button');
+        btn.innerHTML = `<i class="fa-regular fa-circle"></i> ${tab.label}`;
+        btn.onclick = () => showTab(tab.id);
+        nav.appendChild(btn);
+
+        const sec = document.createElement('section');
+        sec.className = 'tab-content';
+        sec.id = tab.id;
+        sec.innerHTML = `<h2>${tab.title}</h2>`;
+
+        if (tab.skillsGrouped) {
+          Object.entries(tab.skillsGrouped).forEach(([category, skills]) => {
+            const grid = document.createElement('div');
+            grid.className = 'skills-grid';
+            grid.innerHTML = `<h3>${category}</h3>` +
+              skills.map(sk => `<div class="skill">${sk.name}</div>`).join('');
+            sec.appendChild(grid);
+          });
+        } else if (tab.skills) {
+          sec.innerHTML += `<div class="skills-bars">
+            ${tab.skills.map(sk => `
+              <div class="skill-bar">
+                <span>${sk.name}</span>
+                <div class="bar"><div class="fill" style="width:${sk.level}%"></div></div>
+              </div>`).join('')}
+          </div>`;
+        } else if (tab.id === 'personal' && tab.projects) {
+          const grid = document.createElement('div');
+          grid.className = 'projects-grid';
+          grid.innerHTML = tab.projects.map(p => `
+            <div class="project-card" data-src="${p.src}" data-type="${p.type}">
+              <h4>${p.title}</h4>
+              ${p.type === 'video'
+                ? `<video preload="metadata" muted><source src="${p.src}" type="video/mp4"></video>`
+                : `<img src="${p.src}" alt="${p.title}">`}
+            </div>`).join('');
+          sec.appendChild(grid);
+        } else if (tab.content) {
+          sec.innerHTML += tab.content.map(t => `<p>${t}</p>`).join('');
+        }
+
+        wrap.appendChild(sec);
+        if (i === 0) sec.classList.add('active');
+      });
+
+      document.querySelectorAll('.project-card').forEach(card => {
+        card.onclick = () => {
+          const src = card.dataset.src;
+          const type = card.dataset.type;
+          openLightbox(
+            type === 'video'
+              ? `<video controls autoplay><source src="${src}" type="video/mp4">Your browser does not support video.</video>`
+              : `<img src="${src}" alt="preview">`
+          );
+        };
+      });
+
+      document.getElementById('lightbox').addEventListener('click', (e) => {
+        if (e.target.id === 'lightbox' || e.target.classList.contains('close')) {
+          const lb = document.getElementById('lightbox');
+          lb.classList.add('hidden');
+          lb.style.display = 'none';
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          const lb = document.getElementById('lightbox');
+          lb.classList.add('hidden');
+          lb.style.display = 'none';
+        }
+      });
+    })();
+  </script>
 
   <!-- ===== FOOTER ===== -->
   <footer>
-	  <p>Made with 💻 by Tarun Khare &copy; <span id="year"></span></p>
-	  <p>Last Updated: <span id="lastModified"></span></p>
-	  <div class="social">
-		<a href="https://www.linkedin.com/in/tarun-khare-98ab5085/" aria-label="LinkedIn">
-		  <i class="fa-brands fa-linkedin"></i>
-		</a>
-		<a href="https://www.youtube.com/channel/UC7ef8pdQ2PywMZy3IoFlZLw" aria-label="YouTube">
-		  <i class="fa-brands fa-youtube"></i>
-		</a>
-	  </div>
-	</footer>
-
+    <p>Made with 💻 by Tarun Khare &copy; <span id="year"></span></p>
+    <p>Last Updated: <span id="lastModified"></span></p>
+    <div class="social">
+      <a href="https://www.linkedin.com/in/tarun-khare-98ab5085/" aria-label="LinkedIn">
+        <i class="fa-brands fa-linkedin"></i>
+      </a>
+      <a href="https://www.youtube.com/channel/UC7ef8pdQ2PywMZy3IoFlZLw" aria-label="YouTube">
+        <i class="fa-brands fa-youtube"></i>
+      </a>
+    </div>
+  </footer>
   <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-  document.getElementById('lastModified').textContent = new Date(document.lastModified).toLocaleString();
-	</script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('lastModified').textContent = new Date(document.lastModified).toLocaleString();
+  </script>
 </body>
 </html>
