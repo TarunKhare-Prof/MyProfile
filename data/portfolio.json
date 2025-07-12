@@ -34,6 +34,8 @@
       ]
     },
     {
+	  "id": "personal",
+	  "label": "Personal Projects",
 	  "title": "Personal Projects",
 	  "projects": [
 		{
