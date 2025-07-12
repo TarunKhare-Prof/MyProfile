@@ -224,3 +224,6 @@ footer .social a:hover {
   padding: 2px 6px;
   z-index: 10000;
 }
+.hidden {
+  display: none !important;
+}

@@ -58,11 +58,13 @@
     function openLightbox(html) {
 	  const lb = document.getElementById('lightbox');
 	  lb.querySelector('.lightbox-content').innerHTML = html;
-	  lb.style.display = 'block'; // show PiP
+	  lb.classList.remove('hidden');
 	}
+
 	document.querySelector('#lightbox .close').onclick = () => {
-	  document.getElementById('lightbox').style.display = 'none';
+	  document.getElementById('lightbox').classList.add('hidden');
 	};
+
 
     <!-- Inside <script> under BUILD PAGE section -->
 		(async () => {
