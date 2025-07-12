@@ -67,74 +67,87 @@
             .onclick = () => document.getElementById('lightbox')
                                       .classList.add('hidden');
 
-    /* ---------- BUILD PAGE ---------- */
-    (async () => {
-      const data = await fetchJSON('data/portfolio.json');
+    <!-- Inside <script> under BUILD PAGE section -->
+		(async () => {
+		  const data = await fetchJSON('data/portfolio.json');
+		  const nav = document.getElementById('tabs');
+		  const wrap = document.getElementById('tabWrapper');
 
-      /* Inject nav buttons & tabs */
-      const nav   = document.getElementById('tabs');
-      const wrap  = document.getElementById('tabWrapper');
+		  data.tabs.forEach((tab, i) => {
+			const btn = document.createElement('button');
+			btn.innerHTML = `<i class="fa-regular fa-circle"></i> ${tab.label}`;
+			btn.onclick = () => showTab(tab.id);
+			nav.appendChild(btn);
 
-      data.tabs.forEach((tab, i) => {
-        /* ---- nav button ---- */
-        const btn      = document.createElement('button');
-        btn.innerHTML  = `<i class="fa-regular fa-circle"></i> ${tab.label}`;
-        btn.onclick    = () => showTab(tab.id);
-        nav.appendChild(btn);
+			const sec = document.createElement('section');
+			sec.className = 'tab-content';
+			sec.id = tab.id;
+			sec.innerHTML = `<h2>${tab.title}</h2>`;
 
-        /* ---- content section ---- */
-        const sec      = document.createElement('section');
-        sec.className  = 'tab-content';
-        sec.id         = tab.id;
-        sec.innerHTML  = `<h2>${tab.title}</h2>`;
+			// ---- Grouped Skills ----
+			if (tab.skillsGrouped) {
+			  Object.entries(tab.skillsGrouped).forEach(([category, skills]) => {
+				sec.innerHTML += `<h3>${category}</h3>`;
+				const groupDiv = document.createElement('div');
+				groupDiv.className = 'skills-bars';
+				groupDiv.innerHTML = skills.map(sk => `
+				  <div class="skill-bar">
+					<span>${sk.name}</span>
+					<div class="bar"><div class="fill" style="width:${sk.level}%"></div></div>
+				  </div>
+				`).join('');
+				sec.appendChild(groupDiv);
+			  });
+			}
 
-        /* Projects grid or paragraph list */
-        if (tab.id === 'personal' && tab.projects) {
-          const grid = document.createElement('div');
-          grid.className = 'projects-grid';
-          grid.innerHTML = tab.projects.map(p => `
-            <div class="project-card" data-src="${p.src}" data-type="${p.type}">
-              <h4>${p.title}</h4>
-              ${p.type === 'video'
-                ? `<video preload="metadata" muted poster="" >
-                     <source src="${p.src}" type="video/mp4">
-                   </video>`
-                : `<img src="${p.src}" alt="${p.title}">`}
-            </div>`).join('');
-          sec.appendChild(grid);
-        }
-        /* Skills progress bars */
-        else if (tab.skills) {
-          sec.innerHTML += `<div class="skills-bars">
-            ${tab.skills.map(sk => `
-              <div class="skill-bar">
-                <span>${sk.name}</span>
-                <div class="bar"><div class="fill" style="width:${sk.level}%"></div></div>
-              </div>`).join('')}
-          </div>`;
-        }
-        /* Plain content paragraphs */
-        else if (tab.content) {
-          sec.innerHTML += tab.content.map(t=>`<p>${t}</p>`).join('');
-        }
+			// ---- Plain Skills ----
+			else if (tab.skills) {
+			  sec.innerHTML += `<div class="skills-bars">
+				${tab.skills.map(sk => `
+				  <div class="skill-bar">
+					<span>${sk.name}</span>
+					<div class="bar"><div class="fill" style="width:${sk.level}%"></div></div>
+				  </div>`).join('')}
+			  </div>`;
+			}
 
-        wrap.appendChild(sec);
-        if (i === 0) sec.classList.add('active');
-      });
+			// ---- Personal Projects ----
+			else if (tab.id === 'personal' && tab.projects) {
+			  const grid = document.createElement('div');
+			  grid.className = 'projects-grid';
+			  grid.innerHTML = tab.projects.map(p => `
+				<div class="project-card" data-src="${p.src}" data-type="${p.type}">
+				  <h4>${p.title}</h4>
+				  ${p.type === 'video'
+					? `<video preload="metadata" muted poster=""><source src="${p.src}" type="video/mp4"></video>`
+					: `<img src="${p.src}" alt="${p.title}">`}
+				</div>`).join('');
+			  sec.appendChild(grid);
+			}
 
-      /* Lightbox click handler */
-      document.querySelectorAll('.project-card').forEach(card=>{
-        card.onclick = () => {
-          const src  = card.dataset.src;
-          const type = card.dataset.type;
-          openLightbox(
-            type==='video'
-              ? `<video controls autoplay><source src="${src}" type="video/mp4"></video>`
-              : `<img src="${src}" alt="preview">`
-          );
-        };
-      });
-    })();
+			// ---- Content Paragraphs ----
+			else if (tab.content) {
+			  sec.innerHTML += tab.content.map(t => `<p>${t}</p>`).join('');
+			}
+
+			wrap.appendChild(sec);
+			if (i === 0) sec.classList.add('active');
+		  });
+
+		  // Lightbox
+		  document.querySelectorAll('.project-card').forEach(card => {
+			card.onclick = () => {
+			  const src = card.dataset.src;
+			  const type = card.dataset.type;
+			  openLightbox(
+				type === 'video'
+				  ? `<video controls autoplay><source src="${src}" type="video/mp4"></video>`
+				  : `<img src="${src}" alt="preview">`
+			  );
+			};
+		  });
+		})();
+
   </script>
 
   <!-- ===== FOOTER ===== -->

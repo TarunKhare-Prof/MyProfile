@@ -266,16 +266,55 @@
 	  ]
 	}
 	,
-    {
-      "id": "skills",
-      "label": "Skills",
-      "title": "Skills",
-      "content": [
-        "Python, C#, VB.NET, JavaScript, HTML, CSS, Flask, WinForms",
-        "Excel automation, SQL, GitHub CI/CD, TestStand, Windchill",
-        "ESP32/8266, Sinric Pro, OTA firmware, WebSockets"
-      ]
-    },
+		{
+	  "id": "skills",
+	  "label": "Skills",
+	  "title": "Skills",
+	  "skillsGrouped": {
+		"Languages": [
+		  { "name": "Python", "level": 90 },
+		  { "name": "C#", "level": 85 },
+		  { "name": "VB.NET", "level": 80 },
+		  { "name": "JavaScript", "level": 70 },
+		  { "name": "HTML/CSS", "level": 80 },
+		  { "name": "SQL", "level": 80 }
+		],
+		"Frameworks & Tools": [
+		  { "name": "Flask", "level": 75 },
+		  { "name": "GitHub", "level": 75 },
+		  { "name": "GitLab", "level": 70 },
+		  { "name": "Sinric Pro", "level": 70 },
+		  { "name": "WS2812b Control", "level": 65 }
+		],
+		"Microcontrollers & Hardware": [
+		  { "name": "ESP32/8266", "level": 70 },
+		  { "name": "Arduino", "level": 75 },
+		  { "name": "AVR Studio", "level": 60 },
+		  { "name": "Atmega 8", "level": 65 },
+		  { "name": "Serial Communication", "level": 80 },
+		  { "name": "Circuit Analysis", "level": 70 },
+		  { "name": "Datasheet Reading", "level": 70 }
+		],
+		"Testing & Simulation": [
+		  { "name": "TestStand", "level": 85 },
+		  { "name": "Proteus Simulation", "level": 70 },
+		  { "name": "Unit Testing", "level": 75 },
+		  { "name": "Integration Testing", "level": 70 }
+		],
+		"IDE & Platforms": [
+		  { "name": "Visual Studio", "level": 85 },
+		  { "name": "VS Code", "level": 80 },
+		  { "name": "PyCharm", "level": 80 },
+		  { "name": "WPF/WinForms", "level": 80 },
+		  { "name": "AWS Basic", "level": 60 },
+		  { "name": "Azure Basic", "level": 60 },
+		  { "name": "PCB Designing", "level": 70 }
+		]
+	  }
+	}
+
+
+,
     {
 	  "id": "education",
 	  "label": "Education",
