@@ -81,21 +81,17 @@
 			sec.id = tab.id;
 			sec.innerHTML = `<h2>${tab.title}</h2>`;
 
-			// ---- Grouped Skills ----
+			// Inside tab.skillsGrouped block
 			if (tab.skillsGrouped) {
 			  Object.entries(tab.skillsGrouped).forEach(([category, skills]) => {
-				sec.innerHTML += `<h3>${category}</h3>`;
-				const groupDiv = document.createElement('div');
-				groupDiv.className = 'skills-bars';
-				groupDiv.innerHTML = skills.map(sk => `
-				  <div class="skill-bar">
-					<span>${sk.name}</span>
-					<div class="bar"><div class="fill" style="width:${sk.level}%"></div></div>
-				  </div>
-				`).join('');
-				sec.appendChild(groupDiv);
+				const grid = document.createElement('div');
+				grid.className = 'skills-grid';
+				grid.innerHTML = `<h3>${category}</h3>` +
+				  skills.map(sk => `<div class="skill">${sk.name}</div>`).join('');
+				sec.appendChild(grid);
 			  });
 			}
+
 
 			// ---- Plain Skills ----
 			else if (tab.skills) {
