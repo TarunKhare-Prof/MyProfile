@@ -160,3 +160,32 @@ h2 {
   max-height: 180px;
   object-fit: cover;
 }
+/* ===== FOOTER ===== */
+footer {
+  margin-top: 60px;
+  text-align: center;
+  padding: 20px;
+  background: #f2f5fa;
+  color: #555;
+  font-size: 14px;
+}
+
+footer p {
+  margin: 0 0 10px;
+}
+
+footer .social {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+footer .social a {
+  color: #004080;
+  font-size: 20px;
+  transition: 0.2s;
+}
+
+footer .social a:hover {
+  color: #0074cc;
+}
