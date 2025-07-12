@@ -135,10 +135,13 @@
 
   <script>
     async function fetchJSON(path) {
-      const res = await fetch(path);
-      if (!res.ok) throw new Error(`Failed to load ${path}`);
-      return res.json();
-    }
+		const res = await fetch(path);
+		if (!res.ok) {
+		  alert(`Failed to load ${path}`);
+		  throw new Error(`Failed to load ${path}`);
+		}
+		return res.json();
+	  }
 
     function showTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
