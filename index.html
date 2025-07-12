@@ -1,220 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tarun Khare - Test Portfolio</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom right, #f2f6fc, #ffffff);
-      color: #333;
-    }
-
-    header {
-      background: rgba(0, 85, 170, 0.8);
-      color: white;
-      padding: 30px 20px;
-      text-align: center;
-      font-size: 36px;
-      font-weight: bold;
-      letter-spacing: 1px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    nav {
-      display: flex;
-      justify-content: center;
-      background-color: rgba(0, 0, 0, 0.03);
-      padding: 15px;
-      gap: 15px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      backdrop-filter: blur(5px);
-    }
-
-    nav button {
-      background-color: rgba(0, 0, 0, 0.05);
-      border: 1px solid #ccc;
-      padding: 10px 20px;
-      cursor: pointer;
-      font-weight: bold;
-      border-radius: 10px;
-      transition: all 0.3s ease;
-    }
-
-    nav button:hover {
-      background-color: #004080;
-      color: white;
-      transform: scale(1.05);
-    }
-
-    .tab-content {
-      display: none;
-      padding: 30px;
-      margin: 20px auto;
-      max-width: 900px;
-      background-color: rgba(255, 255, 255, 0.85);
-      border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    }
-
-    .active {
-      display: block;
-    }
-
-    h2 {
-      color: #004080;
-      border-bottom: 2px solid #004080;
-      padding-bottom: 5px;
-    }
-
-    h3 {
-      color: #0066cc;
-      margin-top: 20px;
-    }
-
-    ul {
-      padding-left: 20px;
-    }
-
-    .profile-pic {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 3px solid #004080;
-      object-fit: cover;
-      margin-bottom: 15px;
-    }
-
-    .profile-wrapper {
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    .project-card {
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      padding: 15px;
-      background-color: white;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    }
-
-    .project-card img {
-      max-width: 100%;
-      border-radius: 6px;
-    }
-  </style>
+  <title>Tarun Khare - Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
   <header>Tarun Khare - Sr. Software Engineer</header>
 
-  <nav>
-    <button onclick="showTab('summary')">Profile Summary</button>
-    <button onclick="showTab('experience')">Work Experience</button>
-    <button onclick="showTab('projects')">Projects</button>
-    <button onclick="showTab('skills')">Skills</button>
-    <button onclick="showTab('education')">Education</button>
-    <button onclick="showTab('contact')">Contact</button>
+  <nav id="tabs">
+    <!-- Buttons will be injected from config -->
   </nav>
 
   <div class="profile-wrapper">
-    <img src="https://avatars.githubusercontent.com/u/000000?v=4" alt="Tarun Khare" class="profile-pic">
+    <img src="images/profile.jpg" class="profile-pic" id="profileImage" alt="Profile Image">
   </div>
 
-  <div id="summary" class="tab-content active">
-    <h2>About</h2>
-    <p>Multifaceted Senior Software Engineer with over 6.5 years of experience in full-stack development, embedded automation, and validation across transportation, fintech, and IoT domains. Skilled in building tools using C#, Python, VB.NET, Flask, SQL, and WinForms.</p>
-    <p>Hands-on experience in SIL-level testing, Windchill Modeler, TestStand, automation pipelines, and remote MPU/DDU validation. Developed Python-Flask-based stock and crypto screeners using Dhan/Delta APIs and IoT systems using ESP32/ESP8266 integrated with Sinric Pro. Skilled in GitHub/GitLab CI/CD and requirement traceability with Windchill + IBM EWM. Passionate about 3D printing, smart home automation, and software+hardware integration.</p>
-  </div>
-
-  <div id="experience" class="tab-content">
-    <h2>Work Experience</h2>
-    <h3>Sr Software Engineer - Alstom (2023-10 to Present)</h3>
-    <ul>
-      <li>Built internal toolkits in C# and Python for train diagnostics and validation.</li>
-      <li>Excel & VB.NET-based documentation automation (reduced 60% manual effort).</li>
-      <li>Flask/WinForms backend for reusable logic across train systems.</li>
-      <li>Windchill Modeler used for SIL + subsystem architecture modeling.</li>
-      <li>Led validation efforts across DDU, MPU, HMI interfaces.</li>
-    </ul>
-    <h3>Software Engineer - Tech Mahindra (2022-02 to 2023-10)</h3>
-    <ul>
-      <li>Automation system design using C#, Excel Interop, and .NET macros.</li>
-    </ul>
-    <h3>Software Engineer - Cyient (2018-11 to 2022-02)</h3>
-    <ul>
-      <li>Designed test pipelines for 24+ safety-critical train features.</li>
-      <li>Regression test support and black-box validation (150+ issues tracked).</li>
-      <li>Developed toolchains for QA, reporting, and analytics.</li>
-    </ul>
-  </div>
-
-  <div id="projects" class="tab-content">
-    <h2>Projects</h2>
-    <div class="project-card">
-      <h3>Stock & Crypto Screener</h3>
-      <img src="https://via.placeholder.com/600x300?text=Stock+Crypto+Screener" alt="Stock Screener">
-      <p>Python Flask-based tool using Dhan & Delta Exchange APIs to fetch and screen real-time financial data. Includes custom strategies, filters, and UI.</p>
-      <a href="#">View Repository</a>
-    </div>
-
-    <div class="project-card">
-      <h3>Smart Home LED Controller</h3>
-      <img src="https://via.placeholder.com/600x300?text=IoT+LED+Control" alt="IoT Controller">
-      <p>ESP8266 project with OTA, web UI, Sinric Pro integration to manage home lighting patterns, brightness, and effects using local or Alexa-based triggers.</p>
-      <a href="#">View Project</a>
-    </div>
-
-    <div class="project-card">
-      <h3>3D Printing Utilities</h3>
-      <img src="https://via.placeholder.com/600x300?text=3D+Printing+Setup" alt="3D Printing">
-      <p>Functional enclosures and automation mounts for IoT sensors, designed using Fusion360 and printed on Anycubic Kobra. Integrated with ESP32 nodes.</p>
-      <a href="#">View Photos</a>
-    </div>
-  </div>
-
-  <div id="skills" class="tab-content">
-    <h2>Skills</h2>
-    <ul>
-      <li><strong>Languages & Frameworks:</strong> Python, C#, VB.NET, HTML, CSS, JavaScript, Flask, Tkinter, WinForms</li>
-      <li><strong>Testing Tools:</strong> TestStand, Codesys HMI, Excel Automation, Validation Pipelines</li>
-      <li><strong>Embedded & IoT:</strong> ESP8266, ESP32, Arduino, OTA, Sinric Pro, WebSockets</li>
-      <li><strong>Dev & CI/CD:</strong> GitHub, GitLab, IBM EWM, Git Actions, WinMerge, DiffTools</li>
-      <li><strong>3D/Design:</strong> Fusion360, STL tweaking, enclosure prototyping</li>
-    </ul>
-  </div>
-
-  <div id="education" class="tab-content">
-    <h2>Education</h2>
-    <ul>
-      <li><strong>Bachelor of Engineering:</strong> Electrical & Electronics, LNCT, Indore (2017-08)</li>
-      <li><strong>Senior Secondary:</strong> PCM + Computer Science, St. Michael's School, Satna (2013-07)</li>
-      <li><strong>Higher Secondary:</strong> St. Michael's School, Satna (2011-07)</li>
-    </ul>
-  </div>
-
-  <div id="contact" class="tab-content">
-    <h2>Contact</h2>
-    <p><strong>Location:</strong> Bengaluru, India 560102</p>
-    <p><strong>Phone:</strong> 7338071923</p>
-    <p><strong>Email:</strong> tarun.vbc.gg@gmail.com</p>
-    <p><strong>LinkedIn:</strong> <a href="#">linkedin.com/in/tarunkhare</a></p>
-    <p><strong>GitHub:</strong> <a href="#">github.com/tarunkhare</a></p>
-  </div>
+  <div id="tabContainer"></div>
 
   <script>
-    function showTab(tabId) {
-      const contents = document.querySelectorAll('.tab-content');
-      contents.forEach((el) => el.classList.remove('active'));
-      document.getElementById(tabId).classList.add('active');
-    }
-  </script>
-</body>
+  async function fetchJSON(path) {
+    const res = await fetch(path);
+    if (!res.ok) throw new Error(`Failed to load ${path}`);
+    return res.json();
+  }
 
+  function showTab(tabId) {
+    const contents = document.querySelectorAll('.tab-content');
+    contents.forEach((el) => el.classList.remove('active'));
+    const selected = document.getElementById(tabId);
+    selected?.classList.add('active');
+  }
+
+  async function initPortfolio() {
+    const data = await fetchJSON('data/portfolio.json');
+
+    document.querySelector('.profile-pic').src = data.profileImage;
+
+    const nav = document.querySelector('nav');
+    const wrapper = document.body.appendChild(document.createElement('div'));
+    wrapper.id = 'tabWrapper';
+
+    for (const tab of data.tabs) {
+      const btn = document.createElement('button');
+      btn.textContent = tab.label;
+      btn.onclick = () => showTab(tab.id);
+      nav.appendChild(btn);
+
+      const section = document.createElement('div');
+      section.className = 'tab-content';
+      section.id = tab.id;
+
+      section.innerHTML = `<h2>${tab.title}</h2>`;
+
+      if (tab.id === 'personal') {
+        section.innerHTML += tab.projects.map(p => `
+          <div class="project-card">
+            <h3>${p.title}</h3>
+            ${
+              p.type === 'video'
+                ? `<video controls><source src="${p.src}" type="video/mp4"></video>`
+                : `<img src="${p.src}" alt="${p.title}">`
+            }
+            <p>${p.description}</p>
+          </div>
+        `).join('');
+      } else {
+        section.innerHTML += tab.content.map(item => `<p>${item}</p>`).join('');
+      }
+
+      wrapper.appendChild(section);
+    }
+
+    showTab(data.tabs[0].id);
+  }
+
+  initPortfolio();
+</script>
+
+</body>
 </html>
