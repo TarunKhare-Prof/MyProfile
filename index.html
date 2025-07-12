@@ -56,13 +56,13 @@
 
     /* ---------- LIGHTBOX ---------- */
     function openLightbox(html) {
-      const lb = document.getElementById('lightbox');
-      lb.querySelector('.lightbox-content').innerHTML = html;
-      lb.classList.remove('hidden');
-    }
-    document.querySelector('#lightbox .close')
-            .onclick = () => document.getElementById('lightbox')
-                                      .classList.add('hidden');
+	  const lb = document.getElementById('lightbox');
+	  lb.querySelector('.lightbox-content').innerHTML = html;
+	  lb.style.display = 'block'; // show PiP
+	}
+	document.querySelector('#lightbox .close').onclick = () => {
+	  document.getElementById('lightbox').style.display = 'none';
+	};
 
     <!-- Inside <script> under BUILD PAGE section -->
 		(async () => {
