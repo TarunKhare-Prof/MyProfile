@@ -44,12 +44,18 @@
     }
 
     function openLightbox(html) {
-      const lb = document.getElementById('lightbox');
-      const content = lb.querySelector('.lightbox-content');
-      content.innerHTML = html;
-      lb.classList.remove('hidden');
-      lb.style.display = 'flex';
-    }
+	  const lb = document.getElementById('lightbox');
+	  const content = lb.querySelector('.lightbox-content');
+
+	  content.innerHTML = html;
+
+	  // FORCE REFLOW for Chrome
+	  void content.offsetHeight;
+
+	  lb.style.display = 'flex';
+	  lb.classList.remove('hidden');
+	}
+
 
     function closeLightbox() {
       const lb = document.getElementById('lightbox');
