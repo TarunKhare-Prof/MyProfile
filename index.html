@@ -55,15 +55,23 @@
     }
 
     /* ---------- LIGHTBOX ---------- */
-    function openLightbox(html) {
+    function openLightbox(html, triggerElement) {
 	  const lb = document.getElementById('lightbox');
-	  lb.querySelector('.lightbox-content').innerHTML = html;
+	  const content = lb.querySelector('.lightbox-content');
+	  content.innerHTML = html;
+
+	  // Get card position
+	  const rect = triggerElement.getBoundingClientRect();
+	  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+	  const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+
+	  // Set lightbox position near clicked element
+	  lb.style.position = 'absolute';
+	  lb.style.top = (rect.top + scrollTop - lb.offsetHeight - 10) + 'px';
+	  lb.style.left = (rect.left + scrollLeft) + 'px';
 	  lb.classList.remove('hidden');
 	}
 
-	document.querySelector('#lightbox .close').onclick = () => {
-	  document.getElementById('lightbox').classList.add('hidden');
-	};
 
 
     <!-- Inside <script> under BUILD PAGE section -->
@@ -131,16 +139,18 @@
 
 		  // Lightbox
 		  document.querySelectorAll('.project-card').forEach(card => {
-			card.onclick = () => {
-			  const src = card.dataset.src;
-			  const type = card.dataset.type;
-			  openLightbox(
-				type === 'video'
-				  ? `<video controls autoplay><source src="${src}" type="video/mp4"></video>`
-				  : `<img src="${src}" alt="preview">`
-			  );
-			};
-		  });
+			  card.onclick = () => {
+				const src = card.dataset.src;
+				const type = card.dataset.type;
+				openLightbox(
+				  type === 'video'
+					? `<video controls autoplay><source src="${src}" type="video/mp4"></video>`
+					: `<img src="${src}" alt="preview">`,
+				  card
+				);
+			  };
+			});
+
 		})();
 
   </script>

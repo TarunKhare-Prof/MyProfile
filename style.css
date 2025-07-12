@@ -192,18 +192,17 @@ footer .social a:hover {
 
 /* Picture-in-Picture style lightbox */
 #lightbox {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 300px;
-  max-height: 220px;
+  position: absolute; /* was fixed */
+  width: 320px;
+  max-height: 240px;
   z-index: 9999;
   background: #fff;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
   border-radius: 12px;
   overflow: hidden;
-  display: none; /* handled via JS with class toggle */
+  display: none;
 }
+
 
 #lightbox .lightbox-content video,
 #lightbox .lightbox-content img {
