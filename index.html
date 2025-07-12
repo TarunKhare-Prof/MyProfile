@@ -44,26 +44,27 @@
     }
 
     function openLightbox(html) {
-	  const lb = document.getElementById('lightbox');
-	  const content = lb.querySelector('.lightbox-content');
-	  content.innerHTML = html;
-
-	  lb.classList.remove('hidden');
-	  lb.style.display = 'flex';
-	}
-
+      const lb = document.getElementById('lightbox');
+      const content = lb.querySelector('.lightbox-content');
+      content.innerHTML = html;
+      lb.classList.remove('hidden');
+      lb.style.display = 'flex';
+    }
 
     function closeLightbox() {
       const lb = document.getElementById('lightbox');
       const content = lb.querySelector('.lightbox-content');
+
+      // Stop video if playing
       const video = content.querySelector('video');
       if (video) {
         video.pause();
         video.currentTime = 0;
       }
-      lb.classList.add('hidden');
+
+      content.innerHTML = '';
       lb.style.display = 'none';
-      content.innerHTML = ''; // remove content
+      lb.classList.add('hidden');
     }
 
     (async () => {
@@ -123,9 +124,8 @@
           const type = card.dataset.type;
           openLightbox(
             type === 'video'
-              ? `<video controls autoplay><source src="${src}" type="video/mp4"></video>`
-              : `<img src="${src}" alt="preview">`,
-            card
+              ? `<video controls autoplay><source src="${src}" type="video/mp4">Your browser does not support video.</video>`
+              : `<img src="${src}" alt="preview">`
           );
         };
       });
@@ -142,6 +142,25 @@
         }
       });
     })();
+  </script>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>Made with 💻 by Tarun Khare &copy; <span id="year"></span></p>
+    <p>Last Updated: <span id="lastModified"></span></p>
+    <div class="social">
+      <a href="https://www.linkedin.com/in/tarun-khare-98ab5085/" aria-label="LinkedIn">
+        <i class="fa-brands fa-linkedin"></i>
+      </a>
+      <a href="https://www.youtube.com/channel/UC7ef8pdQ2PywMZy3IoFlZLw" aria-label="YouTube">
+        <i class="fa-brands fa-youtube"></i>
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('lastModified').textContent = new Date(document.lastModified).toLocaleString();
   </script>
 
   <!-- ===== FOOTER ===== -->
