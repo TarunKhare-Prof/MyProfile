@@ -27,15 +27,20 @@
       ]
     },
     {
-      "id": "projects",
-      "label": "Projects",
-      "title": "Projects",
-      "content": [
-        "Python-Flask based stock screener using Dhan APIs",
-        "ESP-based smart home LED control with Sinric Pro and OTA",
-        "3D printed cases for sensor mounts and enclosures"
-      ]
-    },
+	  "id": "projects",
+	  "label": "Projects",
+	  "title": "Projects",
+	  "content": [
+		"Add-ons for PTC Windchill Modeler – Enhanced the Windchill Modeler with custom menu options tailored to project-specific needs. These extensions dynamically updated based on evolving customer requirements, improving modeling efficiency and traceability.",
+		"Report Generator for Train Validation – Developed an automation tool to generate comprehensive validation reports summarizing execution results. Included status tracking of each requirement with detailed Pass/Fail classification and summary insights.",
+		"Review Tool for Train Validation – Implemented a validation assistant that parses and verifies test scripts. It performs multiple compliance and logical checks, highlighting errors in test cases and suggesting corrective actions to improve validation reliability.",
+		"MPU Software Checker – Designed a static analysis tool to assess and review MPU software for potential issues or misconfigurations. It generates structured reports to aid debugging and quality assurance processes.",
+		"Sequence Generator for TestStand – Built a translator tool that converts structured validation scripts into executable sequences compatible with NI TestStand. This automation significantly reduced manual effort in test setup and ensured test consistency.",
+		"Document Generator – Created a smart documentation generator that, based on user inputs, produces multiple types of documents including Guidelines, Installation Manuals, Requirement Documents, and User Manuals in predefined formats.",
+		"Hours & KPI Tracker – Designed a productivity management tool that enables users to log daily working hours, track KPIs such as OTIF (On Time In Full) and RFT (Right First Time), and maintain deliverables data in a structured format."
+	  ]
+	}
+,
     {
 	  "id": "personal",
 	  "label": "Personal Projects",
