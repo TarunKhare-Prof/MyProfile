@@ -156,31 +156,37 @@ footer {
   background: #f2f5fa;
   color: #555;
   font-size: 14px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+footer .footer-inner {
+  max-width: 1000px;
+  margin: 0 auto;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
 }
-footer p {
+
+footer .footer-inner p {
   margin: 4px 0;
 }
+
 footer .social {
   display: flex;
   justify-content: center;
   gap: 12px;
   margin-top: 10px;
 }
+
 footer .social a {
   color: #004080;
   font-size: 20px;
   transition: color 0.2s;
 }
+
 footer .social a:hover {
   color: #0074cc;
 }
-
-
