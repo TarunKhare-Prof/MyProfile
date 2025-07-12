@@ -5,15 +5,13 @@
       "id": "summary",
       "label": "Profile Summary",
       "title": "Profile Summary",
-      "content": [
-        "Technically diverse Senior Software Engineer with over 6.5 years of experience in full-stack software development,  ",
+      "content": ["Technically diverse Senior Software Engineer with over 6.5 years of experience in full-stack software development,  ",
         "embedded automation, and validation frameworks across the transportation and industrial domains. ",
 		"Adept at developing tools using C#, Python, and VB.NET for automation, testing, data processing, and UI applications.",
 		"Proven expertise in SIL-level testing, remote MPU/DDU validation, and integrated testing pipelines using TestStand and Windchill Modeler. ",
 		"Additionally, self-driven in exploring emerging technologies through personal projects such as Python-Flask-based stock and crypto screeners ",
 		"using Dhan and Delta APIs, ESP-based IoT systems, smart home automation using Sinric Pro, and 3D printing for functional prototypes.",
-		"Passionate about building robust software-hardware integrated systems and mentoring teams to leverage automation and innovation for efficiency and scalability."
-      ]
+		"Passionate about building robust software-hardware integrated systems and mentoring teams to leverage automation and innovation for efficiency and scalability."]
     },
     {
       "id": "experience",
