@@ -28,8 +28,8 @@
     },
     {
 	  "id": "projects",
-	  "label": "Projects",
-	  "title": "Projects",
+	  "label": "Proffesional Projects",
+	  "title": "Proffesional Projects",
 	  "content": [
 		"<strong>Add-ons for PTC Windchill Modeler –</strong> Enhanced the Windchill Modeler with custom menu options tailored to project-specific needs. These extensions dynamically updated based on evolving customer requirements, improving modeling efficiency and traceability.",
 		"<strong>Report Generator for Train Validation –</strong> Developed an automation tool to generate comprehensive validation reports summarizing execution results. Included status tracking of each requirement with detailed Pass/Fail classification and summary insights.",
