@@ -47,28 +47,42 @@ header .wave {
 }
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 12px;
-  margin-top: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 14px;
+  margin-top: 24px;
+  background: #f5f8ff;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #dde7f2;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+  transition: all 0.3s ease;
 }
 
 .skills-grid h3 {
   grid-column: 1 / -1;
-  margin: 10px 0;
-  font-size: 16px;
-  color: #333;
+  margin: 0 0 12px;
+  font-size: 17px;
+  color: #003366;
+  border-bottom: 2px solid #0074cc;
+  padding-bottom: 4px;
 }
 
 .skill {
-  background: #e0ecff;
-  padding: 8px 14px;
-  border-radius: 20px;
+  background: linear-gradient(135deg, #dceeff, #eaf5ff);
+  padding: 10px 16px;
+  border-radius: 25px;
   font-size: 14px;
   text-align: center;
-  font-weight: 500;
-  color: #003366;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  font-weight: 600;
+  color: #004080;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s;
 }
+.skill:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #cce4ff, #dceeff);
+}
+
 
 nav {
   display: flex;
