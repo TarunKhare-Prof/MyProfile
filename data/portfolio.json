@@ -297,79 +297,101 @@
 	}
 	,
 		{
-	  "id": "skills",
-	  "label": "Skills",
-	  "title": "Skills",
-	  "skillsGrouped": {
-		"Languages": [
-		  { "name": "Python", "level": 90 },
-		  { "name": "C#", "level": 85 },
-		  { "name": "VB.NET", "level": 80 },
-		  { "name": "JavaScript", "level": 70 },
-		  { "name": "HTML/CSS", "level": 80 },
-		  { "name": "Embedded C (Working Level)", "level": 80 },
-		  { "name": "Excel Macro VBA", "level": 80 },
-		  { "name": "SQL", "level": 80 },
-		  { "name": "JSON/XML", "level": 80 }
-		],
-		"Frameworks & Tools": [
-		  { "name": "Flask", "level": 75 },
-		  { "name": "WPF/WinForms", "level": 75 },
-		  { "name": "Microsoft Office Interop", "level": 75 },
-		  { "name": "GitHub / GitLab", "level": 70 },
-		  { "name": "Sinric Pro", "level": 70 },
-		  { "name": "WebSocket", "level": 70 },
-		  { "name": "REST APIs", "level": 65 },
-		  { "name": "WS2812b Control", "level": 65 },
-		  { "name": "TradingView (PineScript)", "level": 65 },
-		  { "name": "Delta Exchange API", "level": 65 },
-		  { "name": "DhanHQ WebSocket", "level": 65 },
-		  { "name": "Pandas / OpenPyXL", "level": 65 }
-		],
-		"Microcontrollers & Hardware": [
-		  { "name": "ESP32/8266", "level": 70 },
-		  { "name": "Atmega 8/ Atmega 32", "level": 75 },
-		  { "name": "Arduino", "level": 75 },
-		  { "name": "AVR Studio", "level": 60 },
-		  { "name": "Serial Communication", "level": 80 },
-		  { "name": "Circuit Analysis", "level": 70 },
-		  { "name": "Datasheet Reading", "level": 70 },
-		  { "name": "Touch Displays (TFT/LCD)", "level": 70 },
-		  { "name": "WS2812b LEDs", "level": 70 },
-		  { "name": "L293D / ULN2003 / L298N 2A", "level": 70 },
-		  { "name": "OTA Updates", "level": 70 },
-		  { "name": "Sensors [PIR, Ultrasonic, Temperature, Moisture]", "level": 70 }
-		],
-		"Testing & Simulation": [
-		  { "name": "TestStand", "level": 85 },
-		  { "name": "Proteus Simulation", "level": 70 },
-		  { "name": "Unit Testing", "level": 75 },
-		  { "name": "Integration Testing", "level": 70 },
-		  { "name": "Debugging / RCA", "level": 70 },
-		  { "name": "Manual Testing", "level": 70 },
-		  { "name": "HMI Testing", "level": 70 }
-		],
-		"IDE & Platforms": [
-		  { "name": "Visual Studio", "level": 85 },
-		  { "name": "VS Code", "level": 80 },
-		  { "name": "PyCharm", "level": 80 },
-		  { "name": "SquareLine Studio [ESP UI Design]", "level": 80 },
-		  { "name": "WPF/WinForms", "level": 80 },
-		  { "name": "AWS Basic", "level": 60 },
-		  { "name": "Azure Basic", "level": 60 },
-		  { "name": "Codesys", "level": 60 },
-		  { "name": "MS Tools , [Excel, Word, PPT, Outlook, Teams]", "level": 60 },
-		  { "name": "PCB Designing", "level": 70 }
-		],
-		"AI, Finance & Automation": [
-		  { "name": "ChatGPT API / Use", "level": 85 },
-		  { "name": "Stock Screener Dev", "level": 80 },
-		  { "name": "Crypto Trading Bots", "level": 70 },
-		  { "name": "Smart Home AI", "level": 70 },
-		  { "name": "Excel Automation", "level": 70 }
-		]
-	  }
-	}
+		  "id": "skills",
+		  "label": "Skills",
+		  "title": "Skills",
+		  "skillsGrouped": {
+			"Languages": [
+			  { "name": "Python", "level": 90 },
+			  { "name": "C#", "level": 85 },
+			  { "name": "VB.NET", "level": 80 },
+			  { "name": "JavaScript", "level": 70 },
+			  { "name": "HTML/CSS", "level": 80 },
+			  { "name": "Embedded C (Working Level)", "level": 80 },
+			  { "name": "Excel Macro VBA", "level": 80 },
+			  { "name": "SQL", "level": 80 },
+			  { "name": "JSON/XML", "level": 80 }
+			],
+			"Frameworks & Tools": [
+			  { "name": "Flask", "level": 75 },
+			  { "name": "WPF/WinForms", "level": 75 },
+			  { "name": "Microsoft Office Interop", "level": 75 },
+			  { "name": "GitHub / GitLab", "level": 70 },
+			  { "name": "Sinric Pro", "level": 70 },
+			  { "name": "WebSocket", "level": 70 },
+			  { "name": "REST APIs", "level": 65 },
+			  { "name": "WS2812b Control", "level": 65 },
+			  { "name": "TradingView (PineScript)", "level": 65 },
+			  { "name": "Delta Exchange API", "level": 65 },
+			  { "name": "DhanHQ WebSocket", "level": 65 },
+			  { "name": "Pandas / OpenPyXL", "level": 65 }
+			],
+			"Microcontrollers & Hardware": [
+			  { "name": "ESP32/8266", "level": 70 },
+			  { "name": "Atmega 8/ Atmega 32", "level": 75 },
+			  { "name": "Arduino", "level": 75 },
+			  { "name": "AVR Studio", "level": 60 },
+			  { "name": "Serial Communication", "level": 80 },
+			  { "name": "Circuit Analysis", "level": 70 },
+			  { "name": "Datasheet Reading", "level": 70 },
+			  { "name": "Touch Displays (TFT/LCD)", "level": 70 },
+			  { "name": "WS2812b LEDs", "level": 70 },
+			  { "name": "L293D / ULN2003 / L298N 2A", "level": 70 },
+			  { "name": "OTA Updates", "level": 70 },
+			  { "name": "Sensors [PIR, Ultrasonic, Temperature, Moisture]", "level": 70 },
+			  { "name": "Solenoid Locks Integration", "level": 70 },
+			  { "name": "RFID Module Usage", "level": 70 }
+			],
+			"Networking & Embedded Systems": [
+			  { "name": "Wi-Fi Setup & Troubleshooting", "level": 80 },
+			  { "name": "Router Configuration & Port Forwarding", "level": 75 },
+			  { "name": "Local Network IoT Device Hosting (.local)", "level": 70 }
+			],
+			"Testing & Simulation": [
+			  { "name": "TestStand", "level": 85 },
+			  { "name": "Proteus Simulation", "level": 70 },
+			  { "name": "Unit Testing", "level": 75 },
+			  { "name": "Integration Testing", "level": 70 },
+			  { "name": "Debugging / RCA", "level": 70 },
+			  { "name": "Manual Testing", "level": 70 },
+			  { "name": "HMI Testing", "level": 70 }
+			],
+			"IDE & Platforms": [
+			  { "name": "Visual Studio", "level": 85 },
+			  { "name": "VS Code", "level": 80 },
+			  { "name": "PyCharm", "level": 80 },
+			  { "name": "SquareLine Studio [ESP UI Design]", "level": 80 },
+			  { "name": "WPF/WinForms", "level": 80 },
+			  { "name": "AWS Basic", "level": 60 },
+			  { "name": "Azure Basic", "level": 60 },
+			  { "name": "Codesys", "level": 60 },
+			  { "name": "MS Tools [Excel, Word, PPT, Outlook, Teams]", "level": 60 },
+			  { "name": "DIP TRACE (PCB Designing)", "level": 70 },
+			  { "name": "AVR Studio", "level": 70 }
+			],
+			"AI, Finance & Automation": [
+			  { "name": "ChatGPT API / Use", "level": 85 },
+			  { "name": "Stock Screener Development", "level": 80 },
+			  { "name": "Crypto Trading Bots", "level": 70 },
+			  { "name": "Smart Home AI", "level": 70 },
+			  { "name": "Excel Automation", "level": 70 }
+			],
+			"Operating Systems": [
+			  { "name": "Microsoft Windows", "level": 85 },
+			  { "name": "macOS", "level": 80 },
+			  { "name": "Linux/Ubuntu [Basic]", "level": 70 }
+			],
+			"Additional Knowledge": [
+			  { "name": "Assembling Computer Hardware", "level": 85 },
+			  { "name": "Drilling, Cutting, Wiring Tools", "level": 80 },
+			  { "name": "Soldering, PCB Etching", "level": 75 },
+			  { "name": "Reading Electrical Schematics", "level": 70 },
+			  { "name": "Component-Level Debugging", "level": 70 },
+			  { "name": "Hands-on with Power Supplies & Multimeter Usage", "level": 70 }
+			]
+		  }
+		}
+
 
 
 ,
