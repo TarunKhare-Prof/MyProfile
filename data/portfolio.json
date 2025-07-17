@@ -306,7 +306,7 @@
 		  { "name": "Datasheet Reading", "level": 70 },
 		  { "name": "Touch Displays (TFT/LCD)", "level": 70 },
 		  { "name": "WS2812b LEDs", "level": 70 },
-		  { "name": "L293D/ULN2003/L298N 2A", "level": 70 },
+		  { "name": "L293D / ULN2003 / L298N 2A", "level": 70 },
 		  { "name": "OTA Updates", "level": 70 },
 		  { "name": "Sensors [PIR, Ultrasonic, Temperature, Moisture]", "level": 70 }
 		],
@@ -328,7 +328,7 @@
 		  { "name": "AWS Basic", "level": 60 },
 		  { "name": "Azure Basic", "level": 60 },
 		  { "name": "Codesys", "level": 60 },
-		  { "name": "MS Tools , [Excel,Word,PPT,Outlook,Teams]", "level": 60 },
+		  { "name": "MS Tools , [Excel, Word, PPT, Outlook, Teams]", "level": 60 },
 		  { "name": "PCB Designing", "level": 70 }
 		],
 		"AI, Finance & Automation": [
