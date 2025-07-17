@@ -1,24 +1,22 @@
 {
   "profileImage": "images/profile.jpg",
   "tabs": [
-	  {
-		"id": "summary",
-		"label": "Profile Summary",
-		"title": "Profile Summary",
-		"content": [
-		  "Technically diverse Senior Software Engineer with almsot 7 years of experience in full-stack software development, embedded automation, and validation frameworks across transportation, fintech, and industrial domains.",
-		  "Proficient in building desktop and web-based tools using C#, Python (Flask), VB.NET, and SQL for automation, validation, UI development, and backend operations.",
-		  "Hands-on experience in HMI testing, SIL-level validations, and embedded controller interface testing using TestStand, Windchill Modeler, and CoDeSys.",
-		  "Strong background in documenting and debugging large systems, including requirement traceability, root cause analysis, and test plan execution for 24+ train functions across global metro projects.",
-		  "Capable of designing modular automation frameworks and utilities for tasks such as reporting, diagnostics, document generation, and KPI tracking.",
-		  "Self-motivated learner actively engaged in personal projects: Python-Flask stock/crypto screeners using Delta and Dhan APIs, ESP32/ESP8266-based IoT devices, smart home automation via Sinric Pro, and functional 3D printed prototypes.",
-		  "Skilled in version control and CI/CD using GitLab, GitHub, and automation toolchains; familiar with defect tracking using IBM EWM and integration platforms.",
-		  "Strong communicator and mentor—driven to share knowledge through internal sessions, streamline team productivity, and deliver scalable, future-ready solutions.",
-		  "Focused on leveraging automation, cross-platform integration, and software-hardware synergy to deliver robust and innovative engineering solutions."
-		]
-	  }
-	]
-,
+    {
+      "id": "summary",
+      "label": "Profile Summary",
+      "title": "Profile Summary",
+      "content": [
+      "Technically diverse Senior Software Engineer with over 6.5 years of experience in full-stack software development, embedded automation, and validation frameworks across transportation, fintech, and industrial domains.",
+      "Proficient in building desktop and web-based tools using C#, Python (Flask), VB.NET, and SQL for automation, validation, UI development, and backend operations.",
+      "Hands-on experience in HMI testing, SIL-level validations, and embedded controller interface testing using TestStand, Windchill Modeler, and CoDeSys.",
+      "Strong background in documenting and debugging large systems, including requirement traceability, root cause analysis, and test plan execution for 24+ train functions across global metro projects.",
+      "Capable of designing modular automation frameworks and utilities for tasks such as reporting, diagnostics, document generation, and KPI tracking.",
+      "Self-motivated learner actively engaged in personal projects: Python-Flask stock/crypto screeners using Delta and Dhan APIs, ESP32/ESP8266-based IoT devices, smart home automation via Sinric Pro, and functional 3D printed prototypes.",
+      "Skilled in version control and CI/CD using GitLab, GitHub, and automation toolchains; familiar with defect tracking using IBM EWM and integration platforms.",
+      "Strong communicator and mentor—driven to share knowledge through internal sessions, streamline team productivity, and deliver scalable, future-ready solutions.",
+      "Focused on leveraging automation, cross-platform integration, and software-hardware synergy to deliver robust and innovative engineering solutions."
+    ]
+    },
     {
 	  "id": "experience",
 	  "label": "Work Experience",
