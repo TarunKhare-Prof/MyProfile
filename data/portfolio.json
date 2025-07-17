@@ -37,7 +37,10 @@
 		"<strong>MPU Software Checker –</strong> Designed a static analysis tool to assess and review MPU software for potential issues or misconfigurations. It generates structured reports to aid debugging and quality assurance processes.",
 		"<strong>Sequence Generator for TestStand –</strong> Built a translator tool that converts structured validation scripts into executable sequences compatible with NI TestStand. This automation significantly reduced manual effort in test setup and ensured test consistency.",
 		"<strong>Document Generator –</strong> Created a smart documentation generator that, based on user inputs, produces multiple types of documents including Guidelines, Installation Manuals, Requirement Documents, and User Manuals in predefined formats.",
-		"<strong>Hours & KPI Tracker –</strong> Designed a productivity management tool that enables users to log daily working hours, track KPIs such as OTIF (On Time In Full) and RFT (Right First Time), and maintain deliverables data in a structured format."
+		"<strong>Hours & KPI Tracker –</strong> Designed a productivity management tool that enables users to log daily working hours, track KPIs such as OTIF (On Time In Full) and RFT (Right First Time), and maintain deliverables data in a structured format.",
+		"<strong>Comments Adder –</strong> The tool helps users avoid manually copying and updating repetitive literals for test cases by allowing them to add data directly with minimal intervention.",
+		"<strong>Instance Generator –</strong> The Instance Generator is designed to automate the generation of different equipment and train function combinations. This significantly reduces the time required to create complex configurations and ensures thorough testing of all possible train setups.",
+		"<strong>Proof Reader –</strong> The Proofreading Tool is designed to compare two input documents and identify differences, including changes, deletions, and new additions. It generates a detailed report highlighting the count and nature of differences in both HTML and Excel formats."
 	  ]
 	}
 ,
