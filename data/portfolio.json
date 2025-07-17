@@ -1,31 +1,54 @@
 {
   "profileImage": "images/profile.jpg",
   "tabs": [
+	  {
+		"id": "summary",
+		"label": "Profile Summary",
+		"title": "Profile Summary",
+		"content": [
+		  "Technically diverse Senior Software Engineer with almsot 7 years of experience in full-stack software development, embedded automation, and validation frameworks across transportation, fintech, and industrial domains.",
+		  "Proficient in building desktop and web-based tools using C#, Python (Flask), VB.NET, and SQL for automation, validation, UI development, and backend operations.",
+		  "Hands-on experience in HMI testing, SIL-level validations, and embedded controller interface testing using TestStand, Windchill Modeler, and CoDeSys.",
+		  "Strong background in documenting and debugging large systems, including requirement traceability, root cause analysis, and test plan execution for 24+ train functions across global metro projects.",
+		  "Capable of designing modular automation frameworks and utilities for tasks such as reporting, diagnostics, document generation, and KPI tracking.",
+		  "Self-motivated learner actively engaged in personal projects: Python-Flask stock/crypto screeners using Delta and Dhan APIs, ESP32/ESP8266-based IoT devices, smart home automation via Sinric Pro, and functional 3D printed prototypes.",
+		  "Skilled in version control and CI/CD using GitLab, GitHub, and automation toolchains; familiar with defect tracking using IBM EWM and integration platforms.",
+		  "Strong communicator and mentor—driven to share knowledge through internal sessions, streamline team productivity, and deliver scalable, future-ready solutions.",
+		  "Focused on leveraging automation, cross-platform integration, and software-hardware synergy to deliver robust and innovative engineering solutions."
+		]
+	  }
+	]
+,
     {
-      "id": "summary",
-      "label": "Profile Summary",
-      "title": "Profile Summary",
-      "content": ["Technically diverse Senior Software Engineer with over 6.5 years of experience in full-stack software development,  ",
-        "embedded automation, and validation frameworks across the transportation and industrial domains. ",
-		"Adept at developing tools using C#, Python, and VB.NET for automation, testing, data processing, and UI applications.",
-		"Proven expertise in SIL-level testing, remote MPU/DDU validation, and integrated testing pipelines using TestStand and Windchill Modeler. ",
-		"Additionally, self-driven in exploring emerging technologies through personal projects such as Python-Flask-based stock and crypto screeners ",
-		"using Dhan and Delta APIs, ESP-based IoT systems, smart home automation using Sinric Pro, and 3D printing for functional prototypes.",
-		"Passionate about building robust software-hardware integrated systems and mentoring teams to leverage automation and innovation for efficiency and scalability."]
-    },
-    {
-      "id": "experience",
-      "label": "Work Experience",
-      "title": "Work Experience",
-      "content": [
-        "<strong>Sr Software Engineer - Alstom</strong> (2023-10 to Present)",
-        "Developed reusable backend logic with Flask, automated reports using VB.NET and Excel.",
-        "<strong>Software Engineer - Tech Mahindra</strong> (2022-02 to 2023-10)",
-        "Created automation tools using Excel Interop and VB.NET.",
-        "<strong>Software Engineer - Cyient</strong> (2018-11 to 2022-02)",
-        "Designed test plans for 24+ subsystems and built validation utilities."
-      ]
-    },
+	  "id": "experience",
+	  "label": "Work Experience",
+	  "title": "Work Experience",
+	  "content": [
+		"<strong>Sr. Software Engineer – Alstom Transport India Ltd, Bengaluru</strong> (Oct 2023 – Present)",
+		"• Developed reusable backend validation logic using Flask, WinForms, and embedded SQL operations to support large-scale train test systems.",
+		"• Automated documentation and reporting processes with VB.NET and Excel Macros, reducing manual efforts by over 60%.",
+		"• Built custom internal toolkits in Python and C# for system diagnostics, requirement traceability, and SIL-level testing.",
+		"• Collaborated with cross-functional teams on real-time validation of MPU/DDU and supported integrated test pipelines.",
+		"• Utilized Windchill Modeler to define model-based system architecture and behavior for train subsystems.",
+		"• Mentored junior engineers, contributed to documentation standards, and led internal knowledge-sharing sessions.",
+		
+		"<strong>Software Engineer – Tech Mahindra, Bengaluru</strong> (Feb 2022 – Oct 2023)",
+		"• Created desktop automation tools using VB.NET, C#, and Excel Interop to streamline validation of HMI systems and reporting workflows.",
+		"• Performed CoDeSys-based HMI validation and integrated test development for metro train platforms.",
+		"• Contributed to automation of TestStand sequences for hardware interface testing.",
+		"• Integrated GitLab/GitHub version control with CI/CD pipelines for internal tools, and participated in defect tracking using IBM EWM.",
+		"• Worked closely with validation teams to ensure early detection and reporting of critical issues.",
+		
+		"<strong>Software Engineer – Cyient Ltd, Bengaluru</strong> (Nov 2018 – Feb 2022)",
+		"• Validated 24+ train functionalities including BRK, TBS, OAS, MAS, DRS, JRU, and more across international metro projects (Dubai, Avelia, TGV2020, Amtrak, Shanghai, Delhi, etc.).",
+		"• Developed Excel-based utilities for test case tracking, requirement mapping, and KPI reporting.",
+		"• Created manual and Python-based test scripts based on Electrical Solution Schemes (SPS/PPS) and ADL1/ADL2 documents.",
+		"• Initiated multi-level trace-back testing to trace errors to root producers, helping reduce defect reproduction time.",
+		"• Collaborated with development teams to assist in debugging and validating embedded train control code.",
+		"• Proposed process improvements for better traceability and validation outcomes."
+	  ]
+	}
+,
     {
 	  "id": "projects",
 	  "label": "Professional Projects",
