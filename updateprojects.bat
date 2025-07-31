@@ -32,6 +32,9 @@ for %%F in (%IMAGE_DIR%\*) do (
     :: Format title (replace _ with space)
     set "title=!name:_= !"
 
+    :: Convert backslashes to forward slashes for web compatibility
+    set "src=!src:\=/!"
+
     :: Handle comma before entry
     if not "!firstEntry!"=="true" >> "%OUTPUT_FILE%" echo ,
     set "firstEntry=false"
@@ -39,7 +42,7 @@ for %%F in (%IMAGE_DIR%\*) do (
     :: Write project entry
     >> "%OUTPUT_FILE%" echo   {
     >> "%OUTPUT_FILE%" echo     "title": "!title!",
-    >> "%OUTPUT_FILE%" echo     "media": ["!src:\=\\!"],
+    >> "%OUTPUT_FILE%" echo     "media": ["!src!"],
     >> "%OUTPUT_FILE%" echo     "type": "!type!",
     >> "%OUTPUT_FILE%" echo     "description": {
     >> "%OUTPUT_FILE%" echo       "about": "",
