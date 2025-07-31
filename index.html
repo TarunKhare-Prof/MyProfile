@@ -78,43 +78,45 @@
         sec.innerHTML = `<h2>${tab.title}</h2>`;
 
         if (tab.id === 'personal') {
-          const personalData = await fetchJSON('data/personal_projects.json');
-          const grid = document.createElement('div');
-          grid.className = 'projects-flex-list';
+		  const personalData = await fetchJSON('data/personal_projects.json');
+		  const grid = document.createElement('div');
+		  grid.className = 'projects-flex-list';
 
-          grid.innerHTML = personalData.map((p, index) => {
-            const mediaList = Array.isArray(p.media) ? p.media : [p.media];
-            const mediaNav = mediaList.length > 1 ? `
-              <button class="media-nav prev" onclick="showPrev(${index})">&#8592;</button>
-              <button class="media-nav next" onclick="showNext(${index})">&#8594;</button>` : '';
-            const mediaContent = mediaList.map((src, i) =>
-              p.type === 'video'
-                ? `<video preload="metadata" muted class="media-item ${i === 0 ? 'active' : ''}"><source src="${src}" type="video/mp4"></video>`
-                : `<img src="${src}" class="media-item ${i === 0 ? 'active' : ''}" alt="${p.title}">`
-            ).join('');
+		  grid.innerHTML = personalData.map((p, index) => {
+			const mediaList = Array.isArray(p.src) ? p.src : [p.src];
+			const mediaNav = mediaList.length > 1 ? `
+			  <button class="media-nav prev" onclick="showPrev(${index})">&#8592;</button>
+			  <button class="media-nav next" onclick="showNext(${index})">&#8594;</button>` : '';
+			const mediaContent = mediaList.map((src, i) =>
+			  src.endsWith('.mp4')
+				? `<video preload="metadata" muted class="media-item ${i === 0 ? 'active' : ''}" onclick="openLightbox(this.outerHTML)">
+					 <source src="${src}" type="video/mp4">
+				   </video>`
+				: `<img src="${src}" class="media-item ${i === 0 ? 'active' : ''}" alt="${p.title}" onclick="openLightbox(this.outerHTML)">`
+			).join('');
 
-            return `
-              <div class="project-row" id="project-${index}">
-                <div class="media-column">
-                  <div class="media-wrapper">
-                    ${mediaContent}
-                    ${mediaNav}
-                  </div>
-                </div>
-                <div class="desc-column">
-                  <h3>${p.title}</h3>
-                  <p><strong>Date:</strong> ${p.date}</p>
-                  <p><strong>About:</strong> ${p.description.about}</p>
-                  <p><strong>Coding:</strong> ${p.description.coding}</p>
-                  <p><strong>Hardware:</strong> ${p.description.hardware}</p>
-                </div>
-              </div>
-            `;
-          }).join('');
+			return `
+			  <div class="project-row" id="project-${index}">
+				<div class="media-column">
+				  <div class="media-wrapper">
+					${mediaContent}
+					${mediaNav}
+				  </div>
+				</div>
+				<div class="desc-column">
+				  <h3>${p.title}</h3>
+				  <p><strong>About:</strong> ${p.description}</p>
+				  <p><strong>Software:</strong> ${p.coding}</p>
+				  <p><strong>Hardware:</strong> ${p.hardware}</p>
+				  <p><strong>Additional Info:</strong> ${p.additional}</p>
+				</div>
+			  </div>
+			`;
+		  }).join('');
 
-          sec.appendChild(grid);
-
-        } else if (tab.skillsGrouped) {
+		  sec.appendChild(grid);
+		}
+		else if (tab.skillsGrouped) {
           Object.entries(tab.skillsGrouped).forEach(([category, skills]) => {
             const grid = document.createElement('div');
             grid.className = 'skills-grid';
