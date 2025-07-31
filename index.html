@@ -113,7 +113,8 @@
 		  const personalData = await fetchJSON('data/personal_projects.json');
 
 		  const grid = document.createElement('div');
-		  grid.className = 'projects-grid';
+			grid.className = 'projects-flex-list';
+
 
 		  grid.innerHTML = personalData.map((p, index) => {
 			const mediaNav = p.media.length > 1
