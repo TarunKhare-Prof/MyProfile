@@ -70,7 +70,12 @@
 	  ]
 	}
 
-	
+	,
+	{
+	  "id": "personal",
+	  "label": "Personal Projects",
+	  "title": "My Personal Projects"
+	}
 
 	,
 		
