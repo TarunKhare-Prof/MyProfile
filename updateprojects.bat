@@ -13,36 +13,36 @@ set "IMAGE_EXT=.jpg .jpeg .png .gif"
 > "%OUTPUT_FILE%" echo [
 
 set "firstEntry=true"
-
-:: Loop through files
 for %%F in (%IMAGE_DIR%\*) do (
     set "filename=%%~nxF"
     set "name=%%~nF"
     set "ext=%%~xF"
-    set "src=%%F"
     set "type=image"
 
-    :: Determine if it's a video
     for %%V in (%VIDEO_EXT%) do (
-        if /I "%%~xF"=="%%V" (
-            set "type=video"
-        )
+        if /I "%%~xF"=="%%V" set "type=video"
     )
 
-    :: Format title (replace _ with space)
     set "title=!name:_= !"
 
-    :: Convert backslashes to forward slashes for web compatibility
-    set "src=!src:\=/!"
+    for /f "tokens=1-3 delims=/" %%a in ("%%~tF") do (
+        set "day=%%a"
+        set "month=%%b"
+        set "year=%%c"
+    )
+    set "date=!year!-!month!-!day!"
 
-    :: Handle comma before entry
     if not "!firstEntry!"=="true" >> "%OUTPUT_FILE%" echo ,
     set "firstEntry=false"
 
-    :: Write project entry
     >> "%OUTPUT_FILE%" echo   {
     >> "%OUTPUT_FILE%" echo     "title": "!title!",
-    >> "%OUTPUT_FILE%" echo     "src": ["!src!"],
+    >> "%OUTPUT_FILE%" echo     "src": [
+    >> "%OUTPUT_FILE%" echo       {
+    >> "%OUTPUT_FILE%" echo         "url": "!IMAGE_DIR!\!filename!",
+    >> "%OUTPUT_FILE%" echo         "date": "!date!"
+    >> "%OUTPUT_FILE%" echo       }
+    >> "%OUTPUT_FILE%" echo     ],
     >> "%OUTPUT_FILE%" echo     "type": "!type!",
     >> "%OUTPUT_FILE%" echo     "description": {
     >> "%OUTPUT_FILE%" echo       "about": "",
@@ -58,3 +58,4 @@ for %%F in (%IMAGE_DIR%\*) do (
 
 echo ✅ personal_projects.json generated successfully.
 pause
+

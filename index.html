@@ -89,13 +89,21 @@
               <button class="media-nav prev" onclick="showPrev(${index})">&#8592;</button>
               <button class="media-nav next" onclick="showNext(${index})">&#8594;</button>` : '';
 
-            const mediaContent = mediaList.map((src, i) =>
-              src.endsWith('.mp4') || src.endsWith('.webm') || src.endsWith('.ogg')
-                ? `<video preload="metadata" muted class="media-item ${i === 0 ? 'active' : ''}" onclick="openLightbox(this.outerHTML)">
-                     <source src="${src}" type="video/mp4">
-                   </video>`
-                : `<img src="${src}" class="media-item ${i === 0 ? 'active' : ''}" alt="${p.title}" onclick="openLightbox(this.outerHTML)">`
-            ).join('');
+            const mediaContent = mediaList.map((src, i) => {
+			  const ext = src.split('.').pop().toLowerCase();
+			  const mimeType =
+				ext === 'mp4' ? 'video/mp4' :
+				ext === 'webm' ? 'video/webm' :
+				ext === 'ogg' ? 'video/ogg' :
+				'video/mp4';
+
+			  return src.endsWith('.mp4') || src.endsWith('.webm') || src.endsWith('.ogg')
+				? `<video preload="metadata" muted class="media-item ${i === 0 ? 'active' : ''}" onclick="openLightbox(this.outerHTML)">
+					 <source src="${src}" type="${mimeType}">
+				   </video>`
+				: `<img src="${src}" class="media-item ${i === 0 ? 'active' : ''}" alt="${p.title}" onclick="openLightbox(this.outerHTML)">`;
+			}).join('');
+
 
             return `
               <div class="project-row" id="project-${index}">
