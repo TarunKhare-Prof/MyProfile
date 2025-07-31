@@ -7,11 +7,11 @@
       "url": "images\\3D-Printet Frosted Lamp + WS2812B Digital LED + Controlled From ESP8266 + WIFI Control Pannel + Patterns + Alexa Support + Sinric Pro Connectivity.gif",
       "date": "2025 00:56-08-01"
     },{
-      "url": "images\\frosted_lamp.mov",
+      "url": "images\\frosted_lamp.mp4",
       "date": "2025 00:56-08-01"
     }
   ],
-  "type": "image",
+  "type": "mixed",
   "description": {
     "about": "A 3D-printed frosted lamp with customizable RGB animations, Wi-Fi control, and Alexa voice integration. Designed for ambient lighting and automation.",
     "coding": "Arduino code on ESP8266 using FastLED and Sinric Pro libraries. Handles OTA updates, color selection, brightness, and pattern animations.",
