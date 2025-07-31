@@ -109,68 +109,49 @@
                 <div class="bar"><div class="fill" style="width:${sk.level}%"></div></div>
               </div>`).join('')}
           </div>`;
-        } else if (tab.id === 'personal') {
+        }  else if (tab.id === 'personal') {
+		  const personalData = await fetchJSON('data/personal_projects.json');
+
 		  const grid = document.createElement('div');
-		  grid.className = 'projects-flex-list';
+		  grid.className = 'projects-grid';
 
-		  const personalProjects = await fetchJSON('data/personal_projects.json');
+		  grid.innerHTML = personalData.map((p, index) => {
+			const mediaNav = p.media.length > 1
+			  ? `
+				<button class="media-nav prev" onclick="showPrev(${index})">&#8592;</button>
+				<button class="media-nav next" onclick="showNext(${index})">&#8594;</button>
+			  `
+			  : '';
 
-		  const sortedProjects = personalProjects
-			.map(p => ({ ...p, fileDate: new Date(p.date) }))
-			.sort((a, b) => b.fileDate - a.fileDate);
+			const mediaContent = p.media.map((src, i) =>
+			  p.type === 'video'
+				? `<video preload="metadata" muted class="media-item ${i === 0 ? 'active' : ''}"><source src="${src}" type="video/mp4"></video>`
+				: `<img src="${src}" class="media-item ${i === 0 ? 'active' : ''}" alt="${p.title}">`
+			).join('');
 
-		  sortedProjects.forEach((p, idx) => {
-			const wrapper = document.createElement('div');
-			wrapper.className = 'project-row';
-
-			// Media viewer
-			const mediaBox = document.createElement('div');
-			mediaBox.className = 'media-box';
-
-			const mediaId = `media-${idx}`;
-			mediaBox.innerHTML = `
-			  <div class="media-viewer" id="${mediaId}">
-				${renderMedia(p.media[0])}
-				${p.media.length > 1
-				  ? `<button class="prev">&lt;</button><button class="next">&gt;</button>`
-				  : ''}
+			return `
+			  <div class="project-row" id="project-${index}">
+				<div class="media-column">
+				  <div class="media-wrapper">
+					${mediaContent}
+					${mediaNav}
+				  </div>
+				</div>
+				<div class="desc-column">
+				  <h3>${p.title}</h3>
+				  <p><strong>Date:</strong> ${p.date}</p>
+				  <p><strong>About:</strong> ${p.description.about}</p>
+				  <p><strong>Coding:</strong> ${p.description.coding}</p>
+				  <p><strong>Hardware:</strong> ${p.description.hardware}</p>
+				</div>
 			  </div>
 			`;
-
-			// Description box
-			const descBox = document.createElement('div');
-			descBox.className = 'desc-box';
-			descBox.innerHTML = `
-			  <h3>${p.title}</h3>
-			  ${p.description?.about ? `<p><strong>About:</strong> ${p.description.about}</p>` : ''}
-			  ${p.description?.coding ? `<p><strong>Technologies:</strong> ${p.description.coding}</p>` : ''}
-			  ${p.description?.hardware ? `<p><strong>Hardware:</strong> ${p.description.hardware}</p>` : ''}
-			`;
-
-			wrapper.appendChild(mediaBox);
-			wrapper.appendChild(descBox);
-			grid.appendChild(wrapper);
-
-			// Add carousel logic
-			if (p.media.length > 1) {
-			  let index = 0;
-			  const container = grid.querySelector(`#${mediaId}`);
-			  const updateMedia = () => {
-				container.querySelector('.media-content').outerHTML = renderMedia(p.media[index]);
-			  };
-			  container.querySelector('.prev').onclick = () => {
-				index = (index - 1 + p.media.length) % p.media.length;
-				updateMedia();
-			  };
-			  container.querySelector('.next').onclick = () => {
-				index = (index + 1) % p.media.length;
-				updateMedia();
-			  };
-			}
-		  });
+		  }).join('');
 
 		  sec.appendChild(grid);
-		}else if (tab.content) {
+		}
+
+		else if (tab.content) {
           sec.innerHTML += tab.content.map(t => `<p>${t}</p>`).join('');
         }
 
@@ -204,6 +185,26 @@
         }
       });
     })();
+	
+	
+	function showPrev(index) {
+	  const items = document.querySelectorAll(`#project-${index} .media-item`);
+	  const current = [...items].findIndex(i => i.classList.contains('active'));
+	  if (current > 0) {
+		items[current].classList.remove('active');
+		items[current - 1].classList.add('active');
+	  }
+	}
+
+	function showNext(index) {
+	  const items = document.querySelectorAll(`#project-${index} .media-item`);
+	  const current = [...items].findIndex(i => i.classList.contains('active'));
+	  if (current < items.length - 1) {
+		items[current].classList.remove('active');
+		items[current + 1].classList.add('active');
+	  }
+	}
+
   </script>
 
   <!-- ===== FOOTER ===== -->

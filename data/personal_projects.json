@@ -227,18 +227,7 @@
     }
   }
 ,
-  {
-    "title": "profile",
-    "media": ["images\\profile.jpg"],
-    "type": "image",
-    "date": "2025 18:08-07-12",
-    "description": {
-      "about": "",
-      "coding": "",
-      "hardware": ""
-    }
-  }
-,
+  
   {
     "title": "Quad copter testing",
     "media": ["images\\Quad copter testing.mp4"],
