@@ -38,13 +38,23 @@
     }
 
     function openLightbox(html) {
-      const lb = document.getElementById('lightbox');
-      const content = lb.querySelector('.lightbox-content');
-      content.innerHTML = html;
-      void content.offsetHeight;
-      lb.style.display = 'flex';
-      lb.classList.remove('hidden');
-    }
+	  const lb = document.getElementById('lightbox');
+	  const content = lb.querySelector('.lightbox-content');
+	  content.innerHTML = html;
+
+	  const video = content.querySelector('video');
+	  if (video) {
+		video.setAttribute('autoplay', true);
+		video.setAttribute('controls', true);
+		video.setAttribute('playsinline', true);
+		video.play().catch(err => console.log("Autoplay blocked:", err));
+	  }
+
+	  void content.offsetHeight;
+	  lb.style.display = 'flex';
+	  lb.classList.remove('hidden');
+	}
+
 
     function closeLightbox() {
       const lb = document.getElementById('lightbox');
