@@ -13,6 +13,7 @@ set "IMAGE_EXT=.jpg .jpeg .png .gif"
 > "%OUTPUT_FILE%" echo [
 
 set "firstEntry=true"
+
 for %%F in (%IMAGE_DIR%\*) do (
     set "filename=%%~nxF"
     set "name=%%~nF"
@@ -20,11 +21,18 @@ for %%F in (%IMAGE_DIR%\*) do (
     set "type=image"
 
     for %%V in (%VIDEO_EXT%) do (
-        if /I "%%~xF"=="%%V" set "type=video"
+        if /I "%%~xF"=="%%V" (
+            set "type=video"
+        )
     )
 
     set "title=!name:_= !"
 
+    :: Format file path and escape backslashes
+    set "rawPath=%IMAGE_DIR%\%%~nxF"
+    set "escapedSrc=!rawPath:\=\\!"
+
+    :: Extract date from file timestamp (may vary based on locale)
     for /f "tokens=1-3 delims=/" %%a in ("%%~tF") do (
         set "day=%%a"
         set "month=%%b"
@@ -32,14 +40,16 @@ for %%F in (%IMAGE_DIR%\*) do (
     )
     set "date=!year!-!month!-!day!"
 
+    :: Write comma if not first entry
     if not "!firstEntry!"=="true" >> "%OUTPUT_FILE%" echo ,
     set "firstEntry=false"
 
+    :: Write JSON object
     >> "%OUTPUT_FILE%" echo   {
     >> "%OUTPUT_FILE%" echo     "title": "!title!",
     >> "%OUTPUT_FILE%" echo     "src": [
     >> "%OUTPUT_FILE%" echo       {
-    >> "%OUTPUT_FILE%" echo         "url": "!IMAGE_DIR!\!filename!",
+    >> "%OUTPUT_FILE%" echo         "url": "!escapedSrc!",
     >> "%OUTPUT_FILE%" echo         "date": "!date!"
     >> "%OUTPUT_FILE%" echo       }
     >> "%OUTPUT_FILE%" echo     ],
@@ -58,4 +68,3 @@ for %%F in (%IMAGE_DIR%\*) do (
 
 echo ✅ personal_projects.json generated successfully.
 pause
-

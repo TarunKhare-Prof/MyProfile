@@ -84,7 +84,7 @@
           grid.className = 'projects-flex-list';
 
           grid.innerHTML = personalData.map((p, index) => {
-            const mediaList = Array.isArray(p.src) ? p.src : [p.src];
+            const mediaList = Array.isArray(p.media) ? p.media.map(m => m.url) : [];
             const mediaNav = mediaList.length > 1 ? `
               <button class="media-nav prev" onclick="showPrev(${index})">&#8592;</button>
               <button class="media-nav next" onclick="showNext(${index})">&#8594;</button>` : '';
