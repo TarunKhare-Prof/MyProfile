@@ -77,7 +77,7 @@
         sec.id = tab.id;
         sec.innerHTML = `<h2>${tab.title}</h2>`;
 
-        if (tab.id === 'personal') {
+        if (tab.id === 'personal' && tab.projects) {
           const personalData = await fetchJSON('data/personal_projects.json');
           const grid = document.createElement('div');
           grid.className = 'projects-flex-list';
