@@ -204,11 +204,12 @@
 	  "type": "video",
 	  "description": {
 		"about": "Initial experiment with WS2812B LEDs to understand how data pulses and cycles trigger RGB values. This project demonstrates a moving eye animation on an 8x8 LED matrix.",
-		"coding": "C/C++ with Arduino – Custom bit patterns written to drive color transitions and animations across the 64-LED matrix.",
-		"hardware": "8x8 WS2812B LED matrix, Arduino UNO/Nano for signal generation, 5V power supply.",
-		"additional": "This was part of my foundational learning on how LED strip timing works, how GRB bits are parsed per LED, and how visual animations are constructed frame by frame."
+		"coding": "Embedded C (Atmega8) – Bit-banged waveform generation for precise pulse timing to drive WS2812B LEDs. Manual GRB color bit construction and refresh cycle control.",
+		"hardware": "8x8 WS2812B LED matrix, Atmega8 microcontroller, 5V regulated power supply.",
+		"additional": "This was part of my foundational learning on WS2812B protocol, timing constraints, and animation logic using 8-bit microcontroller without hardware PWM."
 	  }
 	}
+
 	,
 	  {
 	  "title": "Pixel Table with VIA Motherboard Control",
