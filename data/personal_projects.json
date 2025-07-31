@@ -172,7 +172,7 @@
     "description": {
       "about": "3D LED Cube to display animations.",
       "coding": "Custom coded animations with AVR MCU.",
-      "hardware": "Atmega8, 512 Blue LEDs (8x8x8).",
+      "hardware": "Atmega8, 125 Blue LEDs (5x5x5).",
       "additional": "Creates 3D lighting effects."
     }
   },
