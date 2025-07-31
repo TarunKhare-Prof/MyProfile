@@ -7,7 +7,7 @@
         "date": "2025 08:38-07-12"
       }
     ],
-    "type": "image",
+    "type": "mixed",
     "description": {
       "about": "",
       "coding": "",
@@ -23,7 +23,7 @@
         "date": "2025 00:56-08-01"
       }
     ],
-    "type": "image",
+    "type": "mixed",
     "description": {
       "about": "",
       "coding": "",
@@ -32,35 +32,35 @@
     }
   },
   {
-    "title": "7.1 Speaker \u2013 Internal",
+    "title": "7.1 Audio System",
     "src": [
       {
         "url": "images\\7.1 Channel Speaker Assembly inside.jpg",
         "date": "2025 08:38-07-12"
-      }
-    ],
-    "type": "image",
-    "description": {
-      "about": "Custom 7.1 channel speaker setup with internal amplifier wiring and subwoofer tuning.",
-      "coding": "Minimal firmware (Atmega8 for control)",
-      "hardware": "Sony XS-FB162E speakers, Pioneer TS-W1212D4 subwoofer, Sony XM-N1004 amps, SMPS 12V 40A",
-      "additional": ""
-    }
-  },
-  {
-    "title": "7.1 Speaker \u2013 External",
-    "src": [
+      },
       {
         "url": "images\\7.1 Channel Speaker Assembly.jpg",
         "date": "2025 08:38-07-12"
+      },
+      {
+        "url": "images\\Amplifier Assembly.jpg",
+        "date": "2025 08:38-07-12"
+      },
+      {
+        "url": "images\\Final Sub-woofer.jpg",
+        "date": "2025 08:38-07-12"
+      },
+      {
+        "url": "images\\Sub-woofer enclosure.jpg",
+        "date": "2025 08:38-07-12"
       }
     ],
-    "type": "image",
+    "type": "mixed",
     "description": {
-      "about": "7.1 channel audio system with custom-built speaker cabinets and CPU cabinet reuse.",
-      "coding": "Microcontroller setup with Atmega8 and LCD interface",
-      "hardware": "Same as above + 16x2 LCD, rotary knob, custom PCB, reused CPU cabinet",
-      "additional": ""
+      "about": "7.1 Surround Sound Audio System with custom subwoofer and speaker units.",
+      "coding": "MPU programming with Atmega8 for input control, LCD display, and rotary encoder.",
+      "hardware": "Pioneer TS-W1212D4 Subwoofer, Sony XS-FB162E Speakers, Sony XM-N1004 Amplifiers, Atmega8, LCD 16x2, Rotary Encoder, Custom PCB, CPU Cabinet.",
+      "additional": "Self-designed cabinet and controller unit for immersive sound."
     }
   },
   {
@@ -71,7 +71,7 @@
         "date": "2025 08:38-07-12"
       }
     ],
-    "type": "video",
+    "type": "mixed",
     "description": {
       "about": "",
       "coding": "",
@@ -80,147 +80,103 @@
     }
   },
   {
-    "title": "Amplifier Build",
-    "src": [
-      {
-        "url": "images\\Amplifier Assembly.jpg",
-        "date": "2025 08:38-07-12"
-      }
-    ],
-    "type": "image",
-    "description": {
-      "about": "Hand-assembled amplifier for 7.1 audio system including custom cabling and cabinet design.",
-      "coding": "Basic MCU firmware (Atmega8)",
-      "hardware": "Amplifier components, 12V 40A SMPS, custom wiring",
-      "additional": ""
-    }
-  },
-  {
-    "title": "Auto Irrigation",
+    "title": "Auto Irrigation system",
     "src": [
       {
         "url": "images\\Auto Irrigation system.jpg",
         "date": "2025 08:38-07-12"
       }
     ],
-    "type": "image",
+    "type": "mixed",
     "description": {
-      "about": "Automatically controls water supply to fields based on soil moisture levels. Designed as a college project.",
-      "coding": "Embedded C (Atmega8)",
-      "hardware": "Moisture sensor, Atmega8, solenoid valve, LED indicators, relays",
-      "additional": ""
+      "about": "An automatic irrigation system for agricultural fields.",
+      "coding": "Microcontroller logic to read moisture and control valves.",
+      "hardware": "Moisture Sensor, Atmega8, Relay, Solenoid Valve, LEDs.",
+      "additional": "Controls water flow based on soil moisture levels. Used in college project."
     }
   },
   {
-    "title": "MPU for 7.1 Audio",
+    "title": "Creating MPU for 7.1 Channel",
     "src": [
       {
         "url": "images\\Creating MPU for 7.1 Channel.mp4",
         "date": "2025 08:38-07-12"
       }
     ],
-    "type": "video",
+    "type": "mixed",
     "description": {
-      "about": "Designed Microcontroller Processing Unit to manage volume and routing of 7.1 channel audio.",
-      "coding": "C (Atmega8) \u2013 Control logic and LCD interface",
-      "hardware": "Atmega8, 16x2 LCD, rotary knob, PCB, speaker interfacing",
+      "about": "",
+      "coding": "",
+      "hardware": "",
       "additional": ""
     }
   },
   {
-    "title": "Custom Dev Board",
+    "title": "Development board",
     "src": [
       {
         "url": "images\\Development board.jpg",
         "date": "2025 08:38-07-12"
       }
     ],
-    "type": "image",
+    "type": "mixed",
     "description": {
-      "about": "Multi-functional development board with relay, triac, matrix, keypad, LCD for testing.",
-      "coding": "Embedded C \u2013 test utilities for each component",
-      "hardware": "Atmega8, LED matrix, 16x2 LCD, relay, keypad, triac, MOC, 7-segment",
-      "additional": "Hand etched PCB using FeCl3, iron transfer from laser print"
+      "about": "Multi-functional development board for embedded experiments.",
+      "coding": "Includes relay, TRIAC, keypad, segment display and LED matrix control.",
+      "hardware": "Atmega8, LED Matrix, 4x4 Keypad, Relay, TRIAC, MOC, 16x2 LCD, 7 Segment Display.",
+      "additional": "Custom fabricated PCB using iron transfer and FeCl3 etching."
     }
   },
   {
-    "title": "Final Sub-woofer",
+    "title": "Lamp",
     "src": [
       {
-        "url": "images\\Final Sub-woofer.jpg",
+        "url": "images\\Led Lamp 1.mp4",
+        "date": "2025 08:38-07-12"
+      },
+      {
+        "url": "images\\LED Lamp 2.mp4",
         "date": "2025 08:38-07-12"
       }
     ],
-    "type": "image",
+    "type": "mixed",
     "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
-      "additional": ""
+      "about": "Smart RGB LED Lamps with Alexa Control.",
+      "coding": "HTML-based control panel hosted on ESP8266 with SinricPro integration.",
+      "hardware": "ESP8266, WS2812B, 3D-Printed Lampshade.",
+      "additional": "WiFi control + voice commands + local UI panel."
     }
   },
   {
-    "title": "Laser Light Trigger",
+    "title": "Laser security light on",
     "src": [
       {
         "url": "images\\Laser security light on.mp4",
         "date": "2025 08:38-07-12"
       }
     ],
-    "type": "video",
+    "type": "mixed",
     "description": {
-      "about": "Security system that turns on light when laser beam is interrupted.",
-      "coding": "Basic logic with 555 timer (no MCU)",
-      "hardware": "Laser module, LDR, 555 timer, relay, light",
-      "additional": ""
+      "about": "Laser beam based intruder detection system.",
+      "coding": "555 timer to delay relay triggering.",
+      "hardware": "Laser, LDR, Relay, 555 Timer.",
+      "additional": "Activates light when laser beam is broken. Delays off for 15 seconds."
     }
   },
   {
-    "title": "8x8x8 LED Cube",
+    "title": "LED Cube",
     "src": [
       {
         "url": "images\\LED Cube.mp4",
         "date": "2025 08:38-07-12"
       }
     ],
-    "type": "video",
+    "type": "mixed",
     "description": {
-      "about": "3D LED cube capable of animated patterns and lighting effects.",
-      "coding": "C (Atmega8) \u2013 Pattern rendering and multiplexing",
-      "hardware": "512 blue LEDs, Atmega8, custom PCB",
-      "additional": ""
-    }
-  },
-  {
-    "title": "Led Lamp 1",
-    "src": [
-      {
-        "url": "images\\Led Lamp 1.mp4",
-        "date": "2025 08:38-07-12"
-      }
-    ],
-    "type": "video",
-    "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
-      "additional": ""
-    }
-  },
-  {
-    "title": "LED Lamp 2",
-    "src": [
-      {
-        "url": "images\\LED Lamp 2.mp4",
-        "date": "2025 08:38-07-12"
-      }
-    ],
-    "type": "video",
-    "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
-      "additional": ""
+      "about": "3D LED Cube to display animations.",
+      "coding": "Custom coded animations with AVR MCU.",
+      "hardware": "Atmega8, 512 Blue LEDs (8x8x8).",
+      "additional": "Creates 3D lighting effects."
     }
   },
   {
@@ -231,27 +187,11 @@
         "date": "2025 08:38-07-12"
       }
     ],
-    "type": "image",
+    "type": "mixed",
     "description": {
       "about": "",
       "coding": "",
       "hardware": "",
-      "additional": ""
-    }
-  },
-  {
-    "title": "Mono Speakers",
-    "src": [
-      {
-        "url": "images\\Mono speakers.jpg",
-        "date": "2025 08:38-07-12"
-      }
-    ],
-    "type": "image",
-    "description": {
-      "about": "Simple mono speaker boxes with Bluetooth audio input.",
-      "coding": "No MCU",
-      "hardware": "PAM8403, Bluetooth module, 3\" speakers",
       "additional": ""
     }
   },
@@ -263,7 +203,7 @@
         "date": "2025 08:38-07-12"
       }
     ],
-    "type": "video",
+    "type": "mixed",
     "description": {
       "about": "",
       "coding": "",
@@ -279,7 +219,7 @@
         "date": "2025 08:38-07-12"
       }
     ],
-    "type": "video",
+    "type": "mixed",
     "description": {
       "about": "",
       "coding": "",
@@ -288,19 +228,31 @@
     }
   },
   {
-    "title": "Pocket Speaker",
+    "title": "Portable Wireless Speakers",
     "src": [
+      {
+        "url": "images\\Mono speakers.jpg",
+        "date": "2025 08:38-07-12"
+      },
       {
         "url": "images\\Pocket Speaker.mp4",
         "date": "2025 08:38-07-12"
+      },
+      {
+        "url": "images\\stereo speaker test - 1.mp4",
+        "date": "2025 08:38-07-12"
+      },
+      {
+        "url": "images\\Wallet Box Stereo.mp4",
+        "date": "2025 08:38-07-12"
       }
     ],
-    "type": "video",
+    "type": "mixed",
     "description": {
-      "about": "Mini pocket-sized stereo speaker setup for personal use.",
-      "coding": "No firmware involved",
-      "hardware": "Same as above \u2013 PAM8403, Bluetooth, 3\" speaker, battery",
-      "additional": ""
+      "about": "Set of small form-factor portable speaker systems.",
+      "coding": "Bluetooth input routing with amplifier circuit.",
+      "hardware": "PAM8403, TP4056, 2.5\" and 3\" Speakers, Li-ion Battery.",
+      "additional": "Rechargeable compact designs with 3.5mm input."
     }
   },
   {
@@ -311,7 +263,7 @@
         "date": "2025 18:08-07-12"
       }
     ],
-    "type": "image",
+    "type": "mixed",
     "description": {
       "about": "",
       "coding": "",
@@ -327,12 +279,12 @@
         "date": "2025 08:38-07-12"
       }
     ],
-    "type": "video",
+    "type": "mixed",
     "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
-      "additional": ""
+      "about": "College project to build quadcopter with custom PCBs.",
+      "coding": "Motor control with embedded code.",
+      "hardware": "BLDC Motors, Custom PCB.",
+      "additional": "Basic stability and rotation tests."
     }
   },
   {
@@ -343,12 +295,12 @@
         "date": "2025 08:38-07-12"
       }
     ],
-    "type": "video",
+    "type": "mixed",
     "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
-      "additional": ""
+      "about": "WiFi controlled RC car using phone sensors.",
+      "coding": "Phone accelerometer input mapped to servo/motor control via ESP.",
+      "hardware": "Atmega8, ULN2003, ESP8266, Servo, Li-ion Battery.",
+      "additional": "Direction and speed controlled remotely via mobile."
     }
   },
   {
@@ -359,7 +311,7 @@
         "date": "2025 08:38-07-12"
       }
     ],
-    "type": "image",
+    "type": "mixed",
     "description": {
       "about": "",
       "coding": "",
@@ -375,39 +327,7 @@
         "date": "2025 08:38-07-12"
       }
     ],
-    "type": "video",
-    "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
-      "additional": ""
-    }
-  },
-  {
-    "title": "stereo speaker test - 1",
-    "src": [
-      {
-        "url": "images\\stereo speaker test - 1.mp4",
-        "date": "2025 08:38-07-12"
-      }
-    ],
-    "type": "video",
-    "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
-      "additional": ""
-    }
-  },
-  {
-    "title": "Sub-woofer enclosure",
-    "src": [
-      {
-        "url": "images\\Sub-woofer enclosure.jpg",
-        "date": "2025 08:38-07-12"
-      }
-    ],
-    "type": "image",
+    "type": "mixed",
     "description": {
       "about": "",
       "coding": "",
@@ -423,12 +343,12 @@
         "date": "2025 08:38-07-12"
       }
     ],
-    "type": "video",
+    "type": "mixed",
     "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
-      "additional": ""
+      "about": "Touchless water tap using IR sensors.",
+      "coding": "Flow detection and solenoid valve control.",
+      "hardware": "IR Sensor, Atmega8, Solenoid Valve.",
+      "additional": "Auto on/off tap for water conservation."
     }
   },
   {
@@ -439,39 +359,7 @@
         "date": "2025 08:38-07-12"
       }
     ],
-    "type": "video",
-    "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
-      "additional": ""
-    }
-  },
-  {
-    "title": "Timer Socket internal",
-    "src": [
-      {
-        "url": "images\\Timer Socket internal.jpg",
-        "date": "2025 08:38-07-12"
-      }
-    ],
-    "type": "image",
-    "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
-      "additional": ""
-    }
-  },
-  {
-    "title": "Timer Socket to customer",
-    "src": [
-      {
-        "url": "images\\Timer Socket to customer.jpg",
-        "date": "2025 08:38-07-12"
-      }
-    ],
-    "type": "image",
+    "type": "mixed",
     "description": {
       "about": "",
       "coding": "",
@@ -483,16 +371,24 @@
     "title": "Timer Socket",
     "src": [
       {
+        "url": "images\\Timer Socket internal.jpg",
+        "date": "2025 08:38-07-12"
+      },
+      {
+        "url": "images\\Timer Socket to customer.jpg",
+        "date": "2025 08:38-07-12"
+      },
+      {
         "url": "images\\Timer Socket.mp4",
         "date": "2025 08:38-07-12"
       }
     ],
-    "type": "video",
+    "type": "mixed",
     "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
-      "additional": ""
+      "about": "Smart AC socket with timer-based on/off functionality.",
+      "coding": "Time set via buttons and controlled by microcontroller.",
+      "hardware": "Atmega8, 7-Segment Display, Relays.",
+      "additional": "Programmable plug socket for consumer usage."
     }
   },
   {
@@ -503,28 +399,12 @@
         "date": "2025 08:38-07-12"
       }
     ],
-    "type": "video",
+    "type": "mixed",
     "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
-      "additional": ""
-    }
-  },
-  {
-    "title": "Wallet Stereo",
-    "src": [
-      {
-        "url": "images\\Wallet Box Stereo.mp4",
-        "date": "2025 08:38-07-12"
-      }
-    ],
-    "type": "video",
-    "description": {
-      "about": "Compact speaker housed in a wallet box for portable audio.",
-      "coding": "No coding \u2013 plug and play",
-      "hardware": "Bluetooth receiver, PAM8403, 2.5\"/3\" speaker, Li-ion, TP4056",
-      "additional": ""
+      "about": "USB switch to share mouse/keyboard/headset between two PCs.",
+      "coding": "Push button toggles active USB host.",
+      "hardware": "Atmega8, Relays, USB Ports.",
+      "additional": "Physical USB switching across computers."
     }
   }
 ]
