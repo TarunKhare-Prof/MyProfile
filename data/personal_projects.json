@@ -1,21 +1,5 @@
 [
-  {
-  "title": "1000W Transistor Audio Amplifier",
-  "src": [
-    {
-      "url": "images\\1000W Stereo Audio Amplifier with Transistors 2SC5200 and 2SA1943.jpg",
-      "date": "2025 08:38-07-12"
-    }
-  ],
-  "type": "image",
-  "description": {
-    "about": "A high-power stereo audio amplifier designed for robust sound output, capable of driving large subwoofers and multi-channel systems.",
-    "coding": "No microcontroller or digital logic used; pure analog amplification.",
-    "hardware": "Transistors 2SC5200 and 2SA1943, large heat sinks, toroidal transformer, filter capacitors, and audio jacks.",
-    "additional": "Used in home theater setup, manually tuned biasing and gain stage, high-efficiency cooling system."
-  }
-}
-	,
+  
   {
   "title": "3D-Printed Smart Lamp with Alexa Control",
   "src": [
@@ -396,4 +380,22 @@
       "additional": "Physical USB switching across computers."
     }
   }
+  ,
+  {
+  "title": "1000W Transistor Audio Amplifier",
+  "src": [
+    {
+      "url": "images\\1000W Stereo Audio Amplifier with Transistors 2SC5200 and 2SA1943.jpg",
+      "date": "2025 08:38-07-12"
+    }
+  ],
+  "type": "image",
+  "description": {
+    "about": "A high-power stereo audio amplifier designed for robust sound output, capable of driving large subwoofers and multi-channel systems.",
+    "coding": "No microcontroller or digital logic used; pure analog amplification.",
+    "hardware": "Transistors 2SC5200 and 2SA1943, large heat sinks, toroidal transformer, filter capacitors, and audio jacks.",
+    "additional": "Used in home theater setup, manually tuned biasing and gain stage, high-efficiency cooling system."
+  }
+}
+	
 ]
