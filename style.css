@@ -230,3 +230,72 @@ footer .social a {
 footer .social a:hover {
   color: #0074cc;
 }
+/* PERSONAL PROJECTS - FLEX LAYOUT */
+.projects-flex-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+}
+
+.project-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 2em;
+  padding-bottom: 1em;
+  border-bottom: 1px dashed #ccc;
+}
+
+.media-box {
+  flex: 1;
+  position: relative;
+  max-width: 400px;
+  min-width: 300px;
+}
+
+.media-box video,
+.media-box img {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  max-height: 280px;
+  object-fit: cover;
+}
+
+.media-box button.prev,
+.media-box button.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #004080;
+  color: white;
+  border: none;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  z-index: 2;
+  font-size: 1.2em;
+  border-radius: 4px;
+  opacity: 0.8;
+}
+.media-box button.prev:hover,
+.media-box button.next:hover {
+  opacity: 1;
+}
+
+.media-box button.prev { left: 10px; }
+.media-box button.next { right: 10px; }
+
+.desc-box {
+  flex: 2;
+  min-width: 250px;
+}
+
+.desc-box h3 {
+  margin-top: 0;
+  color: #003366;
+}
+
+.desc-box p {
+  margin: 6px 0;
+  line-height: 1.5;
+}

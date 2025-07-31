@@ -64,6 +64,16 @@
       lb.style.display = 'none';
       lb.classList.add('hidden');
     }
+	function renderMedia(src) {
+	  const ext = src.split('.').pop().toLowerCase();
+	  const isVideo = ['mp4', 'webm', 'ogg'].includes(ext);
+	  return `
+		<div class="media-content">
+		  ${isVideo
+			? `<video preload="metadata" muted loop autoplay><source src="${src}" type="video/mp4"></video>`
+			: `<img src="${src}" alt="project media">`}
+		</div>`;
+	}
 
     (async () => {
       const data = await fetchJSON('data/portfolio.json');
@@ -99,39 +109,68 @@
                 <div class="bar"><div class="fill" style="width:${sk.level}%"></div></div>
               </div>`).join('')}
           </div>`;
-        } else if (tab.id === 'personal' && tab.projects) {
-          const grid = document.createElement('div');
-          grid.className = 'projects-grid';
+        } else if (tab.id === 'personal') {
+		  const grid = document.createElement('div');
+		  grid.className = 'projects-flex-list';
 
-          const getFileModifiedDate = async (url) => {
-            try {
-              const res = await fetch(url, { method: 'HEAD' });
-              const lastMod = res.headers.get('Last-Modified');
-              return lastMod ? new Date(lastMod) : new Date(0);
-            } catch {
-              return new Date(0);
-            }
-          };
+		  const personalProjects = await fetchJSON('data/personal_projects.json');
 
-          const projectsWithDates = await Promise.all(
-            tab.projects.map(async p => {
-              const fileDate = await getFileModifiedDate(p.src);
-              return { ...p, fileDate };
-            })
-          );
+		  const sortedProjects = personalProjects
+			.map(p => ({ ...p, fileDate: new Date(p.date) }))
+			.sort((a, b) => b.fileDate - a.fileDate);
 
-          projectsWithDates.sort((a, b) => b.fileDate - a.fileDate);
+		  sortedProjects.forEach((p, idx) => {
+			const wrapper = document.createElement('div');
+			wrapper.className = 'project-row';
 
-          grid.innerHTML = projectsWithDates.map(p => `
-            <div class="project-card" data-src="${p.src}" data-type="${p.type}">
-              <h4>${p.title}</h4>
-              ${p.type === 'video'
-                ? `<video preload="metadata" muted><source src="${p.src}" type="video/mp4"></video>`
-                : `<img src="${p.src}" alt="${p.title}">`}
-            </div>`).join('');
+			// Media viewer
+			const mediaBox = document.createElement('div');
+			mediaBox.className = 'media-box';
 
-          sec.appendChild(grid);
-        } else if (tab.content) {
+			const mediaId = `media-${idx}`;
+			mediaBox.innerHTML = `
+			  <div class="media-viewer" id="${mediaId}">
+				${renderMedia(p.media[0])}
+				${p.media.length > 1
+				  ? `<button class="prev">&lt;</button><button class="next">&gt;</button>`
+				  : ''}
+			  </div>
+			`;
+
+			// Description box
+			const descBox = document.createElement('div');
+			descBox.className = 'desc-box';
+			descBox.innerHTML = `
+			  <h3>${p.title}</h3>
+			  ${p.description?.about ? `<p><strong>About:</strong> ${p.description.about}</p>` : ''}
+			  ${p.description?.coding ? `<p><strong>Technologies:</strong> ${p.description.coding}</p>` : ''}
+			  ${p.description?.hardware ? `<p><strong>Hardware:</strong> ${p.description.hardware}</p>` : ''}
+			`;
+
+			wrapper.appendChild(mediaBox);
+			wrapper.appendChild(descBox);
+			grid.appendChild(wrapper);
+
+			// Add carousel logic
+			if (p.media.length > 1) {
+			  let index = 0;
+			  const container = grid.querySelector(`#${mediaId}`);
+			  const updateMedia = () => {
+				container.querySelector('.media-content').outerHTML = renderMedia(p.media[index]);
+			  };
+			  container.querySelector('.prev').onclick = () => {
+				index = (index - 1 + p.media.length) % p.media.length;
+				updateMedia();
+			  };
+			  container.querySelector('.next').onclick = () => {
+				index = (index + 1) % p.media.length;
+				updateMedia();
+			  };
+			}
+		  });
+
+		  sec.appendChild(grid);
+		}else if (tab.content) {
           sec.innerHTML += tab.content.map(t => `<p>${t}</p>`).join('');
         }
 

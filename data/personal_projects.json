@@ -1,235 +1,397 @@
-{
-  "title": "Personal Projects",
-  "projects": [
-    {
-      "title": "1000W Stereo Audio Amplifier with Transistors 2SC5200 and 2SA1943",
-      "type": "image",
-      "src": "images\\1000W Stereo Audio Amplifier with Transistors 2SC5200 and 2SA1943.jpg",
-      "description": ""
+[
+  {
+    "title": "1000W Stereo Audio Amplifier with Transistors 2SC5200 and 2SA1943",
+    "media": ["images\\1000W Stereo Audio Amplifier with Transistors 2SC5200 and 2SA1943.jpg"],
+    "type": "image",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "3D-Printet Frosted Lamp + WS2812B Digital LED + Controlled From ESP8266 + WIFI Control Pannel + Patterns + Alexa Support + Sinric Pro Connectivity",
-      "type": "image",
-      "src": "images\\3D-Printet Frosted Lamp + WS2812B Digital LED + Controlled From ESP8266 + WIFI Control Pannel + Patterns + Alexa Support + Sinric Pro Connectivity.gif",
-      "description": ""
+  {
+    "title": "3D-Printet Frosted Lamp + WS2812B Digital LED + Controlled From ESP8266 + WIFI Control Pannel + Patterns + Alexa Support + Sinric Pro Connectivity",
+    "media": ["images\\3D-Printet Frosted Lamp + WS2812B Digital LED + Controlled From ESP8266 + WIFI Control Pannel + Patterns + Alexa Support + Sinric Pro Connectivity.gif"],
+    "type": "image",
+    "date": "2025 00:56-08-01",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "7.1 Channel Speaker Assembly inside",
-      "type": "image",
-      "src": "images\\7.1 Channel Speaker Assembly inside.jpg",
-      "description": ""
+  {
+    "title": "7.1 Channel Speaker Assembly inside",
+    "media": ["images\\7.1 Channel Speaker Assembly inside.jpg"],
+    "type": "image",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "7.1 Channel Speaker Assembly",
-      "type": "image",
-      "src": "images\\7.1 Channel Speaker Assembly.jpg",
-      "description": ""
+  {
+    "title": "7.1 Channel Speaker Assembly",
+    "media": ["images\\7.1 Channel Speaker Assembly.jpg"],
+    "type": "image",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "Alexa Voice Controlle Gaming Table Light",
-      "type": "video",
-      "src": "images\\Alexa Voice Controlle Gaming Table Light.mp4",
-      "description": ""
+  {
+    "title": "Alexa Voice Controlle Gaming Table Light",
+    "media": ["images\\Alexa Voice Controlle Gaming Table Light.mp4"],
+    "type": "video",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "Amplifier Assembly",
-      "type": "image",
-      "src": "images\\Amplifier Assembly.jpg",
-      "description": ""
+  {
+    "title": "Amplifier Assembly",
+    "media": ["images\\Amplifier Assembly.jpg"],
+    "type": "image",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "Auto Irrigation system",
-      "type": "image",
-      "src": "images\\Auto Irrigation system.jpg",
-      "description": ""
+  {
+    "title": "Auto Irrigation system",
+    "media": ["images\\Auto Irrigation system.jpg"],
+    "type": "image",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "Creating MPU for 7.1 Channel",
-      "type": "video",
-      "src": "images\\Creating MPU for 7.1 Channel.mp4",
-      "description": ""
+  {
+    "title": "Creating MPU for 7.1 Channel",
+    "media": ["images\\Creating MPU for 7.1 Channel.mp4"],
+    "type": "video",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "Development board",
-      "type": "image",
-      "src": "images\\Development board.jpg",
-      "description": ""
+  {
+    "title": "Development board",
+    "media": ["images\\Development board.jpg"],
+    "type": "image",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "Final Sub-woofer",
-      "type": "image",
-      "src": "images\\Final Sub-woofer.jpg",
-      "description": ""
+  {
+    "title": "Final Sub-woofer",
+    "media": ["images\\Final Sub-woofer.jpg"],
+    "type": "image",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "Laser security light on",
-      "type": "video",
-      "src": "images\\Laser security light on.mp4",
-      "description": ""
+  {
+    "title": "Laser security light on",
+    "media": ["images\\Laser security light on.mp4"],
+    "type": "video",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "LED Cube",
-      "type": "video",
-      "src": "images\\LED Cube.mp4",
-      "description": ""
+  {
+    "title": "LED Cube",
+    "media": ["images\\LED Cube.mp4"],
+    "type": "video",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "Led Lamp 1",
-      "type": "video",
-      "src": "images\\Led Lamp 1.mp4",
-      "description": ""
+  {
+    "title": "Led Lamp 1",
+    "media": ["images\\Led Lamp 1.mp4"],
+    "type": "video",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "LED Lamp 2",
-      "type": "video",
-      "src": "images\\LED Lamp 2.mp4",
-      "description": ""
+  {
+    "title": "LED Lamp 2",
+    "media": ["images\\LED Lamp 2.mp4"],
+    "type": "video",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "LED Matrix PCB Desing",
-      "type": "image",
-      "src": "images\\LED Matrix PCB Desing.jpg",
-      "description": ""
+  {
+    "title": "LED Matrix PCB Desing",
+    "media": ["images\\LED Matrix PCB Desing.jpg"],
+    "type": "image",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "Mono speakers",
-      "type": "image",
-      "src": "images\\Mono speakers.jpg",
-      "description": ""
+  {
+    "title": "Mono speakers",
+    "media": ["images\\Mono speakers.jpg"],
+    "type": "image",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "pixel play",
-      "type": "video",
-      "src": "images\\pixel play.mp4",
-      "description": ""
+  {
+    "title": "pixel play",
+    "media": ["images\\pixel play.mp4"],
+    "type": "video",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "Pixel to Table, VIA Motherboard",
-      "type": "video",
-      "src": "images\\Pixel to Table, VIA Motherboard.mp4",
-      "description": ""
+  {
+    "title": "Pixel to Table, VIA Motherboard",
+    "media": ["images\\Pixel to Table, VIA Motherboard.mp4"],
+    "type": "video",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "Pocket Speaker",
-      "type": "video",
-      "src": "images\\Pocket Speaker.mp4",
-      "description": ""
+  {
+    "title": "Pocket Speaker",
+    "media": ["images\\Pocket Speaker.mp4"],
+    "type": "video",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "profile",
-      "type": "image",
-      "src": "images\\profile.jpg",
-      "description": ""
+  {
+    "title": "profile",
+    "media": ["images\\profile.jpg"],
+    "type": "image",
+    "date": "2025 18:08-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "Quad copter testing",
-      "type": "video",
-      "src": "images\\Quad copter testing.mp4",
-      "description": ""
+  {
+    "title": "Quad copter testing",
+    "media": ["images\\Quad copter testing.mp4"],
+    "type": "video",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "RC Car over Phone",
-      "type": "video",
-      "src": "images\\RC Car over Phone.mp4",
-      "description": ""
+  {
+    "title": "RC Car over Phone",
+    "media": ["images\\RC Car over Phone.mp4"],
+    "type": "video",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "RF remote",
-      "type": "image",
-      "src": "images\\RF remote.jpg",
-      "description": ""
+  {
+    "title": "RF remote",
+    "media": ["images\\RF remote.jpg"],
+    "type": "image",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "RGB Lamp controll over Alexa",
-      "type": "video",
-      "src": "images\\RGB Lamp controll over Alexa.mp4",
-      "description": ""
+  {
+    "title": "RGB Lamp controll over Alexa",
+    "media": ["images\\RGB Lamp controll over Alexa.mp4"],
+    "type": "video",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "stereo speaker test - 1",
-      "type": "video",
-      "src": "images\\stereo speaker test - 1.mp4",
-      "description": ""
+  {
+    "title": "stereo speaker test - 1",
+    "media": ["images\\stereo speaker test - 1.mp4"],
+    "type": "video",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "Sub-woofer enclosure",
-      "type": "image",
-      "src": "images\\Sub-woofer enclosure.jpg",
-      "description": ""
+  {
+    "title": "Sub-woofer enclosure",
+    "media": ["images\\Sub-woofer enclosure.jpg"],
+    "type": "image",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "Tap water sensor",
-      "type": "video",
-      "src": "images\\Tap water sensor.mp4",
-      "description": ""
+  {
+    "title": "Tap water sensor",
+    "media": ["images\\Tap water sensor.mp4"],
+    "type": "video",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "TCP IP test RC car",
-      "type": "video",
-      "src": "images\\TCP IP test RC car.mp4",
-      "description": ""
+  {
+    "title": "TCP IP test RC car",
+    "media": ["images\\TCP IP test RC car.mp4"],
+    "type": "video",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "Timer Socket internal",
-      "type": "image",
-      "src": "images\\Timer Socket internal.jpg",
-      "description": ""
+  {
+    "title": "Timer Socket internal",
+    "media": ["images\\Timer Socket internal.jpg"],
+    "type": "image",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "Timer Socket to customer",
-      "type": "image",
-      "src": "images\\Timer Socket to customer.jpg",
-      "description": ""
+  {
+    "title": "Timer Socket to customer",
+    "media": ["images\\Timer Socket to customer.jpg"],
+    "type": "image",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "Timer Socket",
-      "type": "video",
-      "src": "images\\Timer Socket.mp4",
-      "description": ""
+  {
+    "title": "Timer Socket",
+    "media": ["images\\Timer Socket.mp4"],
+    "type": "video",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "usb(Mouse+Keyboard+Headphone) share between two CPU",
-      "type": "video",
-      "src": "images\\usb(Mouse+Keyboard+Headphone) share between two CPU.mp4",
-      "description": ""
+  {
+    "title": "usb(Mouse+Keyboard+Headphone) share between two CPU",
+    "media": ["images\\usb(Mouse+Keyboard+Headphone) share between two CPU.mp4"],
+    "type": "video",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
+  }
 ,
-    {
-      "title": "Wallet Box Stereo",
-      "type": "video",
-      "src": "images\\Wallet Box Stereo.mp4",
-      "description": ""
+  {
+    "title": "Wallet Box Stereo",
+    "media": ["images\\Wallet Box Stereo.mp4"],
+    "type": "video",
+    "date": "2025 08:38-07-12",
+    "description": {
+      "about": "",
+      "coding": "",
+      "hardware": ""
     }
-  ]
-}
+  }
+]

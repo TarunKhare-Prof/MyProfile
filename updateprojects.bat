@@ -9,48 +9,55 @@ set "OUTPUT_FILE=data\personal_projects.json"
 set "VIDEO_EXT=.mp4 .webm .ogg"
 set "IMAGE_EXT=.jpg .jpeg .png .gif"
 
-:: Start JSON structure
-echo {> %OUTPUT_FILE%
-echo   "title": "Personal Projects",>> %OUTPUT_FILE%
-echo   "projects": [>> %OUTPUT_FILE%
+:: Start JSON array
+> %OUTPUT_FILE% echo [
 
 set "firstEntry=true"
 
-:: Loop through files in /images
+:: Loop through files
 for %%F in (%IMAGE_DIR%\*) do (
     set "filename=%%~nxF"
     set "name=%%~nF"
     set "ext=%%~xF"
     set "src=%%F"
-
-    :: Determine type
     set "type=image"
+
+    :: Determine if it's a video
     for %%V in (%VIDEO_EXT%) do (
         if /I "%%~xF"=="%%V" set "type=video"
     )
 
-    :: Format title from file name (remove _, capitalize)
+    :: Format title (replace _ with space)
     set "title=!name:_= !"
-    for %%C in (!title!) do (
-        set "word=%%C"
-        set "titleFormatted=!titleFormatted! %%~C"
-    )
 
-    :: Handle commas
-    if "!firstEntry!"=="false" echo ,>> %OUTPUT_FILE%
+    :: Get file date in YYYY-MM-DD
+    for /f "tokens=1-3 delims=/" %%a in ("%%~tF") do (
+        set "day=%%a"
+        set "month=%%b"
+        set "year=%%c"
+    )
+    set "date=!year!-!month!-!day!"
+
+    :: Handle comma before entry
+    if not "!firstEntry!"=="true" >> %OUTPUT_FILE% echo ,
     set "firstEntry=false"
 
-    >> %OUTPUT_FILE% echo     {
-    >> %OUTPUT_FILE% echo       "title": "!name:_= !",
-    >> %OUTPUT_FILE% echo       "type": "!type!",
-    >> %OUTPUT_FILE% echo       "src": "!src:\=\\!",
-    >> %OUTPUT_FILE% echo       "description": ""
+    :: Write project entry
+    >> %OUTPUT_FILE% echo   {
+    >> %OUTPUT_FILE% echo     "title": "!title!",
+    >> %OUTPUT_FILE% echo     "media": ["!src:\=\\!"],
+    >> %OUTPUT_FILE% echo     "type": "!type!",
+    >> %OUTPUT_FILE% echo     "date": "!date!",
+    >> %OUTPUT_FILE% echo     "description": {
+    >> %OUTPUT_FILE% echo       "about": "",
+    >> %OUTPUT_FILE% echo       "coding": "",
+    >> %OUTPUT_FILE% echo       "hardware": ""
     >> %OUTPUT_FILE% echo     }
+    >> %OUTPUT_FILE% echo   }
 )
 
-:: Close JSON
-echo   ]>> %OUTPUT_FILE%
-echo }>> %OUTPUT_FILE%
+:: Close JSON array
+>> %OUTPUT_FILE% echo ]
 
 echo ✅ personal_projects.json generated successfully.
 pause
