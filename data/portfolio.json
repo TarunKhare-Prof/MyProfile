@@ -281,6 +281,13 @@
 		}
 	,
 		{
+		  "title": "3D-Printet Frosted Lamp + WS2812B Digital LED + Controlled From ESP8266 + WIFI Control Pannel + Patterns + Alexa Support + Sinric Pro Connectivity",
+		  "type": "image",
+		  "src": "images\\3D-Printet Frosted Lamp + WS2812B Digital LED + Controlled From ESP8266 + WIFI Control Pannel + Patterns + Alexa Support + Sinric Pro Connectivity.gif",
+		  "description": "Home 3D Printed Frosted Lamp , Contains WS2812b LED strip controlled using ESP8266, Connected to Wifi, Has Controll Pannel hosted on ESP8266, With Alexa Controll."
+		}
+	,
+		{
 		  "title": "usb(Mouse+Keyboard+Headphone) share between two CPU",
 		  "type": "video",
 		  "src": "images/usb(Mouse+Keyboard+Headphone) share between two CPU.mp4",
