@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
-  <!-- ===== HEADER ===== -->
   <header>
     <svg class="wave" viewBox="0 0 1440 90" preserveAspectRatio="none">
       <path d="M0,50 C400,140 1040,-40 1440,50 L1440,90 L0,90 Z"></path>
@@ -22,19 +21,14 @@
     </div>
   </header>
 
-  <!-- ===== NAVIGATION ===== -->
   <nav id="tabs"></nav>
-
-  <!-- ===== MAIN TAB WRAPPER ===== -->
   <main id="tabWrapper"></main>
 
-  <!-- ===== LIGHTBOX MODAL ===== -->
   <div id="lightbox" class="hidden">
     <span class="close">&times;</span>
     <div class="lightbox-content"></div>
   </div>
 
-  <!-- ===== JS TO BUILD PAGE ===== -->
   <script>
     const fetchJSON = async (p) => (await fetch(p)).json();
 
@@ -47,7 +41,7 @@
       const lb = document.getElementById('lightbox');
       const content = lb.querySelector('.lightbox-content');
       content.innerHTML = html;
-      void content.offsetHeight; // force reflow
+      void content.offsetHeight;
       lb.style.display = 'flex';
       lb.classList.remove('hidden');
     }
@@ -64,16 +58,6 @@
       lb.style.display = 'none';
       lb.classList.add('hidden');
     }
-	function renderMedia(src) {
-	  const ext = src.split('.').pop().toLowerCase();
-	  const isVideo = ['mp4', 'webm', 'ogg'].includes(ext);
-	  return `
-		<div class="media-content">
-		  ${isVideo
-			? `<video preload="metadata" muted loop autoplay><source src="${src}" type="video/mp4"></video>`
-			: `<img src="${src}" alt="project media">`}
-		</div>`;
-	}
 
     (async () => {
       const data = await fetchJSON('data/portfolio.json');
@@ -93,7 +77,44 @@
         sec.id = tab.id;
         sec.innerHTML = `<h2>${tab.title}</h2>`;
 
-        if (tab.skillsGrouped) {
+        if (tab.id === 'personal') {
+          const personalData = await fetchJSON('data/personal_projects.json');
+          const grid = document.createElement('div');
+          grid.className = 'projects-flex-list';
+
+          grid.innerHTML = personalData.map((p, index) => {
+            const mediaList = Array.isArray(p.media) ? p.media : [p.media];
+            const mediaNav = mediaList.length > 1 ? `
+              <button class="media-nav prev" onclick="showPrev(${index})">&#8592;</button>
+              <button class="media-nav next" onclick="showNext(${index})">&#8594;</button>` : '';
+            const mediaContent = mediaList.map((src, i) =>
+              p.type === 'video'
+                ? `<video preload="metadata" muted class="media-item ${i === 0 ? 'active' : ''}"><source src="${src}" type="video/mp4"></video>`
+                : `<img src="${src}" class="media-item ${i === 0 ? 'active' : ''}" alt="${p.title}">`
+            ).join('');
+
+            return `
+              <div class="project-row" id="project-${index}">
+                <div class="media-column">
+                  <div class="media-wrapper">
+                    ${mediaContent}
+                    ${mediaNav}
+                  </div>
+                </div>
+                <div class="desc-column">
+                  <h3>${p.title}</h3>
+                  <p><strong>Date:</strong> ${p.date}</p>
+                  <p><strong>About:</strong> ${p.description.about}</p>
+                  <p><strong>Coding:</strong> ${p.description.coding}</p>
+                  <p><strong>Hardware:</strong> ${p.description.hardware}</p>
+                </div>
+              </div>
+            `;
+          }).join('');
+
+          sec.appendChild(grid);
+
+        } else if (tab.skillsGrouped) {
           Object.entries(tab.skillsGrouped).forEach(([category, skills]) => {
             const grid = document.createElement('div');
             grid.className = 'skills-grid';
@@ -109,68 +130,11 @@
                 <div class="bar"><div class="fill" style="width:${sk.level}%"></div></div>
               </div>`).join('')}
           </div>`;
-        }  else if (tab.id === 'personal') {
-		  const personalData = await fetchJSON('data/personal_projects.json');
-
-		  const grid = document.createElement('div');
-			grid.className = 'projects-flex-list';
-
-
-		  grid.innerHTML = personalData.map((p, index) => {
-			const mediaNav = p.media.length > 1
-			  ? `
-				<button class="media-nav prev" onclick="showPrev(${index})">&#8592;</button>
-				<button class="media-nav next" onclick="showNext(${index})">&#8594;</button>
-			  `
-			  : '';
-
-			const mediaContent = p.media.map((src, i) =>
-			  p.type === 'video'
-				? `<video preload="metadata" muted class="media-item ${i === 0 ? 'active' : ''}"><source src="${src}" type="video/mp4"></video>`
-				: `<img src="${src}" class="media-item ${i === 0 ? 'active' : ''}" alt="${p.title}">`
-			).join('');
-
-			return `
-			  <div class="project-row" id="project-${index}">
-				<div class="media-column">
-				  <div class="media-wrapper">
-					${mediaContent}
-					${mediaNav}
-				  </div>
-				</div>
-				<div class="desc-column">
-				  <h3>${p.title}</h3>
-				  <p><strong>Date:</strong> ${p.date}</p>
-				  <p><strong>About:</strong> ${p.description.about}</p>
-				  <p><strong>Coding:</strong> ${p.description.coding}</p>
-				  <p><strong>Hardware:</strong> ${p.description.hardware}</p>
-				</div>
-			  </div>
-			`;
-		  }).join('');
-
-		  sec.appendChild(grid);
-		}
-
-		else if (tab.content) {
+        } else if (tab.content) {
           sec.innerHTML += tab.content.map(t => `<p>${t}</p>`).join('');
         }
 
         wrap.appendChild(sec);
-
-        // bind click to project cards (after adding to DOM)
-        document.querySelectorAll('.project-card').forEach(card => {
-          card.onclick = () => {
-            const src = card.dataset.src;
-            const type = card.dataset.type;
-            openLightbox(
-              type === 'video'
-                ? `<video controls autoplay><source src="${src}" type="video/mp4">Your browser does not support video.</video>`
-                : `<img src="${src}" alt="preview">`
-            );
-          };
-        });
-
         if (i === 0) sec.classList.add('active');
       }
 
@@ -186,29 +150,26 @@
         }
       });
     })();
-	
-	
-	function showPrev(index) {
-	  const items = document.querySelectorAll(`#project-${index} .media-item`);
-	  const current = [...items].findIndex(i => i.classList.contains('active'));
-	  if (current > 0) {
-		items[current].classList.remove('active');
-		items[current - 1].classList.add('active');
-	  }
-	}
 
-	function showNext(index) {
-	  const items = document.querySelectorAll(`#project-${index} .media-item`);
-	  const current = [...items].findIndex(i => i.classList.contains('active'));
-	  if (current < items.length - 1) {
-		items[current].classList.remove('active');
-		items[current + 1].classList.add('active');
-	  }
-	}
+    function showPrev(index) {
+      const items = document.querySelectorAll(`#project-${index} .media-item`);
+      const current = [...items].findIndex(i => i.classList.contains('active'));
+      if (current > 0) {
+        items[current].classList.remove('active');
+        items[current - 1].classList.add('active');
+      }
+    }
 
+    function showNext(index) {
+      const items = document.querySelectorAll(`#project-${index} .media-item`);
+      const current = [...items].findIndex(i => i.classList.contains('active'));
+      if (current < items.length - 1) {
+        items[current].classList.remove('active');
+        items[current + 1].classList.add('active');
+      }
+    }
   </script>
 
-  <!-- ===== FOOTER ===== -->
   <footer>
     <div class="footer-inner">
       <p>Made with 💻 by Tarun Khare &copy; <span id="year"></span></p>
@@ -220,15 +181,6 @@
       </div>
     </div>
   </footer>
-
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y230QVB9W6"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-Y230QVB9W6');
-  </script>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
