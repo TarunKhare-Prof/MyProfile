@@ -14,8 +14,7 @@
       "hardware": "",
       "additional": ""
     }
-  }
-,
+  },
   {
     "title": "3D-Printet Frosted Lamp + WS2812B Digital LED + Controlled From ESP8266 + WIFI Control Pannel + Patterns + Alexa Support + Sinric Pro Connectivity",
     "src": [
@@ -31,10 +30,9 @@
       "hardware": "",
       "additional": ""
     }
-  }
-,
+  },
   {
-    "title": "7.1 Channel Speaker Assembly inside",
+    "title": "7.1 Speaker \u2013 Internal",
     "src": [
       {
         "url": "images\\7.1 Channel Speaker Assembly inside.jpg",
@@ -43,15 +41,14 @@
     ],
     "type": "image",
     "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
+      "about": "Custom 7.1 channel speaker setup with internal amplifier wiring and subwoofer tuning.",
+      "coding": "Minimal firmware (Atmega8 for control)",
+      "hardware": "Sony XS-FB162E speakers, Pioneer TS-W1212D4 subwoofer, Sony XM-N1004 amps, SMPS 12V 40A",
       "additional": ""
     }
-  }
-,
+  },
   {
-    "title": "7.1 Channel Speaker Assembly",
+    "title": "7.1 Speaker \u2013 External",
     "src": [
       {
         "url": "images\\7.1 Channel Speaker Assembly.jpg",
@@ -60,13 +57,12 @@
     ],
     "type": "image",
     "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
+      "about": "7.1 channel audio system with custom-built speaker cabinets and CPU cabinet reuse.",
+      "coding": "Microcontroller setup with Atmega8 and LCD interface",
+      "hardware": "Same as above + 16x2 LCD, rotary knob, custom PCB, reused CPU cabinet",
       "additional": ""
     }
-  }
-,
+  },
   {
     "title": "Alexa Voice Controlle Gaming Table Light",
     "src": [
@@ -82,10 +78,9 @@
       "hardware": "",
       "additional": ""
     }
-  }
-,
+  },
   {
-    "title": "Amplifier Assembly",
+    "title": "Amplifier Build",
     "src": [
       {
         "url": "images\\Amplifier Assembly.jpg",
@@ -94,15 +89,14 @@
     ],
     "type": "image",
     "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
+      "about": "Hand-assembled amplifier for 7.1 audio system including custom cabling and cabinet design.",
+      "coding": "Basic MCU firmware (Atmega8)",
+      "hardware": "Amplifier components, 12V 40A SMPS, custom wiring",
       "additional": ""
     }
-  }
-,
+  },
   {
-    "title": "Auto Irrigation system",
+    "title": "Auto Irrigation",
     "src": [
       {
         "url": "images\\Auto Irrigation system.jpg",
@@ -111,15 +105,14 @@
     ],
     "type": "image",
     "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
+      "about": "Automatically controls water supply to fields based on soil moisture levels. Designed as a college project.",
+      "coding": "Embedded C (Atmega8)",
+      "hardware": "Moisture sensor, Atmega8, solenoid valve, LED indicators, relays",
       "additional": ""
     }
-  }
-,
+  },
   {
-    "title": "Creating MPU for 7.1 Channel",
+    "title": "MPU for 7.1 Audio",
     "src": [
       {
         "url": "images\\Creating MPU for 7.1 Channel.mp4",
@@ -128,15 +121,14 @@
     ],
     "type": "video",
     "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
+      "about": "Designed Microcontroller Processing Unit to manage volume and routing of 7.1 channel audio.",
+      "coding": "C (Atmega8) \u2013 Control logic and LCD interface",
+      "hardware": "Atmega8, 16x2 LCD, rotary knob, PCB, speaker interfacing",
       "additional": ""
     }
-  }
-,
+  },
   {
-    "title": "Development board",
+    "title": "Custom Dev Board",
     "src": [
       {
         "url": "images\\Development board.jpg",
@@ -145,13 +137,12 @@
     ],
     "type": "image",
     "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
-      "additional": ""
+      "about": "Multi-functional development board with relay, triac, matrix, keypad, LCD for testing.",
+      "coding": "Embedded C \u2013 test utilities for each component",
+      "hardware": "Atmega8, LED matrix, 16x2 LCD, relay, keypad, triac, MOC, 7-segment",
+      "additional": "Hand etched PCB using FeCl3, iron transfer from laser print"
     }
-  }
-,
+  },
   {
     "title": "Final Sub-woofer",
     "src": [
@@ -167,10 +158,9 @@
       "hardware": "",
       "additional": ""
     }
-  }
-,
+  },
   {
-    "title": "Laser security light on",
+    "title": "Laser Light Trigger",
     "src": [
       {
         "url": "images\\Laser security light on.mp4",
@@ -179,15 +169,14 @@
     ],
     "type": "video",
     "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
+      "about": "Security system that turns on light when laser beam is interrupted.",
+      "coding": "Basic logic with 555 timer (no MCU)",
+      "hardware": "Laser module, LDR, 555 timer, relay, light",
       "additional": ""
     }
-  }
-,
+  },
   {
-    "title": "LED Cube",
+    "title": "8x8x8 LED Cube",
     "src": [
       {
         "url": "images\\LED Cube.mp4",
@@ -196,13 +185,12 @@
     ],
     "type": "video",
     "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
+      "about": "3D LED cube capable of animated patterns and lighting effects.",
+      "coding": "C (Atmega8) \u2013 Pattern rendering and multiplexing",
+      "hardware": "512 blue LEDs, Atmega8, custom PCB",
       "additional": ""
     }
-  }
-,
+  },
   {
     "title": "Led Lamp 1",
     "src": [
@@ -218,8 +206,7 @@
       "hardware": "",
       "additional": ""
     }
-  }
-,
+  },
   {
     "title": "LED Lamp 2",
     "src": [
@@ -235,8 +222,7 @@
       "hardware": "",
       "additional": ""
     }
-  }
-,
+  },
   {
     "title": "LED Matrix PCB Desing",
     "src": [
@@ -252,10 +238,9 @@
       "hardware": "",
       "additional": ""
     }
-  }
-,
+  },
   {
-    "title": "Mono speakers",
+    "title": "Mono Speakers",
     "src": [
       {
         "url": "images\\Mono speakers.jpg",
@@ -264,13 +249,12 @@
     ],
     "type": "image",
     "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
+      "about": "Simple mono speaker boxes with Bluetooth audio input.",
+      "coding": "No MCU",
+      "hardware": "PAM8403, Bluetooth module, 3\" speakers",
       "additional": ""
     }
-  }
-,
+  },
   {
     "title": "pixel play",
     "src": [
@@ -286,8 +270,7 @@
       "hardware": "",
       "additional": ""
     }
-  }
-,
+  },
   {
     "title": "Pixel to Table, VIA Motherboard",
     "src": [
@@ -303,8 +286,7 @@
       "hardware": "",
       "additional": ""
     }
-  }
-,
+  },
   {
     "title": "Pocket Speaker",
     "src": [
@@ -315,13 +297,12 @@
     ],
     "type": "video",
     "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
+      "about": "Mini pocket-sized stereo speaker setup for personal use.",
+      "coding": "No firmware involved",
+      "hardware": "Same as above \u2013 PAM8403, Bluetooth, 3\" speaker, battery",
       "additional": ""
     }
-  }
-,
+  },
   {
     "title": "profile",
     "src": [
@@ -337,8 +318,7 @@
       "hardware": "",
       "additional": ""
     }
-  }
-,
+  },
   {
     "title": "Quad copter testing",
     "src": [
@@ -354,8 +334,7 @@
       "hardware": "",
       "additional": ""
     }
-  }
-,
+  },
   {
     "title": "RC Car over Phone",
     "src": [
@@ -371,8 +350,7 @@
       "hardware": "",
       "additional": ""
     }
-  }
-,
+  },
   {
     "title": "RF remote",
     "src": [
@@ -388,8 +366,7 @@
       "hardware": "",
       "additional": ""
     }
-  }
-,
+  },
   {
     "title": "RGB Lamp controll over Alexa",
     "src": [
@@ -405,8 +382,7 @@
       "hardware": "",
       "additional": ""
     }
-  }
-,
+  },
   {
     "title": "stereo speaker test - 1",
     "src": [
@@ -422,8 +398,7 @@
       "hardware": "",
       "additional": ""
     }
-  }
-,
+  },
   {
     "title": "Sub-woofer enclosure",
     "src": [
@@ -439,8 +414,7 @@
       "hardware": "",
       "additional": ""
     }
-  }
-,
+  },
   {
     "title": "Tap water sensor",
     "src": [
@@ -456,8 +430,7 @@
       "hardware": "",
       "additional": ""
     }
-  }
-,
+  },
   {
     "title": "TCP IP test RC car",
     "src": [
@@ -473,8 +446,7 @@
       "hardware": "",
       "additional": ""
     }
-  }
-,
+  },
   {
     "title": "Timer Socket internal",
     "src": [
@@ -490,8 +462,7 @@
       "hardware": "",
       "additional": ""
     }
-  }
-,
+  },
   {
     "title": "Timer Socket to customer",
     "src": [
@@ -507,8 +478,7 @@
       "hardware": "",
       "additional": ""
     }
-  }
-,
+  },
   {
     "title": "Timer Socket",
     "src": [
@@ -524,8 +494,7 @@
       "hardware": "",
       "additional": ""
     }
-  }
-,
+  },
   {
     "title": "usb(Mouse+Keyboard+Headphone) share between two CPU",
     "src": [
@@ -541,10 +510,9 @@
       "hardware": "",
       "additional": ""
     }
-  }
-,
+  },
   {
-    "title": "Wallet Box Stereo",
+    "title": "Wallet Stereo",
     "src": [
       {
         "url": "images\\Wallet Box Stereo.mp4",
@@ -553,9 +521,9 @@
     ],
     "type": "video",
     "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
+      "about": "Compact speaker housed in a wallet box for portable audio.",
+      "coding": "No coding \u2013 plug and play",
+      "hardware": "Bluetooth receiver, PAM8403, 2.5\"/3\" speaker, Li-ion, TP4056",
       "additional": ""
     }
   }
