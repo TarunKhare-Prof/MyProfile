@@ -188,7 +188,7 @@
 	  "description": {
 		"about": "College-era project where I began exploring LED matrix layouts and 2-layer PCB design. This image shows a 3D render of the PCB generated using DipTrace.",
 		"coding": "No coding involved at this stage – focus was on circuit design and layout.",
-		"hardware": "Designed for 8x8 LED matrix driving, intended to be powered by MCU like Atmega8 or Arduino in future builds.",
+		"hardware": "Designed for 11x11 LED matrix driving, intended to be powered by MCU like Atmega8 or Arduino in future builds.",
 		"additional": "This project marked my early exploration into PCB CAD tools, particularly DipTrace, learning about component placement, via routing, and 3D visualization."
 	  }
 	}
