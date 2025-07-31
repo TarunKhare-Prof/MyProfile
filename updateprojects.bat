@@ -42,7 +42,7 @@ for %%F in (%IMAGE_DIR%\*) do (
     :: Write project entry
     >> "%OUTPUT_FILE%" echo   {
     >> "%OUTPUT_FILE%" echo     "title": "!title!",
-    >> "%OUTPUT_FILE%" echo     "media": ["!src!"],
+    >> "%OUTPUT_FILE%" echo     "src": ["!src!"],
     >> "%OUTPUT_FILE%" echo     "type": "!type!",
     >> "%OUTPUT_FILE%" echo     "description": {
     >> "%OUTPUT_FILE%" echo       "about": "",
