@@ -1,84 +1,96 @@
 [
   {
-    "title": "1000W Stereo Audio Amplifier with Transistors 2SC5200 and 2SA1943",
-    "src": [
-      {
-        "url": "images\\1000W Stereo Audio Amplifier with Transistors 2SC5200 and 2SA1943.jpg",
-        "date": "2025 08:38-07-12"
-      }
-    ],
-    "type": "mixed",
-    "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
-      "additional": ""
+  "title": "1000W Transistor Audio Amplifier",
+  "src": [
+    {
+      "url": "images\\1000W Stereo Audio Amplifier with Transistors 2SC5200 and 2SA1943.jpg",
+      "date": "2025 08:38-07-12"
     }
-  },
+  ],
+  "type": "image",
+  "description": {
+    "about": "A high-power stereo audio amplifier designed for robust sound output, capable of driving large subwoofers and multi-channel systems.",
+    "coding": "No microcontroller or digital logic used; pure analog amplification.",
+    "hardware": "Transistors 2SC5200 and 2SA1943, large heat sinks, toroidal transformer, filter capacitors, and audio jacks.",
+    "additional": "Used in home theater setup, manually tuned biasing and gain stage, high-efficiency cooling system."
+  }
+}
+	,
   {
-    "title": "3D-Printet Frosted Lamp + WS2812B Digital LED + Controlled From ESP8266 + WIFI Control Pannel + Patterns + Alexa Support + Sinric Pro Connectivity",
-    "src": [
-      {
-        "url": "images\\3D-Printet Frosted Lamp + WS2812B Digital LED + Controlled From ESP8266 + WIFI Control Pannel + Patterns + Alexa Support + Sinric Pro Connectivity.gif",
-        "date": "2025 00:56-08-01"
-      }
-    ],
-    "type": "mixed",
-    "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
-      "additional": ""
+  "title": "3D-Printed Smart Lamp with Alexa Control",
+  "src": [
+    {
+      "url": "images\\3D-Printet Frosted Lamp + WS2812B Digital LED + Controlled From ESP8266 + WIFI Control Pannel + Patterns + Alexa Support + Sinric Pro Connectivity.gif",
+      "date": "2025 00:56-08-01"
     }
-  },
+  ],
+  "type": "image",
+  "description": {
+    "about": "A 3D-printed frosted lamp with customizable RGB animations, Wi-Fi control, and Alexa voice integration. Designed for ambient lighting and automation.",
+    "coding": "Arduino code on ESP8266 using FastLED and Sinric Pro libraries. Handles OTA updates, color selection, brightness, and pattern animations.",
+    "hardware": "ESP8266 NodeMCU, WS2812B LED strip, custom 3D-printed diffuser, USB power, and push buttons for manual control.",
+    "additional": "Controlled via web panel and Alexa. Supports effects like rainbow, wave, breathing, and static colors with smooth transitions."
+  }
+}
+,
+  
   {
-    "title": "7.1 Audio System",
-    "src": [
-      {
-        "url": "images\\7.1 Channel Speaker Assembly inside.jpg",
-        "date": "2025 08:38-07-12"
-      },
-      {
-        "url": "images\\7.1 Channel Speaker Assembly.jpg",
-        "date": "2025 08:38-07-12"
-      },
-      {
-        "url": "images\\Amplifier Assembly.jpg",
-        "date": "2025 08:38-07-12"
-      },
-      {
-        "url": "images\\Final Sub-woofer.jpg",
-        "date": "2025 08:38-07-12"
-      },
-      {
-        "url": "images\\Sub-woofer enclosure.jpg",
-        "date": "2025 08:38-07-12"
-      }
-    ],
-    "type": "mixed",
-    "description": {
-      "about": "7.1 Surround Sound Audio System with custom subwoofer and speaker units.",
-      "coding": "MPU programming with Atmega8 for input control, LCD display, and rotary encoder.",
-      "hardware": "Pioneer TS-W1212D4 Subwoofer, Sony XS-FB162E Speakers, Sony XM-N1004 Amplifiers, Atmega8, LCD 16x2, Rotary Encoder, Custom PCB, CPU Cabinet.",
-      "additional": "Self-designed cabinet and controller unit for immersive sound."
+  "title": "7.1 Audio System with Custom MPU",
+  "src": [
+    {
+      "url": "images\\7.1 Channel Speaker Assembly inside.jpg",
+      "date": "2025 08:38-07-12"
+    },
+    {
+      "url": "images\\7.1 Channel Speaker Assembly.jpg",
+      "date": "2025 08:38-07-12"
+    },
+    {
+      "url": "images\\Amplifier Assembly.jpg",
+      "date": "2025 08:38-07-12"
+    },
+    {
+      "url": "images\\Final Sub-woofer.jpg",
+      "date": "2025 08:38-07-12"
+    },
+    {
+      "url": "images\\Sub-woofer enclosure.jpg",
+      "date": "2025 08:38-07-12"
+    },
+    {
+      "url": "images\\Creating MPU for 7.1 Channel.mp4",
+      "date": "2025 08:38-07-12"
     }
-  },
-  {
-    "title": "Alexa Voice Controlle Gaming Table Light",
-    "src": [
-      {
-        "url": "images\\Alexa Voice Controlle Gaming Table Light.mp4",
-        "date": "2025 08:38-07-12"
-      }
-    ],
-    "type": "mixed",
-    "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
-      "additional": ""
-    }
-  },
+  ],
+  "type": "mixed",
+  "description": {
+    "about": "Custom-built 7.1 surround sound audio system featuring powerful subwoofer, speaker arrays, and a self-designed controller MPU. Designed for home theater with immersive sound experience.",
+    "coding": "Developed firmware for Atmega8 microcontroller to manage input selection, volume control via rotary encoder, and display data on a 16x2 LCD. Handles channel routing and switching logic.",
+    "hardware": "Pioneer TS-W1212D4 Subwoofer, Sony XS-FB162E Speakers, Sony XM-N1004 Amplifiers, Atmega8 MCU, 16x2 LCD, Rotary Encoder, custom-fabricated PCB, reused CPU cabinet for main unit, hand-built enclosures for subwoofer and speakers.",
+    "additional": "Designed and wired complete amplifier unit, subwoofer tuning, speaker phase balancing, and control panel integration. The MPU video showcases the interactive setup of the control unit."
+  }
+}
+
+  
+  
+	  ,
+	  {
+	  "title": "Alexa-Controlled RGB Gaming Table Light",
+	  "src": [
+		{
+		  "url": "images\\Alexa Voice Controlle Gaming Table Light.mp4",
+		  "date": "2025 08:38-07-12"
+		}
+	  ],
+	  "type": "mixed",
+	  "description": {
+		"about": "RGB lighting setup integrated beneath the gaming table, controlled via voice commands using Alexa for enhanced gaming ambiance.",
+		"coding": "Firmware on ESP8266 using Arduino core; connected with Alexa through Sinric Pro and custom Alexa skills to toggle colors, patterns, and brightness.",
+		"hardware": "ESP8266 microcontroller, 5050 RGB LED strip, 12V power supply, MOSFET driver for LEDs, Wi-Fi setup for Alexa integration.",
+		"additional": "Voice commands enable pattern change, color setting, and power on/off without manual interaction, enhancing desk aesthetics during PC gaming sessions."
+	  }
+	}
+	,
   {
     "title": "Auto Irrigation system",
     "src": [
@@ -95,22 +107,7 @@
       "additional": "Controls water flow based on soil moisture levels. Used in college project."
     }
   },
-  {
-    "title": "Creating MPU for 7.1 Channel",
-    "src": [
-      {
-        "url": "images\\Creating MPU for 7.1 Channel.mp4",
-        "date": "2025 08:38-07-12"
-      }
-    ],
-    "type": "mixed",
-    "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
-      "additional": ""
-    }
-  },
+  
   {
     "title": "Development board",
     "src": [
@@ -180,53 +177,56 @@
     }
   },
   {
-    "title": "LED Matrix PCB Desing",
-    "src": [
-      {
-        "url": "images\\LED Matrix PCB Desing.jpg",
-        "date": "2025 08:38-07-12"
-      }
-    ],
-    "type": "mixed",
-    "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
-      "additional": ""
-    }
-  },
-  {
-    "title": "pixel play",
-    "src": [
-      {
-        "url": "images\\pixel play.mp4",
-        "date": "2025 08:38-07-12"
-      }
-    ],
-    "type": "mixed",
-    "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
-      "additional": ""
-    }
-  },
-  {
-    "title": "Pixel to Table, VIA Motherboard",
-    "src": [
-      {
-        "url": "images\\Pixel to Table, VIA Motherboard.mp4",
-        "date": "2025 08:38-07-12"
-      }
-    ],
-    "type": "mixed",
-    "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
-      "additional": ""
-    }
-  },
+	  "title": "LED Matrix PCB (DipTrace 3D)",
+	  "src": [
+		{
+		  "url": "images\\LED Matrix PCB Desing.jpg",
+		  "date": "2025 08:38-07-12"
+		}
+	  ],
+	  "type": "image",
+	  "description": {
+		"about": "College-era project where I began exploring LED matrix layouts and 2-layer PCB design. This image shows a 3D render of the PCB generated using DipTrace.",
+		"coding": "No coding involved at this stage – focus was on circuit design and layout.",
+		"hardware": "Designed for 8x8 LED matrix driving, intended to be powered by MCU like Atmega8 or Arduino in future builds.",
+		"additional": "This project marked my early exploration into PCB CAD tools, particularly DipTrace, learning about component placement, via routing, and 3D visualization."
+	  }
+	}
+	,
+	  {
+	  "title": "WS2812B Eye Pattern Learning",
+	  "src": [
+		{
+		  "url": "images\\pixel play.mp4",
+		  "date": "2025 08:38-07-12"
+		}
+	  ],
+	  "type": "video",
+	  "description": {
+		"about": "Initial experiment with WS2812B LEDs to understand how data pulses and cycles trigger RGB values. This project demonstrates a moving eye animation on an 8x8 LED matrix.",
+		"coding": "C/C++ with Arduino – Custom bit patterns written to drive color transitions and animations across the 64-LED matrix.",
+		"hardware": "8x8 WS2812B LED matrix, Arduino UNO/Nano for signal generation, 5V power supply.",
+		"additional": "This was part of my foundational learning on how LED strip timing works, how GRB bits are parsed per LED, and how visual animations are constructed frame by frame."
+	  }
+	}
+	,
+	  {
+	  "title": "Pixel Table with VIA Motherboard Control",
+	  "src": [
+		{
+		  "url": "images\\Pixel to Table, VIA Motherboard.mp4",
+		  "date": "2025 08:38-07-12"
+		}
+	  ],
+	  "type": "video",
+	  "description": {
+		"about": "A creative lighting setup where a WS2812B LED strip is mounted under a wooden table, with light passing through drilled holes to create pixel-like lighting effects on the surface.",
+		"coding": "Controlled via custom software from a VIA motherboard’s internal USB or serial port, driving LED data through a microcontroller interface.",
+		"hardware": "WS2812B LED strip, table with drilled holes for light diffusion, old VIA motherboard, Arduino/ESP interface for LED control.",
+		"additional": "Designed for visual aesthetics and mood lighting. Patterns include wave, sparkle, and spectrum animations triggered via PC interface."
+	  }
+	}
+	,
   {
     "title": "Portable Wireless Speakers",
     "src": [
@@ -289,37 +289,39 @@
     }
   },
   {
-    "title": "RF remote",
-    "src": [
-      {
-        "url": "images\\RF remote.jpg",
-        "date": "2025 08:38-07-12"
-      }
-    ],
-    "type": "mixed",
-    "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
-      "additional": ""
-    }
-  },
-  {
-    "title": "RGB Lamp controll over Alexa",
-    "src": [
-      {
-        "url": "images\\RGB Lamp controll over Alexa.mp4",
-        "date": "2025 08:38-07-12"
-      }
-    ],
-    "type": "mixed",
-    "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
-      "additional": ""
-    }
-  },
+	  "title": "RF Remote-Controlled Home Appliances",
+	  "src": [
+		{
+		  "url": "images\\RF remote.jpg",
+		  "date": "2025 08:38-07-12"
+		}
+	  ],
+	  "type": "mixed",
+	  "description": {
+		"about": "Custom-built RF-based remote control system to wirelessly operate home appliances, similar to a TV remote. Developed as a self-learning project during college vacations.",
+		"coding": "Basic Embedded C programming on Atmega8 for decoding RF signals and triggering relays based on received commands.",
+		"hardware": "433 MHz RF transmitter and receiver modules, Atmega8 microcontroller, relays, light control board, 12V supply, custom PCB.",
+		"additional": "Receiver embedded inside switchboard housing, capable of switching appliances like lights and fans remotely using the RF transmitter unit."
+	  }
+	}
+,
+	  {
+	  "title": "RGB Lamp with ESP8266 + Alexa",
+	  "src": [
+		{
+		  "url": "images\\RGB Lamp controll over Alexa.mp4",
+		  "date": "2025 08:38-07-12"
+		}
+	  ],
+	  "type": "mixed",
+	  "description": {
+		"about": "Converted a regular mood lamp into a smart RGB lamp for aesthetic home decor. The lamp is controllable via Alexa voice commands.",
+		"coding": "ESP8266 programmed using Arduino framework to receive Alexa commands via Sinric Pro and control the RGB LED.",
+		"hardware": "ESP8266 NodeMCU, RGB LED (common cathode), power supply, modified lamp housing.",
+		"additional": "Lamp connected to Wi-Fi network, responds to Alexa commands like 'Turn on lamp', 'Set color to blue', etc. Enhances home ambience with programmable lighting."
+	  }
+	}
+,
   {
     "title": "Tap water sensor",
     "src": [
@@ -337,21 +339,22 @@
     }
   },
   {
-    "title": "TCP IP test RC car",
-    "src": [
-      {
-        "url": "images\\TCP IP test RC car.mp4",
-        "date": "2025 08:38-07-12"
-      }
-    ],
-    "type": "mixed",
-    "description": {
-      "about": "",
-      "coding": "",
-      "hardware": "",
-      "additional": ""
-    }
-  },
+	  "title": "ESP8266 RC Car over TCP/IP",
+	  "src": [
+		{
+		  "url": "images\\TCP IP test RC car.mp4",
+		  "date": "2025 08:38-07-12"
+		}
+	  ],
+	  "type": "mixed",
+	  "description": {
+		"about": "Project to control a 4-motor RC car over a Wi-Fi TCP/IP connection between two ESP8266 modules, simulating remote vehicle control.",
+		"coding": "Arduino code for ESP8266 using `WiFiServer` and `WiFiClient` classes to establish socket communication. Pushbutton commands simulated in Proteus sent over network to second ESP controlling motors.",
+		"hardware": "2× ESP8266 NodeMCU modules, USB-to-Serial CH340 module for programming/config (via AT commands and Arduino), ULN2003 driver IC, 4× DC motors, power supply unit, pushbuttons, and simulation via Proteus.",
+		"additional": "Project helped understand networking basics with ESP8266, COM port configuration, and motor control logic remotely triggered via socket messages."
+	  }
+	}
+	,
   {
     "title": "Timer Socket",
     "src": [
