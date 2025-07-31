@@ -78,7 +78,8 @@
       const nav = document.getElementById('tabs');
       const wrap = document.getElementById('tabWrapper');
 
-      data.tabs.forEach((tab, i) => {
+      for (let i = 0; i < data.tabs.length; i++) {
+	    const tab = data.tabs[i];
         const btn = document.createElement('button');
         btn.innerHTML = `<i class="fa-regular fa-circle"></i> ${tab.label}`;
         btn.onclick = () => showTab(tab.id);
