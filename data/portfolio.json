@@ -189,25 +189,7 @@
 		"<strong>Higher Secondary:</strong> - St. Michael’s, Satna"
 	  ]
 	},
-    {
-      "id": "Certifications",
-      "label": "Certifications",
-      "title": "Certifications",
-      "content": [
-        "To Be Added Soon..."
-        
-      ]
-    },
-    {
-      "id": "MyCodes",
-      "label": "My Codes",
-      "title": "My Codes",
-      "content": [
-        "To Be Added Soon..."
-        
-      ]
-    }
-	,
+   
     {
       "id": "contact",
       "label": "Contact",
