@@ -85,9 +85,11 @@
         const sec = document.createElement('section');
         sec.className = 'tab-content';
         sec.id = tab.id;
-        sec.innerHTML = `<h2>${tab.title}</h2>`;
 
-        // PERSONAL PROJECTS
+        if (tab.id !== 'skills') {
+          sec.innerHTML = `<h2>${tab.title}</h2>`;
+        }
+
         if (tab.id === 'personal') {
           const personalData = await fetchJSON('data/personal_projects.json');
           const grid = document.createElement('div');
@@ -135,72 +137,75 @@
 
           sec.appendChild(grid);
 
-        // SKILLS TABLE
         } else if (tab.id === 'skills') {
-		  const table = document.createElement('table');
-		  table.className = 'skills-table';
+          const table = document.createElement('table');
+          table.className = 'skills-table';
 
-		  const grouped = skillsData.reduce((acc, skill) => {
-			(acc[skill.category] = acc[skill.category] || []).push(skill);
-			return acc;
-		  }, {});
+          const grouped = skillsData.reduce((acc, skill) => {
+            (acc[skill.category] = acc[skill.category] || []).push(skill);
+            return acc;
+          }, {});
 
-		  const levelOrder = { "Advanced": 5, "Working Level": 4, "Intermediate": 3, "Basic": 2, "Learning": 1 };
+          const levelOrder = { "Advanced": 5, "Working Level": 4, "Intermediate": 3, "Basic": 2, "Learning": 1 };
 
-		  let rows = '';
-		  Object.entries(grouped).forEach(([category, skills]) => {
-			rows += `<tr class="category-row"><td colspan="5">${category}</td></tr>`;
-			skills.sort((a, b) => (levelOrder[b.level] || 0) - (levelOrder[a.level] || 0)).forEach(skill => {
-			  rows += `
-				<tr>
-				  <td></td>
-				  <td>${skill.name}</td>
-				  <td>${skill.level}</td>
-				  <td>${skill.status || ''}</td>
-				  <td>${skill.remarks || ''}</td>
-				</tr>`;
-			});
-		  });
-
-		  table.innerHTML = `
-			<thead>
-			  <tr>
-				<th>Category</th>
-				<th>Name</th>
-				<th>Level</th>
-				<th>Status / Last Used</th>
-				<th>Remarks</th>
-			  </tr>
-			</thead>
-			<tbody>${rows}</tbody>
-		  `;
-
-		  sec.appendChild(table);
-		}
-
-
-
-        // OTHER SKILLS FORMATS
-         else if (tab.skillsGrouped) {
-          Object.entries(tab.skillsGrouped).forEach(([category, skills]) => {
-            const grid = document.createElement('div');
-            grid.className = 'skills-grid';
-            grid.innerHTML = `<h3>${category}</h3>` +
-              skills.map(sk => `<div class="skill">${sk.name}</div>`).join('');
-            sec.appendChild(grid);
+          let rows = '';
+          Object.entries(grouped).forEach(([category, skills]) => {
+            rows += `<tr class="category-row"><td colspan="5">${category}</td></tr>`;
+            skills.sort((a, b) => (levelOrder[b.level] || 0) - (levelOrder[a.level] || 0)).forEach(skill => {
+              const highlight = (skill.status || '').toLowerCase() === 'using' ? ' style="background-color:#eaffea"' : '';
+              rows += `
+                <tr${highlight}>
+                  <td></td>
+                  <td>${skill.name}</td>
+                  <td>${skill.level}</td>
+                  <td>${skill.status || ''}</td>
+                  <td>${skill.remarks || ''}</td>
+                </tr>`;
+            });
           });
 
-        } else if (tab.skills) {
-          sec.innerHTML += `<div class="skills-bars">
-            ${tab.skills.map(sk => `
-              <div class="skill-bar">
-                <span>${sk.name}</span>
-                <div class="bar"><div class="fill" style="width:${sk.level}%"></div></div>
-              </div>`).join('')}
-          </div>`;
+          table.innerHTML = `
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Name</th>
+                <th>Level</th>
+                <th>Status / Last Used</th>
+                <th>Remarks</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          `;
 
-        } else if (tab.content) {
-          sec.innerHTML += tab.content.map(t => `<p>${t}</p>`).join('');
+          const wrapper = document.createElement('div');
+          wrapper.style.display = 'flex';
+          wrapper.style.gap = '20px';
+          wrapper.style.flexWrap = 'wrap';
+
+          const tableCol = document.createElement('div');
+          tableCol.style.flex = '3';
+          tableCol.appendChild(table);
+
+          const legendCol = document.createElement('div');
+          legendCol.style.flex = '1';
+          legendCol.innerHTML = `
+            <h4 style="margin-top:0">Level Guide</h4>
+            <table style="width:100%; border-collapse:collapse" border="1">
+              <thead><tr><th>Level</th><th>Label</th></tr></thead>
+              <tbody>
+                <tr><td>5</td><td>Advanced</td></tr>
+                <tr><td>4</td><td>Working Level</td></tr>
+                <tr><td>3</td><td>Intermediate</td></tr>
+                <tr><td>2</td><td>Basic</td></tr>
+                <tr><td>1</td><td>Learning</td></tr>
+              </tbody>
+            </table>
+          `;
+
+          wrapper.appendChild(tableCol);
+          wrapper.appendChild(legendCol);
+          sec.innerHTML = '';
+          sec.appendChild(wrapper);
         }
 
         wrap.appendChild(sec);
