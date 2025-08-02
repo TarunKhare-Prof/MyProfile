@@ -151,26 +151,33 @@
 			  </tr>
 			</thead>
 			<tbody>
-			  ${skillsData
-				  .slice()
-				  .sort((a, b) => {
-					const order = {
-					  "Advanced": 4,
-					  "Working Level": 3,
-					  "Intermediate": 2,
-					  "Basic": 1,
-					  "Learning": 0
-					};
-					return (order[b.level] || 0) - (order[a.level] || 0);
-				  })
-				  .map(skill => `
+			  ${Object.entries(
+				skillsData.reduce((acc, skill) => {
+				  if (!acc[skill.category]) acc[skill.category] = [];
+				  acc[skill.category].push(skill);
+				  return acc;
+				}, {})
+			  )
+			  .map(([category, skills]) => {
+				const order = {
+				  "Advanced": 4,
+				  "Working Level": 3,
+				  "Intermediate": 2,
+				  "Basic": 1,
+				  "Learning": 0
+				};
+				const sorted = skills.sort((a, b) => (order[b.level] || 0) - (order[a.level] || 0));
+				return sorted
+				  .map((skill, i) => `
 					<tr>
-					  <td>${skill.category}</td>
+					  <td>${i === 0 ? category : ''}</td>
 					  <td>${skill.name}</td>
 					  <td>${skill.level}</td>
 					  <td>${skill.status || ''}</td>
 					  <td>${skill.remarks || ''}</td>
-					</tr>`).join('')}
+					</tr>`).join('');
+			  }).join('')}
+
 
 			</tbody>`;
 		  sec.appendChild(table);
