@@ -38,23 +38,22 @@
     }
 
     function openLightbox(html) {
-	  const lb = document.getElementById('lightbox');
-	  const content = lb.querySelector('.lightbox-content');
-	  content.innerHTML = html;
+      const lb = document.getElementById('lightbox');
+      const content = lb.querySelector('.lightbox-content');
+      content.innerHTML = html;
 
-	  const video = content.querySelector('video');
-	  if (video) {
-		video.setAttribute('autoplay', true);
-		video.setAttribute('controls', true);
-		video.setAttribute('playsinline', true);
-		video.play().catch(err => console.log("Autoplay blocked:", err));
-	  }
+      const video = content.querySelector('video');
+      if (video) {
+        video.setAttribute('autoplay', true);
+        video.setAttribute('controls', true);
+        video.setAttribute('playsinline', true);
+        video.play().catch(err => console.log("Autoplay blocked:", err));
+      }
 
-	  void content.offsetHeight;
-	  lb.style.display = 'flex';
-	  lb.classList.remove('hidden');
-	}
-
+      void content.offsetHeight;
+      lb.style.display = 'flex';
+      lb.classList.remove('hidden');
+    }
 
     function closeLightbox() {
       const lb = document.getElementById('lightbox');
@@ -71,6 +70,7 @@
 
     (async () => {
       const data = await fetchJSON('data/portfolio.json');
+      const skillsData = await fetchJSON('data/skills.json');
       const nav = document.getElementById('tabs');
       const wrap = document.getElementById('tabWrapper');
 
@@ -135,7 +135,47 @@
 
           sec.appendChild(grid);
 
-        // SKILLS GROUPED
+        // SKILLS TABLE
+        } (tab.id === 'skills') {
+		  const table = document.createElement('table');
+		  table.className = 'skills-table';
+		  table.innerHTML = `
+			<thead>
+			  <tr>
+				<th>Category</th>
+				<th>Name</th>
+				<th>Level</th>
+				<th>Status / Last Used</th>
+				<th>Remarks</th>
+			  </tr>
+			</thead>
+			<tbody>
+			  ${skillsData
+				  .slice()
+				  .sort((a, b) => {
+					const order = {
+					  "Advanced": 4,
+					  "Working Level": 3,
+					  "Intermediate": 2,
+					  "Basic": 1,
+					  "Learning": 0
+					};
+					return (order[b.level] || 0) - (order[a.level] || 0);
+				  })
+				  .map(skill => `
+					<tr>
+					  <td>${skill.category}</td>
+					  <td>${skill.name}</td>
+					  <td>${skill.level}</td>
+					  <td>${skill.status || ''}</td>
+					  <td>${skill.remarks || ''}</td>
+					</tr>`).join('')}
+
+			</tbody>`;
+		  sec.appendChild(table);
+
+
+        // OTHER SKILLS FORMATS
         } else if (tab.skillsGrouped) {
           Object.entries(tab.skillsGrouped).forEach(([category, skills]) => {
             const grid = document.createElement('div');
@@ -145,7 +185,6 @@
             sec.appendChild(grid);
           });
 
-        // SKILLS WITH LEVEL
         } else if (tab.skills) {
           sec.innerHTML += `<div class="skills-bars">
             ${tab.skills.map(sk => `
@@ -155,7 +194,6 @@
               </div>`).join('')}
           </div>`;
 
-        // DEFAULT CONTENT
         } else if (tab.content) {
           sec.innerHTML += tab.content.map(t => `<p>${t}</p>`).join('');
         }
