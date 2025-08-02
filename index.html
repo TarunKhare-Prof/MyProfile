@@ -136,10 +136,32 @@
           sec.appendChild(grid);
 
         // SKILLS TABLE
-        } else if (tab.id === 'skills') 
-		{
+        } else if (tab.id === 'skills') {
 		  const table = document.createElement('table');
 		  table.className = 'skills-table';
+
+		  const grouped = skillsData.reduce((acc, skill) => {
+			(acc[skill.category] = acc[skill.category] || []).push(skill);
+			return acc;
+		  }, {});
+
+		  const levelOrder = { "Advanced": 5, "Working Level": 4, "Intermediate": 3, "Basic": 2, "Learning": 1 };
+
+		  let rows = '';
+		  Object.entries(grouped).forEach(([category, skills]) => {
+			rows += `<tr class="category-row"><td colspan="5">${category}</td></tr>`;
+			skills.sort((a, b) => (levelOrder[b.level] || 0) - (levelOrder[a.level] || 0)).forEach(skill => {
+			  rows += `
+				<tr>
+				  <td></td>
+				  <td>${skill.name}</td>
+				  <td>${skill.level}</td>
+				  <td>${skill.status || ''}</td>
+				  <td>${skill.remarks || ''}</td>
+				</tr>`;
+			});
+		  });
+
 		  table.innerHTML = `
 			<thead>
 			  <tr>
@@ -147,44 +169,19 @@
 				<th>Name</th>
 				<th>Level</th>
 				<th>Status / Last Used</th>
-				
+				<th>Remarks</th>
 			  </tr>
 			</thead>
-			<tbody>
-			  ${Object.entries(
-				skillsData.reduce((acc, skill) => {
-				  if (!acc[skill.category]) acc[skill.category] = [];
-				  acc[skill.category].push(skill);
-				  return acc;
-				}, {})
-			  )
-			  .map(([category, skills]) => {
-				const order = {
-				  "Advanced": 4,
-				  "Working Level": 3,
-				  "Intermediate": 2,
-				  "Basic": 1,
-				  "Learning": 0
-				};
-				const sorted = skills.sort((a, b) => (order[b.level] || 0) - (order[a.level] || 0));
-				return sorted
-				  .map((skill, i) => `
-					<tr>
-					  <td>${i === 0 ? category : ''}</td>
-					  <td>${skill.name}</td>
-					  <td>${skill.level}</td>
-					  <td>${skill.status || ''}</td>
-					  
-					</tr>`).join('');
-			  }).join('')}
+			<tbody>${rows}</tbody>
+		  `;
 
-
-			</tbody>`;
 		  sec.appendChild(table);
+		}
+
 
 
         // OTHER SKILLS FORMATS
-        } else if (tab.skillsGrouped) {
+         else if (tab.skillsGrouped) {
           Object.entries(tab.skillsGrouped).forEach(([category, skills]) => {
             const grid = document.createElement('div');
             grid.className = 'skills-grid';

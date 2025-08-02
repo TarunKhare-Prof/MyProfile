@@ -123,6 +123,21 @@ nav button:hover {
   background-color: #ffffff;
 }
 
+/* Grouped Category Row */
+.skills-table .category-row td {
+  background-color: #e6f0ff;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: #003366;
+  border-top: 2px solid #004080;
+}
+
+/* First column padding for empty repeated category cells */
+.skills-table td:first-child:empty {
+  background-color: #f6faff;
+}
+
 
 /* ===== PROJECT GRID (OLD GENERAL GRID) ===== */
 .projects-grid {
