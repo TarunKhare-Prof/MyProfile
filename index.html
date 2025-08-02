@@ -179,29 +179,35 @@
             <tbody>${rows}</tbody>
           `;
 
-          const skillsWrapper = document.createElement('div');
-          skillsWrapper.className = 'skills-wrapper';
-          skillsWrapper.appendChild(table);
-          sec.appendChild(skillsWrapper);
+          const flexContainer = document.createElement('div');
+			flexContainer.className = 'skills-flex-container';
 
-          const guideCard = document.createElement('div');
-          guideCard.className = 'level-guide-card';
-          guideCard.innerHTML = `
-            <h3>Level Guide</h3>
-            <table class="level-guide">
-              <thead>
-                <tr><th>Level</th><th>Label</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>5</td><td>Advanced</td></tr>
-                <tr><td>4</td><td>Working Level</td></tr>
-                <tr><td>3</td><td>Intermediate</td></tr>
-                <tr><td>2</td><td>Basic</td></tr>
-                <tr><td>1</td><td>Learning</td></tr>
-              </tbody>
-            </table>
-          `;
-          sec.appendChild(guideCard);
+			const skillsWrapper = document.createElement('div');
+			skillsWrapper.className = 'skills-wrapper';
+			skillsWrapper.appendChild(table);
+
+			const guideCard = document.createElement('div');
+			guideCard.className = 'level-guide-card';
+			guideCard.innerHTML = `
+			  <h3>Level Guide</h3>
+			  <table class="level-guide">
+				<thead>
+				  <tr><th>Level</th><th>Label</th></tr>
+				</thead>
+				<tbody>
+				  <tr><td>5</td><td>Advanced</td></tr>
+				  <tr><td>4</td><td>Working Level</td></tr>
+				  <tr><td>3</td><td>Intermediate</td></tr>
+				  <tr><td>2</td><td>Basic</td></tr>
+				  <tr><td>1</td><td>Learning</td></tr>
+				</tbody>
+			  </table>
+			`;
+
+			flexContainer.appendChild(skillsWrapper);
+			flexContainer.appendChild(guideCard);
+			sec.appendChild(flexContainer);
+
 
         } else if (tab.skillsGrouped) {
           Object.entries(tab.skillsGrouped).forEach(([category, skills]) => {

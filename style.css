@@ -401,3 +401,25 @@ footer .social a:hover {
   box-shadow: none;
   padding: 0;
 }
+.skills-flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.skills-wrapper {
+  flex: 2;
+  min-width: 600px;
+}
+
+.level-guide-card {
+  flex: 1;
+  min-width: 250px;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
