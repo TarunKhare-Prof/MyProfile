@@ -179,20 +179,18 @@
 			<tbody>${rows}</tbody>
 		  `;
 
-		  const wrapper = document.createElement('div');
-		  wrapper.style.display = 'flex';
-		  wrapper.style.gap = '20px';
-		  wrapper.style.flexWrap = 'wrap';
+		  const skillsWrapper = document.createElement('div');
+		  skillsWrapper.className = 'skills-wrapper';
+		  skillsWrapper.appendChild(table);
+		  sec.appendChild(skillsWrapper);
+		  wrap.appendChild(sec);
 
-		  const tableCol = document.createElement('div');
-		  tableCol.style.flex = '3';
-		  tableCol.appendChild(table);
-
-		  const legendCol = document.createElement('div');
-		  legendCol.style.flex = '1';
-		  legendCol.innerHTML = `
-			<h4 style="margin-top:0">Level Guide</h4>
-			<table class="skills-table" style="width:auto">
+		  // Add Level Guide AFTER the white box
+		  const guideCard = document.createElement('div');
+		  guideCard.className = 'level-guide-card';
+		  guideCard.innerHTML = `
+			<h3>Level Guide</h3>
+			<table class="level-guide">
 			  <thead>
 				<tr><th>Level</th><th>Label</th></tr>
 			  </thead>
@@ -205,11 +203,9 @@
 			  </tbody>
 			</table>
 		  `;
-
-		  wrapper.appendChild(tableCol);
-		  wrapper.appendChild(legendCol);
-		  sec.appendChild(wrapper);
+		  wrap.appendChild(guideCard);
 		}
+
 
 		else if (tab.skillsGrouped) {
 		  Object.entries(tab.skillsGrouped).forEach(([category, skills]) => {
