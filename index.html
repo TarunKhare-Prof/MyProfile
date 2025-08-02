@@ -85,7 +85,8 @@
         nav.appendChild(btn);
 
         const sec = document.createElement('section');
-        sec.className = 'tab-content' + (tab.id === 'skills' ? ' full-width' : '');
+        sec.className = 'tab-content';
+
         sec.id = tab.id;
 
         if (tab.id !== 'skills') {
