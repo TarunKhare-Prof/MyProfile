@@ -91,21 +91,36 @@ nav button:hover {
 }
 
 /* ===== SKILLS ===== */
+/* ===== SKILLS TABLE ENHANCED ===== */
 .skills-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 1rem;
+  border: 1px solid #bbb;
+  font-size: 15px;
 }
 
 .skills-table th,
 .skills-table td {
   border: 1px solid #ccc;
-  padding: 8px 12px;
+  padding: 10px 14px;
   text-align: left;
 }
 
 .skills-table th {
-  background-color: #f0f0f0;
+  background-color: #004080;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.skills-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.skills-table tbody tr:nth-child(odd) {
+  background-color: #ffffff;
 }
 
 
