@@ -180,14 +180,7 @@
             <tbody>${rows}</tbody>
           `;
 
-          const flexContainer = document.createElement('div');
-			flexContainer.className = 'skills-flex-container';
-
-			const skillsWrapper = document.createElement('div');
-			skillsWrapper.className = 'skills-wrapper';
-			skillsWrapper.appendChild(table);
-
-			const guideCard = document.createElement('div');
+          const guideCard = document.createElement('div');
 			guideCard.className = 'level-guide-card';
 			guideCard.innerHTML = `
 			  <h3>Level Guide</h3>
@@ -205,9 +198,18 @@
 			  </table>
 			`;
 
-			flexContainer.appendChild(skillsWrapper);
-			flexContainer.appendChild(guideCard);
-			sec.appendChild(flexContainer);
+			const skillsWrapper = document.createElement('div');
+			skillsWrapper.className = 'skills-wrapper';
+			skillsWrapper.appendChild(table);
+
+			// Wrap both in a single card
+			const combinedCard = document.createElement('div');
+			combinedCard.className = 'skills-combined-card';
+			combinedCard.appendChild(guideCard);
+			combinedCard.appendChild(skillsWrapper);
+
+			sec.appendChild(combinedCard);
+
 
 
         } else if (tab.skillsGrouped) {
