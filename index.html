@@ -83,7 +83,7 @@
 		nav.appendChild(btn);
 
 		const sec = document.createElement('section');
-		sec.className = 'tab-content';
+		sec.className = 'tab-content' + (tab.id === 'skills' ? ' full-width' : '');
 		sec.id = tab.id;
 
 		// remove "Skills" heading
