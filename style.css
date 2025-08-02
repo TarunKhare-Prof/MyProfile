@@ -351,3 +351,47 @@ footer .social a:hover {
   margin-bottom: 5px;
   font-size: 15px;
 }
+/* ===== SKILLS WRAPPER (inside white card) ===== */
+.skills-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* ===== LEVEL GUIDE OUTSIDE WHITE BOX ===== */
+.level-guide-card {
+  max-width: 1000px;
+  margin: -20px auto 40px;
+  padding: 20px 30px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.level-guide-card h3 {
+  margin-top: 0;
+  font-size: 18px;
+  color: #004080;
+  border-bottom: 1px solid #cdd1e1;
+  padding-bottom: 6px;
+}
+
+.level-guide-card .level-guide {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  margin-top: 10px;
+}
+
+.level-guide-card .level-guide th,
+.level-guide-card .level-guide td {
+  border: 1px solid #ccc;
+  padding: 8px 14px;
+  text-align: left;
+}
+
+.level-guide-card .level-guide th {
+  background-color: #004080;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+}
