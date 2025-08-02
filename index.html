@@ -202,6 +202,27 @@
             </table>
           `;
           sec.appendChild(guideCard);
+
+        } else if (tab.skillsGrouped) {
+          Object.entries(tab.skillsGrouped).forEach(([category, skills]) => {
+            const grid = document.createElement('div');
+            grid.className = 'skills-grid';
+            grid.innerHTML = `<h3>${category}</h3>` +
+              skills.map(sk => `<div class="skill">${sk.name}</div>`).join('');
+            sec.appendChild(grid);
+          });
+
+        } else if (tab.skills) {
+          sec.innerHTML += `<div class="skills-bars">
+            ${tab.skills.map(sk => `
+              <div class="skill-bar">
+                <span>${sk.name}</span>
+                <div class="bar"><div class="fill" style="width:${sk.level}%"></div></div>
+              </div>`).join('')}
+          </div>`;
+
+        } else if (tab.content) {
+          sec.innerHTML += tab.content.map(t => `<p>${t}</p>`).join('');
         }
 
         wrap.appendChild(sec);
