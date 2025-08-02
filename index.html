@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tarun Khare – Portfolio</title>
-  <link rel="stylesheet" href="style.css?v=1.0.5" />
+  <link rel="stylesheet" href="style.css?v=1.0.4" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
@@ -18,6 +18,7 @@
         <h1>Tarun Khare</h1>
         <h2>Sr. Software Engineer</h2>
         <h3>At: Alstom Transport (Bangalore)</h3>
+        
       </div>
     </div>
   </header>
@@ -30,34 +31,19 @@
     <div class="lightbox-content"></div>
   </div>
 
-  <footer>
-    <div class="footer-inner">
-      <p>Made with 💻 by Tarun Khare &copy; <span id="year"></span></p>
-      <p>Last Updated: <span id="lastModified"></span></p>
-      <div class="social">
-        <p>Connect On :</p>
-        <a href="https://www.linkedin.com/in/tarun-khare-98ab5085/" aria-label="LinkedIn">
-          <i class="fa-brands fa-linkedin"></i>
-        </a>
-      </div>
-    </div>
-  </footer>
-
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-    document.getElementById('lastModified').textContent = new Date(document.lastModified).toLocaleString();
-
     const fetchJSON = async (p) => (await fetch(p)).json();
 
     function showTab(id) {
-      document.querySelectorAll('.tab-content').forEach(el =>
-        el.classList.toggle('active', el.id === id));
+      document.querySelectorAll('.tab-content')
+              .forEach(el => el.classList.toggle('active', el.id === id));
     }
 
     function openLightbox(html) {
       const lb = document.getElementById('lightbox');
       const content = lb.querySelector('.lightbox-content');
       content.innerHTML = html;
+
       const video = content.querySelector('video');
       if (video) {
         video.setAttribute('autoplay', true);
@@ -65,6 +51,8 @@
         video.setAttribute('playsinline', true);
         video.play().catch(err => console.log("Autoplay blocked:", err));
       }
+
+      void content.offsetHeight;
       lb.style.display = 'flex';
       lb.classList.remove('hidden');
     }
@@ -82,24 +70,6 @@
       lb.classList.add('hidden');
     }
 
-    function showPrev(index) {
-      const items = document.querySelectorAll(`#project-${index} .media-item`);
-      const current = [...items].findIndex(i => i.classList.contains('active'));
-      if (current > 0) {
-        items[current].classList.remove('active');
-        items[current - 1].classList.add('active');
-      }
-    }
-
-    function showNext(index) {
-      const items = document.querySelectorAll(`#project-${index} .media-item`);
-      const current = [...items].findIndex(i => i.classList.contains('active'));
-      if (current < items.length - 1) {
-        items[current].classList.remove('active');
-        items[current + 1].classList.add('active');
-      }
-    }
-
     (async () => {
       const data = await fetchJSON('data/portfolio.json');
       const skillsData = await fetchJSON('data/skills.json');
@@ -108,6 +78,7 @@
 
       for (let i = 0; i < data.tabs.length; i++) {
         const tab = data.tabs[i];
+
         const btn = document.createElement('button');
         btn.innerHTML = `<i class="fa-regular fa-circle"></i> ${tab.label}`;
         btn.onclick = () => showTab(tab.id);
@@ -115,7 +86,9 @@
 
         const sec = document.createElement('section');
         sec.className = 'tab-content';
+
         sec.id = tab.id;
+
         if (tab.id !== 'skills') {
           sec.innerHTML = `<h2>${tab.title}</h2>`;
         }
@@ -124,28 +97,35 @@
           const personalData = await fetchJSON('data/personal_projects.json');
           const grid = document.createElement('div');
           grid.className = 'projects-flex-list';
+
           grid.innerHTML = personalData.map((p, index) => {
             const mediaList = Array.isArray(p.src) ? p.src.map(m => m.url) : [];
             const desc = p.description || {};
             const mediaNav = mediaList.length > 1 ? `
               <button class="media-nav prev" onclick="showPrev(${index})">&#8592;</button>
               <button class="media-nav next" onclick="showNext(${index})">&#8594;</button>` : '';
+
             const mediaContent = mediaList.map((src, i) => {
               const ext = src.split('.').pop().toLowerCase();
               const mimeType =
                 ext === 'mp4' ? 'video/mp4' :
                 ext === 'webm' ? 'video/webm' :
                 ext === 'ogg' ? 'video/ogg' : 'video/mp4';
+
               return (ext === 'mp4' || ext === 'webm' || ext === 'ogg')
                 ? `<video preload="metadata" muted class="media-item ${i === 0 ? 'active' : ''}" onclick="openLightbox(this.outerHTML)">
                      <source src="${src}" type="${mimeType}">
                    </video>`
                 : `<img src="${src}" class="media-item ${i === 0 ? 'active' : ''}" alt="${p.title}" onclick="openLightbox(this.outerHTML)">`;
             }).join('');
+
             return `
               <div class="project-row" id="project-${index}">
                 <div class="media-column">
-                  <div class="media-wrapper">${mediaContent}${mediaNav}</div>
+                  <div class="media-wrapper">
+                    ${mediaContent}
+                    ${mediaNav}
+                  </div>
                 </div>
                 <div class="desc-column">
                   <h3>${p.title}</h3>
@@ -154,17 +134,23 @@
                   <p><strong>Hardware:</strong> ${desc.hardware || ""}</p>
                   <p><strong>Additional Info:</strong> ${desc.additional || ""}</p>
                 </div>
-              </div>`;
+              </div>
+            `;
           }).join('');
+
           sec.appendChild(grid);
+
         } else if (tab.id === 'skills') {
           const table = document.createElement('table');
           table.className = 'skills-table';
+
           const grouped = skillsData.reduce((acc, skill) => {
             (acc[skill.category] = acc[skill.category] || []).push(skill);
             return acc;
           }, {});
+
           const levelOrder = { "Advanced": 5, "Working Level": 4, "Intermediate": 3, "Basic": 2, "Learning": 1 };
+
           let rows = '';
           Object.entries(grouped).forEach(([category, skills]) => {
             rows += `<tr class="category-row"><td colspan="5">${category}</td></tr>`;
@@ -176,72 +162,76 @@
                   <td>${skill.name}</td>
                   <td>${skill.level}</td>
                   <td>${skill.status || ''}</td>
+                  
                 </tr>`;
             });
           });
+
           table.innerHTML = `
             <thead>
-              <tr><th>Category</th><th>Name</th><th>Level</th><th>Status / Last Used</th></tr>
+              <tr>
+                <th>Category</th>
+                <th>Name</th>
+                <th>Level</th>
+                <th>Status / Last Used</th>
+                
+              </tr>
             </thead>
-            <tbody>${rows}</tbody>`;
+            <tbody>${rows}</tbody>
+          `;
+
           const guideCard = document.createElement('div');
-          guideCard.className = 'level-guide-card';
-          guideCard.innerHTML = `
-            <h3>Level Guide</h3>
-            <table class="level-guide">
-              <thead><tr><th>Level</th><th>Label</th></tr></thead>
-              <tbody>
-                <tr><td>5</td><td>Advanced</td></tr>
-                <tr><td>4</td><td>Working Level</td></tr>
-                <tr><td>3</td><td>Intermediate</td></tr>
-                <tr><td>2</td><td>Basic</td></tr>
-                <tr><td>1</td><td>Learning</td></tr>
-              </tbody>
-            </table>`;
-          const skillsWrapper = document.createElement('div');
-          skillsWrapper.className = 'skills-wrapper';
-          skillsWrapper.appendChild(table);
-          const combinedCard = document.createElement('div');
-          combinedCard.className = 'skills-combined-card';
-          combinedCard.appendChild(guideCard);
-          combinedCard.appendChild(skillsWrapper);
-          sec.appendChild(combinedCard);
-        } else if (tab.id === 'projects') {
-          const projectCards = document.createElement("div");
-          projectCards.className = "tile-group";
-          tab.content.forEach(item => {
-            const match = item.match(/<strong>(.*?)<\/strong>\s*[-–—]?\s*(.*)/);
-            if (match) {
-              const title = match[1].trim();
-              const desc = match[2].trim();
-              const card = document.createElement("div");
-              card.className = "tile-card";
-              card.innerHTML = `<h3>${title}</h3><p>${desc}</p>`;
-              projectCards.appendChild(card);
-            }
+			guideCard.className = 'level-guide-card';
+			guideCard.innerHTML = `
+			  <h3>Level Guide</h3>
+			  <table class="level-guide">
+				<thead>
+				  <tr><th>Level</th><th>Label</th></tr>
+				</thead>
+				<tbody>
+				  <tr><td>5</td><td>Advanced</td></tr>
+				  <tr><td>4</td><td>Working Level</td></tr>
+				  <tr><td>3</td><td>Intermediate</td></tr>
+				  <tr><td>2</td><td>Basic</td></tr>
+				  <tr><td>1</td><td>Learning</td></tr>
+				</tbody>
+			  </table>
+			`;
+
+			const skillsWrapper = document.createElement('div');
+			skillsWrapper.className = 'skills-wrapper';
+			skillsWrapper.appendChild(table);
+
+			// Wrap both in a single card
+			const combinedCard = document.createElement('div');
+			combinedCard.className = 'skills-combined-card';
+			combinedCard.appendChild(guideCard);
+			combinedCard.appendChild(skillsWrapper);
+
+			sec.appendChild(combinedCard);
+
+
+
+        } else if (tab.skillsGrouped) {
+          Object.entries(tab.skillsGrouped).forEach(([category, skills]) => {
+            const grid = document.createElement('div');
+            grid.className = 'skills-grid';
+            grid.innerHTML = `<h3>${category}</h3>` +
+              skills.map(sk => `<div class="skill">${sk.name}</div>`).join('');
+            sec.appendChild(grid);
           });
-          sec.appendChild(projectCards);
+
+        } else if (tab.skills) {
+          sec.innerHTML += `<div class="skills-bars">
+            ${tab.skills.map(sk => `
+              <div class="skill-bar">
+                <span>${sk.name}</span>
+                <div class="bar"><div class="fill" style="width:${sk.level}%"></div></div>
+              </div>`).join('')}
+          </div>`;
+
         } else if (tab.content) {
-          const workItems = tab.content.join('\n').split('<strong>').slice(1).map(item => {
-            const [header, ...rest] = item.split('</strong>');
-            const bulletList = rest.join('</strong>').split('\n').filter(line => line.trim().startsWith('•'));
-            return {
-              title: header.trim(),
-              bullets: bulletList.map(b => b.replace('•', '').trim())
-            };
-          });
-
-          const tileWrap = document.createElement('div');
-          tileWrap.className = 'tile-group';
-
-          tileWrap.innerHTML = workItems.map(w => `
-            <div class="tile-card">
-              <h3>${w.title}</h3>
-              <ul>${w.bullets.map(b => `<li>${b}</li>`).join('')}</ul>
-            </div>
-          `).join('');
-
-          sec.appendChild(tileWrap);
+          sec.innerHTML += tab.content.map(t => `<p>${t}</p>`).join('');
         }
 
         wrap.appendChild(sec);
@@ -260,6 +250,42 @@
         }
       });
     })();
+
+    function showPrev(index) {
+      const items = document.querySelectorAll(`#project-${index} .media-item`);
+      const current = [...items].findIndex(i => i.classList.contains('active'));
+      if (current > 0) {
+        items[current].classList.remove('active');
+        items[current - 1].classList.add('active');
+      }
+    }
+
+    function showNext(index) {
+      const items = document.querySelectorAll(`#project-${index} .media-item`);
+      const current = [...items].findIndex(i => i.classList.contains('active'));
+      if (current < items.length - 1) {
+        items[current].classList.remove('active');
+        items[current + 1].classList.add('active');
+      }
+    }
+  </script>
+
+  <footer>
+    <div class="footer-inner">
+      <p>Made with 💻 by Tarun Khare &copy; <span id="year"></span></p>
+      <p>Last Updated: <span id="lastModified"></span></p>
+      <div class="social">
+        <p>Connect On :</p>
+        <a href="https://www.linkedin.com/in/tarun-khare-98ab5085/" aria-label="LinkedIn">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('lastModified').textContent = new Date(document.lastModified).toLocaleString();
   </script>
 </body>
 </html>
