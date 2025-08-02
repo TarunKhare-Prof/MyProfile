@@ -95,14 +95,16 @@
 	  "label": "Education",
 	  "title": "Education",
 	  "content": [
-		"<div class='info-card'>",
-		"<h2>Education</h2>",
-		"<p><strong>Diploma:</strong> PG-Diploma, Embedded System and Design, CDAC-Knowledge Park Bangalore</p>",
-		"<p><strong>Graduation:</strong> Bachelor of Engineering, Electrical & Electronics, LNCT Indore</p>",
-		"<p><strong>Senior Secondary:</strong> PCM + Computer Science, St. Michael’s, Satna</p>",
-		"<p><strong>Higher Secondary:</strong> St. Michael’s, Satna</p>",
-		"</div>"
-	  ]
+	  "<div class='info-card enhanced-education'>",
+	  "<ul class='edu-list'>",
+	  "  <li><i class='fa-solid fa-graduation-cap'></i> <strong>PG-Diploma:</strong> Embedded System and Design, CDAC-Knowledge Park Bangalore</li>",
+	  "  <li><i class='fa-solid fa-user-graduate'></i> <strong>Graduation:</strong> Bachelor of Engineering, Electrical & Electronics, LNCT Indore</li>",
+	  "  <li><i class='fa-solid fa-school'></i> <strong>Senior Secondary:</strong> PCM + Computer Science, St. Michael’s, Satna</li>",
+	  "  <li><i class='fa-solid fa-school-flag'></i> <strong>Higher Secondary:</strong> St. Michael’s, Satna</li>",
+	  "</ul>",
+	  "</div>"
+	]
+
 	}
 ,
    
@@ -111,17 +113,19 @@
 	  "label": "Contact",
 	  "title": "Contact",
 	  "content": [
-		"<div class='info-card'>",
-		"<h2>Contact</h2>",
-		"<p><strong>Location:</strong> Bengaluru, India 560102</p>",
-		"<p><strong>Primary Phone:</strong> +91-8770057790</p>",
-		"<p><strong>Alternate Phone:</strong> +91-7338071923</p>",
-		"<p><strong>Primary Email:</strong> <a href='mailto:tarun@tarunkhare.in'>tarun@tarunkhare.in</a></p>",
-		"<p><strong>Alternate Email:</strong> <a href='mailto:tarun.vbc.gg@gmail.com'>tarun.vbc.gg@gmail.com</a></p>",
-		"<p><strong>LinkedIn:</strong> <a href='https://www.linkedin.com/in/tarun-khare-98ab5085/' target='_blank'>linkedin.com/in/tarun-khare-98ab5085</a></p>",
-		"<p><strong>Portfolio:</strong> <a href='https://tarunkhare.in' target='_blank'>https://tarunkhare.in</a></p>",
-		"</div>"
-	  ]
+		  "<div class='info-card enhanced-contact'>",
+		  "<ul class='contact-list'>",
+		  "  <li><i class='fa-solid fa-location-dot'></i> <strong>Location:</strong> Bengaluru, India 560102</li>",
+		  "  <li><i class='fa-solid fa-phone'></i> <strong>Primary Phone:</strong> +91-8770057790</li>",
+		  "  <li><i class='fa-solid fa-phone-volume'></i> <strong>Alternate Phone:</strong> +91-7338071923</li>",
+		  "  <li><i class='fa-solid fa-envelope'></i> <strong>Primary Email:</strong> <a href='mailto:tarun@tarunkhare.in'>tarun@tarunkhare.in</a></li>",
+		  "  <li><i class='fa-solid fa-envelope-open-text'></i> <strong>Alternate Email:</strong> <a href='mailto:tarun.vbc.gg@gmail.com'>tarun.vbc.gg@gmail.com</a></li>",
+		  "  <li><i class='fa-brands fa-linkedin'></i> <strong>LinkedIn:</strong> <a href='https://www.linkedin.com/in/tarun-khare-98ab5085/' target='_blank'>linkedin.com/in/tarun-khare-98ab5085</a></li>",
+		  "  <li><i class='fa-solid fa-globe'></i> <strong>Portfolio:</strong> <a href='https://tarunkhare.in' target='_blank'>https://tarunkhare.in</a></li>",
+		  "</ul>",
+		  "</div>"
+		]
+
 	}
 
   ]

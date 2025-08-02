@@ -435,3 +435,26 @@ footer .social a:hover {
 .info-card a:hover {
   text-decoration: underline;
 }
+.enhanced-education .edu-list,
+.enhanced-contact .contact-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.edu-list li,
+.contact-list li {
+  margin-bottom: 12px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.edu-list li i,
+.contact-list li i {
+  color: #0074cc;
+  min-width: 20px;
+  margin-top: 2px;
+}
