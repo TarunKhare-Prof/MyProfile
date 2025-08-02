@@ -8,6 +8,34 @@
   },
   {
     "category": "Languages",
+    "name": "C",
+    "level": "Intermediate",
+    "status": "Using",
+    "remarks": ""
+  },
+  {
+    "category": "Languages",
+    "name": "C++",
+    "level": "Intermediate",
+    "status": "Using",
+    "remarks": ""
+  },
+  {
+    "category": "Languages",
+    "name": "Java",
+    "level": "Basic",
+    "status": "Using",
+    "remarks": ""
+  },
+  {
+    "category": "Languages",
+    "name": "PERL",
+    "level": "Basic",
+    "status": "Using",
+    "remarks": ""
+  },
+  {
+    "category": "Languages",
     "name": "C#",
     "level": "Working Level",
     "status": "Using",
