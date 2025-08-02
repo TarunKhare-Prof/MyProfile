@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Professional Projects</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 20px;
+      background: #f9f9f9;
+      color: #333;
+    }
+    h2 {
+      color: #2c3e50;
+      font-size: 28px;
+      margin-bottom: 16px;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 4px;
+    }
+    .project-card {
+      background: white;
+      margin-bottom: 20px;
+      padding: 20px;
+      border-left: 5px solid #2980b9;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+    .project-card strong {
+      display: block;
+      font-size: 18px;
+      color: #2c3e50;
+      margin-bottom: 8px;
+    }
+    .project-card p {
+      margin: 5px 0;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <h2>Professional Projects</h2>
+  <div id="projects"></div>
+
+  <script>
+    fetch('data/portfolio.json')
+      .then(res => res.json())
+      .then(data => {
+        const tab = data.tabs.find(t => t.id === "projects");
+        const container = document.getElementById('projects');
+
+        tab.content.forEach(entry => {
+          const card = document.createElement('div');
+          card.className = 'project-card';
+
+          if (entry.includes('<strong>')) {
+            const splitIndex = entry.indexOf('</strong>') + 9;
+            const title = entry.slice(0, splitIndex);
+            const description = entry.slice(splitIndex);
+            card.innerHTML = `${title}<p>${description.trim()}</p>`;
+          } else {
+            card.innerHTML = `<p>${entry}</p>`;
+          }
+
+          container.appendChild(card);
+        });
+      });
+  </script>
+</body>
+</html>
