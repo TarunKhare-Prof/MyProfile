@@ -92,7 +92,7 @@
 ,
     {
 	  "id": "education",
-	  "label": "",
+	  "label": "Education",
 	  "title": "Education",
 	  "content": [
 	  "<div class='info-card enhanced-education'>",
@@ -110,7 +110,7 @@
    
     {
 	  "id": "contact",
-	  "label": "",
+	  "label": "Contact",
 	  "title": "Contact",
 	  "content": [
 		  "<div class='info-card enhanced-contact'>",
