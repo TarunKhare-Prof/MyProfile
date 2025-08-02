@@ -210,7 +210,27 @@
           combinedCard.appendChild(skillsWrapper);
           sec.appendChild(combinedCard);
         } else if (tab.content) {
-          sec.innerHTML += tab.content.map(t => `<p>${t}</p>`).join('');
+          const workItems = tab.content.join('\n').split('<strong>').slice(1).map(item => {
+		  const [header, ...rest] = item.split('</strong>');
+		  const bulletList = rest.join('</strong>').split('\n').filter(line => line.trim().startsWith('•'));
+		  return {
+			title: header.trim(),
+			bullets: bulletList.map(b => b.replace('•', '').trim())
+		  };
+		});
+
+		const tileWrap = document.createElement('div');
+		tileWrap.className = 'tile-group';
+
+		tileWrap.innerHTML = workItems.map(w => `
+		  <div class="tile-card">
+			<h3>${w.title}</h3>
+			<ul>${w.bullets.map(b => `<li>${b}</li>`).join('')}</ul>
+		  </div>
+		`).join('');
+
+		sec.appendChild(tileWrap);
+
         }
         wrap.appendChild(sec);
         if (i === 0) sec.classList.add('active');
