@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tarun Khare – Portfolio</title>
-  <link rel="stylesheet" href="style.css?v=1.0.4" />
+  <link rel="stylesheet" href="style.css?v=1.0.5" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
@@ -46,9 +46,7 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
     document.getElementById('lastModified').textContent = new Date(document.lastModified).toLocaleString();
-  </script>
 
-  <script>
     const fetchJSON = async (p) => (await fetch(p)).json();
 
     function showTab(id) {
@@ -67,7 +65,6 @@
         video.setAttribute('playsinline', true);
         video.play().catch(err => console.log("Autoplay blocked:", err));
       }
-      void content.offsetHeight;
       lb.style.display = 'flex';
       lb.classList.remove('hidden');
     }
@@ -209,29 +206,44 @@
           combinedCard.appendChild(guideCard);
           combinedCard.appendChild(skillsWrapper);
           sec.appendChild(combinedCard);
+        } else if (tab.id === 'projects') {
+          const projectCards = document.createElement("div");
+          projectCards.className = "tile-group";
+          tab.content.forEach(item => {
+            const match = item.match(/<strong>(.*?)<\/strong>\s*[-–—]?\s*(.*)/);
+            if (match) {
+              const title = match[1].trim();
+              const desc = match[2].trim();
+              const card = document.createElement("div");
+              card.className = "tile-card";
+              card.innerHTML = `<h3>${title}</h3><p>${desc}</p>`;
+              projectCards.appendChild(card);
+            }
+          });
+          sec.appendChild(projectCards);
         } else if (tab.content) {
           const workItems = tab.content.join('\n').split('<strong>').slice(1).map(item => {
-		  const [header, ...rest] = item.split('</strong>');
-		  const bulletList = rest.join('</strong>').split('\n').filter(line => line.trim().startsWith('•'));
-		  return {
-			title: header.trim(),
-			bullets: bulletList.map(b => b.replace('•', '').trim())
-		  };
-		});
+            const [header, ...rest] = item.split('</strong>');
+            const bulletList = rest.join('</strong>').split('\n').filter(line => line.trim().startsWith('•'));
+            return {
+              title: header.trim(),
+              bullets: bulletList.map(b => b.replace('•', '').trim())
+            };
+          });
 
-		const tileWrap = document.createElement('div');
-		tileWrap.className = 'tile-group';
+          const tileWrap = document.createElement('div');
+          tileWrap.className = 'tile-group';
 
-		tileWrap.innerHTML = workItems.map(w => `
-		  <div class="tile-card">
-			<h3>${w.title}</h3>
-			<ul>${w.bullets.map(b => `<li>${b}</li>`).join('')}</ul>
-		  </div>
-		`).join('');
+          tileWrap.innerHTML = workItems.map(w => `
+            <div class="tile-card">
+              <h3>${w.title}</h3>
+              <ul>${w.bullets.map(b => `<li>${b}</li>`).join('')}</ul>
+            </div>
+          `).join('');
 
-		sec.appendChild(tileWrap);
-
+          sec.appendChild(tileWrap);
         }
+
         wrap.appendChild(sec);
         if (i === 0) sec.classList.add('active');
       }
