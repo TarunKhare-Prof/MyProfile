@@ -311,3 +311,43 @@ footer .social a {
 footer .social a:hover {
   color: #0074cc;
 }
+/* ===== LEVEL GUIDE TABLE ===== */
+.level-guide-wrapper {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.level-guide {
+  border: 1px solid #bbb;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin-top: 10px;
+  min-width: 240px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.level-guide th,
+.level-guide td {
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.level-guide th {
+  background-color: #004080;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.level-guide caption {
+  caption-side: top;
+  text-align: left;
+  font-weight: bold;
+  color: #004080;
+  margin-bottom: 5px;
+  font-size: 15px;
+}
