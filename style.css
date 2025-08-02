@@ -399,3 +399,39 @@ footer .social a:hover {
   max-width: 1000px;
   margin: 40px auto;
 }
+/* ===== SECTION STYLING FOR EDUCATION AND CONTACT ===== */
+.info-card {
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  padding: 30px;
+  max-width: 1000px;
+  margin: 40px auto;
+}
+
+.info-card h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #003366;
+  border-bottom: 2px solid #0074cc;
+  padding-bottom: 8px;
+}
+
+.info-card p {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.info-card strong {
+  color: #004080;
+}
+
+.info-card a {
+  color: #0074cc;
+  text-decoration: none;
+}
+
+.info-card a:hover {
+  text-decoration: underline;
+}

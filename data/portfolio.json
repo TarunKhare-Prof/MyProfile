@@ -95,27 +95,34 @@
 	  "label": "Education",
 	  "title": "Education",
 	  "content": [
-		"<strong>Diploma:</strong> PG-Diploma, Embedded System and Design, CDAC-Knowledge Park Bangalore",
-		"<strong>Graduation:</strong> Bachelor of Engineering, Electrical & Electronics, LNCT Indore",
-		"<strong>Senior Secondary:</strong> - PCM + Computer Science, St. Michael’s, Satna",
-		"<strong>Higher Secondary:</strong> - St. Michael’s, Satna"
+		"<div class='info-card'>",
+		"<h2>Education</h2>",
+		"<p><strong>Diploma:</strong> PG-Diploma, Embedded System and Design, CDAC-Knowledge Park Bangalore</p>",
+		"<p><strong>Graduation:</strong> Bachelor of Engineering, Electrical & Electronics, LNCT Indore</p>",
+		"<p><strong>Senior Secondary:</strong> PCM + Computer Science, St. Michael’s, Satna</p>",
+		"<p><strong>Higher Secondary:</strong> St. Michael’s, Satna</p>",
+		"</div>"
 	  ]
-	},
+	}
+,
    
     {
-      "id": "contact",
-      "label": "Contact",
-      "title": "Contact",
-      "content": [
-        "<strong>Location:</strong> Bengaluru, India 560102",
-        "<strong>Primary Phone:</strong> +91-8770057790",
-        "<strong>Alternate Phone:</strong> +91-7338071923",
-        "<strong>Primary Email:</strong> tarun@tarunkhare.in",
-        "<strong>Alternate Email:</strong> tarun.vbc.gg@gmail.com",
-        "<strong>LinkedIn:</strong> https://www.linkedin.com/in/tarun-khare-98ab5085/",
-        "<strong>Portfolio:</strong> https://tarunkhare.in"
-		
-      ]
-    }
+	  "id": "contact",
+	  "label": "Contact",
+	  "title": "Contact",
+	  "content": [
+		"<div class='info-card'>",
+		"<h2>Contact</h2>",
+		"<p><strong>Location:</strong> Bengaluru, India 560102</p>",
+		"<p><strong>Primary Phone:</strong> +91-8770057790</p>",
+		"<p><strong>Alternate Phone:</strong> +91-7338071923</p>",
+		"<p><strong>Primary Email:</strong> <a href='mailto:tarun@tarunkhare.in'>tarun@tarunkhare.in</a></p>",
+		"<p><strong>Alternate Email:</strong> <a href='mailto:tarun.vbc.gg@gmail.com'>tarun.vbc.gg@gmail.com</a></p>",
+		"<p><strong>LinkedIn:</strong> <a href='https://www.linkedin.com/in/tarun-khare-98ab5085/' target='_blank'>linkedin.com/in/tarun-khare-98ab5085</a></p>",
+		"<p><strong>Portfolio:</strong> <a href='https://tarunkhare.in' target='_blank'>https://tarunkhare.in</a></p>",
+		"</div>"
+	  ]
+	}
+
   ]
 }
