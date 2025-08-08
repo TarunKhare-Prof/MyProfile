@@ -316,6 +316,76 @@
   },
   {
     "category": "Testing & Simulation",
+    "name": "White Box & Black Box",
+    "level": "Advanced",
+    "status": "Using",
+    "remarks": ""
+  },
+  {
+    "category": "Testing & Simulation",
+    "name": "V-Model",
+    "level": "Working Level",
+    "status": "Using",
+    "remarks": ""
+  },
+  {
+    "category": "Testing & Simulation",
+    "name": "AGILE",
+    "level": "Working Level",
+    "status": "Using",
+    "remarks": ""
+  },
+  {
+    "category": "Testing & Simulation",
+    "name": "RTRT",
+    "level": "Intermediate",
+    "status": "1Y-Ago",
+    "remarks": ""
+  },
+  {
+    "category": "Testing & Simulation",
+    "name": "Debugging",
+    "level": "Advanced",
+    "status": "Using",
+    "remarks": ""
+  },
+  {
+    "category": "Testing & Simulation",
+    "name": "Traceability matrices",
+    "level": "Advanced",
+    "status": "Using",
+    "remarks": ""
+  },
+  {
+    "category": "Testing & Simulation",
+    "name": "QA documentation",
+    "level": "Advanced",
+    "status": "Using",
+    "remarks": ""
+  },
+  {
+    "category": "Testing & Simulation",
+    "name": "Test Report Prepration",
+    "level": "Advanced",
+    "status": "Using",
+    "remarks": ""
+  },
+  {
+    "category": "Testing & Simulation",
+    "name": "SIL0/SIL2 Requirements",
+    "level": "Advanced",
+    "status": "Using",
+    "remarks": ""
+  },
+  {
+    "category": "Testing & Simulation",
+    "name": "SIL0/SIL2 Requirements",
+    "level": "Advanced",
+    "status": "Using",
+    "remarks": ""
+  },
+  {
+    "category": "Testing & Simulation",
     "name": "Debugging / RCA",
     "level": "Advanced",
     "status": "Using",
