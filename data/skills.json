@@ -342,13 +342,7 @@
     "status": "1Y-Ago",
     "remarks": ""
   },
-  {
-    "category": "Testing & Simulation",
-    "name": "Debugging",
-    "level": "Advanced",
-    "status": "Using",
-    "remarks": ""
-  },
+
   {
     "category": "Testing & Simulation",
     "name": "Traceability matrices",
@@ -370,13 +364,7 @@
     "status": "Using",
     "remarks": ""
   },
-  {
-    "category": "Testing & Simulation",
-    "name": "SIL0/SIL2 Requirements",
-    "level": "Advanced",
-    "status": "Using",
-    "remarks": ""
-  },
+  
   {
     "category": "Testing & Simulation",
     "name": "SIL0/SIL2 Requirements",
@@ -400,7 +388,7 @@
   },
   {
     "category": "Testing & Simulation",
-    "name": "HMI Testing",
+    "name": "HMI Testing (Codesys)",
     "level": "Working Level",
     "status": "2Y-AGO",
     "remarks": ""
