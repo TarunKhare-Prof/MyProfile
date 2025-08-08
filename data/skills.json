@@ -381,11 +381,19 @@
   },
   {
     "category": "Testing & Simulation",
+    "name": "Regression & Non-Regression Testing",
+    "level": "Advanced",
+    "status": "Using",
+    "remarks": ""
+  },
+  {
+    "category": "Testing & Simulation",
     "name": "Manual Testing",
     "level": "Advanced",
     "status": "Using",
     "remarks": ""
   },
+  
   {
     "category": "Testing & Simulation",
     "name": "HMI Testing (Codesys)",
@@ -405,6 +413,34 @@
     "name": "VS Code",
     "level": "Working Level",
     "status": "2M-AGO",
+    "remarks": ""
+  },
+  {
+    "category": "IDE & Platforms",
+    "name": "Clear Case",
+    "level": "Working Level",
+    "status": "Using",
+    "remarks": ""
+  },
+  {
+    "category": "IDE & Platforms",
+    "name": "Clear Quest",
+    "level": "Working Level",
+    "status": "Using",
+    "remarks": ""
+  },
+  {
+    "category": "IDE & Platforms",
+    "name": "DOORS",
+    "level": "Working Level",
+    "status": "2Y-AGO",
+    "remarks": ""
+  },
+  {
+    "category": "IDE & Platforms",
+    "name": "PTC Windchill Modeller",
+    "level": "Working Level",
+    "status": "Using",
     "remarks": ""
   },
   {
