@@ -9,24 +9,22 @@
 
   <!-- ADD: tiny style for the fixed button -->
   <style>
-    .download-btn {
-      position: fixed;
-      top: 14px;
-      right: 14px;
-      z-index: 2000;
-      background: #2563eb;
-      color: #fff;
-      border: none;
-      padding: 10px 14px;
-      border-radius: 8px;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,.2);
-      font-weight: 600;
-    }
-    .download-btn:hover{ background:#1e40af; }
-    /* Hidden resume container for PDF composition (not visible on the page) */
-    #resumeRoot { position: fixed; left: -99999px; top: 0; width: 794px; background: #fff; color:#111; }
-  </style>
+  .download-btn {
+    position: fixed; top: 14px; right: 14px; z-index: 2000;
+    background: #2563eb; color: #fff; border: none; padding: 10px 14px;
+    border-radius: 8px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.2);
+    font-weight: 600;
+	  }
+	  .download-btn:hover{ background:#1e40af; }
+
+	  /* Was: position:fixed; left:-99999px (can yield blank) */
+	  #resumeRoot{
+		position: absolute; left: 0; top: -9999px;
+		width: 794px; background: #fff; color:#111;
+		visibility: hidden; /* participates in layout */
+	  }
+	</style>
+
 </head>
 <body>
 

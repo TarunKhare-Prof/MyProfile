@@ -1,26 +1,23 @@
-// js/resume-export.js  (Hosted mode: fetch JSON and export PDF)
+// js/resume-export.js  (patched)
 (function () {
-  // Build URLs relative to the current page (works on GitHub Pages / repo subpaths)
-  const base = new URL('.', location.href);
-  const URLS = {
-    portfolio: new URL('data/portfolio.json', base).href,
-    skills: new URL('data/skills.json', base).href,
-    personal: new URL('data/personal_projects.json', base).href, // optional
-  };
+  const A4_WIDTH = 794; // px @ ~96dpi
+  const A4_HEIGHT_PT = 842; // pt (jsPDF A4 height)
+  const A4_WIDTH_PT  = 595; // pt (jsPDF A4 width)
 
-  async function loadJSON(url) {
-    const r = await fetch(url, { cache: 'no-store' });
-    if (!r.ok) throw new Error(`HTTP ${r.status} for ${url}`);
+  async function loadJSON(path) {
+    const r = await fetch(path, { cache: 'no-store' });
+    if (!r.ok) throw new Error(`HTTP ${r.status} for ${path}`);
     return r.json();
   }
 
   async function getAllData() {
+    const base = new URL('.', location.href);
     const [portfolio, skills] = await Promise.all([
-      loadJSON(URLS.portfolio),
-      loadJSON(URLS.skills),
+      loadJSON(new URL('data/portfolio.json', base).href),
+      loadJSON(new URL('data/skills.json', base).href),
     ]);
     let personal = [];
-    try { personal = await loadJSON(URLS.personal); } catch (_) {}
+    try { personal = await loadJSON(new URL('data/personal_projects.json', base).href); } catch {}
     return { portfolio, skills, personal };
   }
 
@@ -30,17 +27,16 @@
 
     const wrap = document.createElement('div');
     wrap.style.cssText = [
+      `width:${A4_WIDTH}px`,
       'padding:32px 40px',
       'font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif',
       'line-height:1.4',
       'color:#111',
-      'background:#fff',
-      'width:794px' // A4 width at 96dpi
+      'background:#fff'
     ].join(';');
 
     const profileImg = portfolio.profileImage || 'images/profile.jpg';
 
-    // Header
     const header = document.createElement('div');
     header.style.cssText = 'display:flex;gap:16px;align-items:center;border-bottom:2px solid #e5e7eb;padding-bottom:12px;margin-bottom:10px';
     header.innerHTML = `
@@ -60,7 +56,6 @@
       return d;
     };
 
-    // Summary
     const summary = (portfolio.tabs?.find(t => t.id === 'summary') || {}).content || [];
     if (summary.length) {
       const s = makeSec('Profile Summary');
@@ -76,7 +71,6 @@
       wrap.appendChild(s);
     }
 
-    // Experience
     const exp = (portfolio.tabs?.find(t => t.id === 'experience') || {}).content || [];
     if (exp.length) {
       const e = makeSec('Work Experience');
@@ -84,7 +78,6 @@
       wrap.appendChild(e);
     }
 
-    // Projects (with language/IDE tags)
     const projTab = portfolio.tabs?.find(t => t.id === 'projects');
     if (projTab && Array.isArray(projTab.content)) {
       const pr = makeSec('Professional Projects');
@@ -112,7 +105,6 @@
       wrap.appendChild(pr);
     }
 
-    // Personal projects (compact)
     if (Array.isArray(personal) && personal.length) {
       const pp = makeSec('Personal Projects (Selected)');
       personal.slice(0, 6).forEach(p => {
@@ -126,7 +118,6 @@
       wrap.appendChild(pp);
     }
 
-    // Skills
     if (Array.isArray(skills)) {
       const sk = makeSec('Skills');
       const byCat = skills.reduce((a, s) => { (a[s.category] = a[s.category] || []).push(s); return a; }, {});
@@ -150,7 +141,6 @@
       wrap.appendChild(sk);
     }
 
-    // Education
     const edu = (portfolio.tabs?.find(t => t.id === 'education') || {}).content || [];
     if (edu.length) {
       const ed = makeSec('Education');
@@ -158,7 +148,6 @@
       wrap.appendChild(ed);
     }
 
-    // Contact
     const contact = (portfolio.tabs?.find(t => t.id === 'contact') || {}).content || [];
     if (contact.length) {
       const ct = makeSec('Contact');
@@ -170,19 +159,64 @@
     return root;
   }
 
-  async function exportPDF(rootEl) {
-    if (!window.jspdf || !window.jspdf.jsPDF) {
-      alert('PDF library failed to load. Check your internet/CDN.');
-      return;
+  // ---- export helpers ----
+  async function ensureFontsReady() {
+    if (document.fonts && document.fonts.ready) {
+      try { await document.fonts.ready; } catch {}
     }
+    await new Promise(r => setTimeout(r, 30)); // tiny layout settle
+  }
+
+  async function exportPDF_htmlAPI(rootEl) {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF('p', 'pt', 'a4');
+    await ensureFontsReady();
+    // force layout (avoid blank)
+    // eslint-disable-next-line no-unused-expressions
+    rootEl.offsetHeight;
+
     await doc.html(rootEl, {
       callback: (d) => d.save('Tarun_Khare_Resume.pdf'),
       margin: [36, 36, 40, 36],
       autoPaging: 'text',
-      html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' }
+      html2canvas: {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: '#ffffff',
+        // helpful when the element is not on-screen
+        windowWidth: A4_WIDTH
+      }
     });
+  }
+
+  async function exportPDF_fallbackCanvas(rootEl) {
+    const { jsPDF } = window.jspdf;
+    await ensureFontsReady();
+    const canvas = await html2canvas(rootEl, {
+      scale: 2, useCORS: true, backgroundColor: '#ffffff', windowWidth: A4_WIDTH
+    });
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new jsPDF('p', 'pt', 'a4');
+
+    // fit image width to page; compute height to keep aspect ratio
+    const pageW = A4_WIDTH_PT;
+    const pageH = A4_HEIGHT_PT;
+    const imgW = pageW;
+    const imgH = (canvas.height * imgW) / canvas.width;
+
+    let y = 0;
+    let remaining = imgH;
+
+    while (remaining > 0) {
+      pdf.addImage(imgData, 'PNG', 0, y ? 0 : 0, imgW, Math.min(remaining, pageH));
+      remaining -= pageH;
+      if (remaining > 0) {
+        pdf.addPage();
+        y = 0;
+      }
+    }
+
+    pdf.save('Tarun_Khare_Resume.pdf');
   }
 
   window.addEventListener('DOMContentLoaded', () => {
@@ -196,8 +230,17 @@
           alert('portfolio.json is missing or malformed.');
           return;
         }
+
         const rootEl = buildResumeDOM(portfolio, skills || [], personal || []);
-        await exportPDF(rootEl);
+        // make sure the element is in DOM flow (we set visibility hidden via CSS)
+        rootEl.style.visibility = 'hidden';
+
+        try {
+          await exportPDF_htmlAPI(rootEl);
+        } catch (e) {
+          console.warn('doc.html() failed, using fallback canvas path:', e);
+          await exportPDF_fallbackCanvas(rootEl);
+        }
       } catch (e) {
         console.error(e);
         alert('Could not generate the resume. See console for details.');
