@@ -167,27 +167,31 @@
     await new Promise(r => setTimeout(r, 30)); // tiny layout settle
   }
 
-  async function exportPDF_htmlAPI(rootEl) {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF('p', 'pt', 'a4');
-    await ensureFontsReady();
-    // force layout (avoid blank)
-    // eslint-disable-next-line no-unused-expressions
-    rootEl.offsetHeight;
+  async function exportPDF(rootEl) {
+	  // wait for fonts/layout to settle
+	  if (document.fonts && document.fonts.ready) {
+		try { await document.fonts.ready; } catch {}
+	  }
+	  await new Promise(r => requestAnimationFrame(r)); // 1 frame
 
-    await doc.html(rootEl, {
-      callback: (d) => d.save('Tarun_Khare_Resume.pdf'),
-      margin: [36, 36, 40, 36],
-      autoPaging: 'text',
-      html2canvas: {
-        scale: 2,
-        useCORS: true,
-        backgroundColor: '#ffffff',
-        // helpful when the element is not on-screen
-        windowWidth: A4_WIDTH
-      }
-    });
-  }
+	  const opt = {
+		margin:       [0.5, 0.5, 0.6, 0.5], // inches: top, left, bottom, right
+		filename:     'Tarun_Khare_Resume.pdf',
+		image:        { type: 'jpeg', quality: 0.98 },
+		html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
+		jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+	  };
+
+	  // Make sure it participates in layout (opacity:0 already, so it won't flash)
+	  rootEl.style.opacity = '0';
+	  rootEl.style.position = 'fixed';
+	  rootEl.style.left = '0';
+	  rootEl.style.top = '0';
+	  rootEl.style.width = '794px';
+
+	  await html2pdf().set(opt).from(rootEl).save();
+	}
+
 
   async function exportPDF_fallbackCanvas(rootEl) {
     const { jsPDF } = window.jspdf;

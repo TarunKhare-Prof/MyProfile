@@ -18,11 +18,18 @@
 	  .download-btn:hover{ background:#1e40af; }
 
 	  /* Was: position:fixed; left:-99999px (can yield blank) */
-	  #resumeRoot{
-		position: absolute; left: 0; top: -9999px;
-		width: 794px; background: #fff; color:#111;
-		visibility: hidden; /* participates in layout */
-	  }
+	  /* Keep it in normal layout so size can be measured, but invisible */
+	#resumeRoot{
+	  position: fixed;
+	  left: 0;
+	  top: 0;
+	  width: 794px;           /* A4 at ~96dpi */
+	  background: #fff;
+	  color: #111;
+	  opacity: 0;             /* invisible but rendered */
+	  pointer-events: none;   /* can’t click it */
+	}
+
 	</style>
 
 </head>
@@ -366,8 +373,10 @@
 
   <!-- ADD: Hidden resume root and the 3 scripts (libs + your separate exporter) -->
   <div id="resumeRoot"></div>
-  <script defer src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-  <script defer src="js/resume-export.js"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+	<script defer src="js/resume-export.js"></script>
+
 </body>
 </html>
