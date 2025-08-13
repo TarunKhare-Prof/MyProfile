@@ -224,31 +224,32 @@
   }
 
   window.addEventListener('DOMContentLoaded', () => {
-    const btn = document.getElementById('downloadResume');
-    if (!btn) return;
+	  const btn = document.getElementById('downloadResume');
+	  if (!btn) return;
 
-    btn.addEventListener('click', async () => {
-      try {
-        const { portfolio, skills, personal } = await getAllData();
-        if (!portfolio?.tabs?.length) {
-          alert('portfolio.json is missing or malformed.');
-          return;
-        }
+	  btn.addEventListener('click', async () => {
+		try {
+		  const { portfolio, skills, personal } = await getAllData();
+		  if (!portfolio?.tabs?.length) {
+			alert('portfolio.json is missing or malformed.');
+			return;
+		  }
 
-        const rootEl = buildResumeDOM(portfolio, skills || [], personal || []);
-        // make sure the element is in DOM flow (we set visibility hidden via CSS)
-        rootEl.style.visibility = 'hidden';
+		  const rootEl = buildResumeDOM(portfolio, skills || [], personal || []);
+		  // keep it in layout (CSS already sets opacity:0 so it won’t flash)
+		  rootEl.style.opacity = '0';
+		  rootEl.style.position = 'fixed';
+		  rootEl.style.left = '0';
+		  rootEl.style.top = '0';
+		  rootEl.style.width = '794px';
 
-        try {
-          await exportPDF_htmlAPI(rootEl);
-        } catch (e) {
-          console.warn('doc.html() failed, using fallback canvas path:', e);
-          await exportPDF_fallbackCanvas(rootEl);
-        }
-      } catch (e) {
-        console.error(e);
-        alert('Could not generate the resume. See console for details.');
-      }
-    });
+		  await exportPDF(rootEl);  // <-- call the function you actually defined
+		} catch (e) {
+		  console.error(e);
+		  alert('Could not generate the resume. See console for details.');
+		}
+	  });
+	});
+
   });
 })();
