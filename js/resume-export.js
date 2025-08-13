@@ -1,12 +1,29 @@
-// js/resume-export.js
+// js/resume-export.js  (Hosted mode: fetch JSON and export PDF)
 (function () {
-  async function loadJSON(path) {
-    const r = await fetch(path);
-    if (!r.ok) throw new Error(`Failed to load ${path}`);
+  // Build URLs relative to the current page (works on GitHub Pages / repo subpaths)
+  const base = new URL('.', location.href);
+  const URLS = {
+    portfolio: new URL('data/portfolio.json', base).href,
+    skills: new URL('data/skills.json', base).href,
+    personal: new URL('data/personal_projects.json', base).href, // optional
+  };
+
+  async function loadJSON(url) {
+    const r = await fetch(url, { cache: 'no-store' });
+    if (!r.ok) throw new Error(`HTTP ${r.status} for ${url}`);
     return r.json();
   }
 
-  // Build a clean A4 document in an off-screen container
+  async function getAllData() {
+    const [portfolio, skills] = await Promise.all([
+      loadJSON(URLS.portfolio),
+      loadJSON(URLS.skills),
+    ]);
+    let personal = [];
+    try { personal = await loadJSON(URLS.personal); } catch (_) {}
+    return { portfolio, skills, personal };
+  }
+
   function buildResumeDOM(portfolio, skills, personal) {
     const root = document.getElementById('resumeRoot');
     root.innerHTML = '';
@@ -16,12 +33,14 @@
       'padding:32px 40px',
       'font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif',
       'line-height:1.4',
-      'color:#111'
+      'color:#111',
+      'background:#fff',
+      'width:794px' // A4 width at 96dpi
     ].join(';');
 
     const profileImg = portfolio.profileImage || 'images/profile.jpg';
 
-    // header
+    // Header
     const header = document.createElement('div');
     header.style.cssText = 'display:flex;gap:16px;align-items:center;border-bottom:2px solid #e5e7eb;padding-bottom:12px;margin-bottom:10px';
     header.innerHTML = `
@@ -41,8 +60,8 @@
       return d;
     };
 
-    // summary
-    const summary = (portfolio.tabs.find(t => t.id === 'summary') || {}).content || [];
+    // Summary
+    const summary = (portfolio.tabs?.find(t => t.id === 'summary') || {}).content || [];
     if (summary.length) {
       const s = makeSec('Profile Summary');
       const ul = document.createElement('ul');
@@ -57,16 +76,16 @@
       wrap.appendChild(s);
     }
 
-    // experience
-    const exp = (portfolio.tabs.find(t => t.id === 'experience') || {}).content || [];
+    // Experience
+    const exp = (portfolio.tabs?.find(t => t.id === 'experience') || {}).content || [];
     if (exp.length) {
       const e = makeSec('Work Experience');
       e.innerHTML += exp.map(p => `<p style="margin:4px 0;font-size:12.5px">${p}</p>`).join('');
       wrap.appendChild(e);
     }
 
-    // projects (with language/IDE tags)
-    const projTab = portfolio.tabs.find(t => t.id === 'projects');
+    // Projects (with language/IDE tags)
+    const projTab = portfolio.tabs?.find(t => t.id === 'projects');
     if (projTab && Array.isArray(projTab.content)) {
       const pr = makeSec('Professional Projects');
       projTab.content.forEach(item => {
@@ -93,7 +112,7 @@
       wrap.appendChild(pr);
     }
 
-    // personal projects (compact)
+    // Personal projects (compact)
     if (Array.isArray(personal) && personal.length) {
       const pp = makeSec('Personal Projects (Selected)');
       personal.slice(0, 6).forEach(p => {
@@ -107,7 +126,7 @@
       wrap.appendChild(pp);
     }
 
-    // skills (grouped tags)
+    // Skills
     if (Array.isArray(skills)) {
       const sk = makeSec('Skills');
       const byCat = skills.reduce((a, s) => { (a[s.category] = a[s.category] || []).push(s); return a; }, {});
@@ -131,16 +150,16 @@
       wrap.appendChild(sk);
     }
 
-    // education
-    const edu = (portfolio.tabs.find(t => t.id === 'education') || {}).content || [];
+    // Education
+    const edu = (portfolio.tabs?.find(t => t.id === 'education') || {}).content || [];
     if (edu.length) {
       const ed = makeSec('Education');
       ed.innerHTML += edu.map(p => `<p style="margin:4px 0;font-size:12.5px">${p}</p>`).join('');
       wrap.appendChild(ed);
     }
 
-    // contact
-    const contact = (portfolio.tabs.find(t => t.id === 'contact') || {}).content || [];
+    // Contact
+    const contact = (portfolio.tabs?.find(t => t.id === 'contact') || {}).content || [];
     if (contact.length) {
       const ct = makeSec('Contact');
       ct.innerHTML += contact.map(p => `<p style="margin:4px 0;font-size:12.5px">${p}</p>`).join('');
@@ -153,34 +172,31 @@
 
   async function exportPDF(rootEl) {
     if (!window.jspdf || !window.jspdf.jsPDF) {
-      alert('PDF library failed to load. Check your internet or CDN.');
+      alert('PDF library failed to load. Check your internet/CDN.');
       return;
     }
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF('p', 'pt', 'a4');
     await doc.html(rootEl, {
       callback: (d) => d.save('Tarun_Khare_Resume.pdf'),
-      margin: [36, 36, 40, 36],  // top, left, bottom, right
+      margin: [36, 36, 40, 36],
       autoPaging: 'text',
       html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' }
     });
   }
 
-  // Hook up the button
   window.addEventListener('DOMContentLoaded', () => {
     const btn = document.getElementById('downloadResume');
     if (!btn) return;
 
     btn.addEventListener('click', async () => {
       try {
-        const [portfolio, skills] = await Promise.all([
-          loadJSON('data/portfolio.json'),
-          loadJSON('data/skills.json')
-        ]);
-        let personal = [];
-        try { personal = await loadJSON('data/personal_projects.json'); } catch(_) {}
-
-        const rootEl = buildResumeDOM(portfolio, skills, personal);
+        const { portfolio, skills, personal } = await getAllData();
+        if (!portfolio?.tabs?.length) {
+          alert('portfolio.json is missing or malformed.');
+          return;
+        }
+        const rootEl = buildResumeDOM(portfolio, skills || [], personal || []);
         await exportPDF(rootEl);
       } catch (e) {
         console.error(e);
