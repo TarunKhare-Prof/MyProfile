@@ -56,19 +56,53 @@
 	  "label": "Professional Projects",
 	  "title": "Professional Projects",
 	  "content": [
-		"<strong>Add-ons for PTC Windchill Modeler –</strong> Enhanced the Windchill Modeler with custom menu options tailored to project-specific needs. These extensions dynamically updated based on evolving customer requirements, improving modeling efficiency and traceability.",
-		"<strong>Report Generator for Train Validation –</strong> Developed an automation tool to generate comprehensive validation reports summarizing execution results. Included status tracking of each requirement with detailed Pass/Fail classification and summary insights.",
-		"<strong>Review Tool for Train Validation –</strong> Implemented a validation assistant that parses and verifies test scripts. It performs multiple compliance and logical checks, highlighting errors in test cases and suggesting corrective actions to improve validation reliability.",
-		"<strong>MPU Software Checker –</strong> Designed a static analysis tool to assess and review MPU software for potential issues or misconfigurations. It generates structured reports to aid debugging and quality assurance processes.",
-		"<strong>Sequence Generator for TestStand –</strong> Built a translator tool that converts structured validation scripts into executable sequences compatible with NI TestStand. This automation significantly reduced manual effort in test setup and ensured test consistency.",
-		"<strong>Document Generator –</strong> Created a smart documentation generator that, based on user inputs, produces multiple types of documents including Guidelines, Installation Manuals, Requirement Documents, and User Manuals in predefined formats.",
-		"<strong>Hours & KPI Tracker –</strong> Designed a productivity management tool that enables users to log daily working hours, track KPIs such as OTIF (On Time In Full) and RFT (Right First Time), and maintain deliverables data in a structured format.",
-		"<strong>Comments Adder –</strong> The tool helps users avoid manually copying and updating repetitive literals for test cases by allowing them to add data directly with minimal intervention.",
-		"<strong>Instance Generator –</strong> The Instance Generator is designed to automate the generation of different equipment and train function combinations. This significantly reduces the time required to create complex configurations and ensures thorough testing of all possible train setups.",
-		"<strong>Proof Reader –</strong> The Proofreading Tool is designed to compare two input documents and identify differences, including changes, deletions, and new additions. It generates a detailed report highlighting the count and nature of differences in both HTML and Excel formats.",
-		"<strong>Train Functionality Validation Framework –</strong> Developed and executed test scenarios for PC-based testing of different train functionalities across various metro projects, including Dubai, Avelia, TGV2020, Amtrak, Delhi, and Shanghai. Validated over 24 critical functions such as BRK, JRU, DRS, LIG, TCN, OAS, MAS, and TBS. Conducted multi-level trace-back testing to identify root producers. Created test cases based on Electrical Solution Principles (SPS/PPS) and ADL1/ADL2 documentation. Also contributed to HMI development using CoDeSys with varying train configurations and screen layouts, supporting both manual and Python-based HMI validation."
+		{
+		  "description": "<strong>Add-ons for PTC Windchill Modeler –</strong> Enhanced the Windchill Modeler with custom menu options tailored to project-specific needs. These extensions dynamically updated based on evolving customer requirements, improving modeling efficiency and traceability.",
+		  "languages": ["C#", "WPF", "WinForms", "PTC Modeler"]
+		},
+		{
+		  "description": "<strong>Report Generator for Train Validation –</strong> Developed an automation tool to generate comprehensive validation reports summarizing execution results. Included status tracking of each requirement with detailed Pass/Fail classification and summary insights.",
+		  "languages": ["Python", "Tkinter", "Pandas"]
+		},
+		{
+		  "description": "<strong>Review Tool for Train Validation –</strong> Implemented a validation assistant that parses and verifies test scripts. It performs multiple compliance and logical checks, highlighting errors in test cases and suggesting corrective actions to improve validation reliability.",
+		  "languages": ["Python", "Tkinter", "Pandas"]
+		},
+		{
+		  "description": "<strong>MPU Software Checker –</strong> Designed a static analysis tool to assess and review MPU software for potential issues or misconfigurations. It generates structured reports to aid debugging and quality assurance processes.",
+		  "languages": ["Python", "Tkinter", "Pandas"]
+		},
+		{
+		  "description": "<strong>Sequence Generator for TestStand –</strong> Built a translator tool that converts structured validation scripts into executable sequences compatible with NI TestStand. This automation significantly reduced manual effort in test setup and ensured test consistency.",
+		  "languages": ["VB.NET", "VB Macros", "Python", "Tkinter", "Pandas"]
+		},
+		{
+		  "description": "<strong>Document Generator –</strong> Created a smart documentation generator that, based on user inputs, produces multiple types of documents including Guidelines, Installation Manuals, Requirement Documents, and User Manuals in predefined formats.",
+		  "languages": ["Python", "Tkinter", "Pandas"]
+		},
+		{
+		  "description": "<strong>Hours & KPI Tracker –</strong> Designed a productivity management tool that enables users to log daily working hours, track KPIs such as OTIF (On Time In Full) and RFT (Right First Time), and maintain deliverables data in a structured format.",
+		  "languages": ["Python", "Flask", "Tkinter", "Pandas", "Microsoft Graph API"]
+		},
+		{
+		  "description": "<strong>Comments Adder –</strong> The tool helps users avoid manually copying and updating repetitive literals for test cases by allowing them to add data directly with minimal intervention.",
+		  "languages": ["VB Macros", "Python"]
+		},
+		{
+		  "description": "<strong>Instance Generator –</strong> The Instance Generator is designed to automate the generation of different equipment and train function combinations. This significantly reduces the time required to create complex configurations and ensures thorough testing of all possible train setups.",
+		  "languages": ["VB Macros"]
+		},
+		{
+		  "description": "<strong>Proof Reader –</strong> The Proofreading Tool is designed to compare two input documents and identify differences, including changes, deletions, and new additions. It generates a detailed report highlighting the count and nature of differences in both HTML and Excel formats.",
+		  "languages": ["Python", "Tkinter", "OpenPyxl"]
+		},
+		{
+		  "description": "<strong>Train Functionality Validation Framework –</strong> Developed and executed test scenarios for PC-based testing of different train functionalities across various metro projects, including Dubai, Avelia, TGV2020, Amtrak, Delhi, and Shanghai. Validated over 24 critical functions such as BRK, JRU, DRS, LIG, TCN, OAS, MAS, and TBS. Conducted multi-level trace-back testing to identify root producers. Created test cases based on Electrical Solution Principles (SPS/PPS) and ADL1/ADL2 documentation. Also contributed to HMI development using CoDeSys with varying train configurations and screen layouts, supporting both manual and Python-based HMI validation.",
+		  "languages": ["SIL0/SIL2", "Component Testing", "Integration Testing", "DOORs", "ClearCase", "ClearQuest", "TestStand", "Excel Script", "Control Build"]
+		}
 	  ]
 	}
+
 
 	,
 	{
