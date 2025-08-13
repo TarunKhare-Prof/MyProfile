@@ -30,7 +30,6 @@
 <body>
 
   <!-- Fixed Download button (already present) -->
-	<button id="downloadResume" class="download-btn" title="Download resume as PDF">⬇ Download Resume</button>
 
   <header>
     <svg class="wave" viewBox="0 0 1440 90" preserveAspectRatio="none">
@@ -366,11 +365,15 @@
   </script>
 
   <!-- Hidden resume root -->
-	<div id="resumeRoot"></div>
+	<div id="resumeRoot" style="
+	  position: fixed; left: 0; top: 0; width: 794px;
+	  background:#fff; color:#111; opacity:0; pointer-events:none;">
+	</div>
 
 	<!-- Only these two libs -->
 	<script defer src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 	<script defer src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
 
 	<!-- Exporter (no html2pdf usage) -->
 	<script defer src="js/resume-export.js?v=2"></script>
