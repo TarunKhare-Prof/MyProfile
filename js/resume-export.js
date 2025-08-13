@@ -1,33 +1,112 @@
-// js/resume-export.js (fixed)
+// js/resume-export.js  — DOM-scraping version
 (function () {
-  const A4_WIDTH = 794; // px @ ~96dpi
-  const A4_HEIGHT_PT = 842; // pt (jsPDF A4 height)
-  const A4_WIDTH_PT  = 595; // pt (jsPDF A4 width)
+  const A4_WIDTH_PX = 794; // ~96dpi width
 
-  async function loadJSON(path) {
-    const r = await fetch(path, { cache: 'no-store' });
-    if (!r.ok) throw new Error(`HTTP ${r.status} for ${path}`);
-    return r.json();
+  // --- tiny helpers ---
+  const $  = (sel, root=document) => root.querySelector(sel);
+  const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+  const hasText = (s) => s && s.replace(/\s+/g,'').length > 0;
+
+  // Wait until your tabs finished rendering (projects & summary exist)
+  async function waitForTabsReady(timeoutMs = 5000) {
+    const start = performance.now();
+    while (performance.now() - start < timeoutMs) {
+      const summaryHas = $$('#summary p').length > 0;
+      const expHas     = $$('#experience p, #experience li, #experience strong').length > 0;
+      const projHas    = $$('#projects-holder .project-card').length > 0;
+      const skillsHas  = $$('#skills table.skills-table').length > 0;
+      if (summaryHas || expHas || projHas || skillsHas) return true;
+      await new Promise(r => setTimeout(r, 120));
+    }
+    return false;
   }
 
-  async function getAllData() {
-    const base = new URL('.', location.href);
-    const [portfolio, skills] = await Promise.all([
-      loadJSON(new URL('data/portfolio.json', base).href),
-      loadJSON(new URL('data/skills.json', base).href),
-    ]);
-    let personal = [];
-    try { personal = await loadJSON(new URL('data/personal_projects.json', base).href); } catch {}
-    return { portfolio, skills, personal };
+  // ============= EXTRACT FROM DOM =============
+  function extractSummary() {
+    const sec = $('#summary'); if (!sec) return [];
+    return $$('#summary p').map(p => p.textContent.trim()).filter(hasText);
   }
 
-  function buildResumeDOM(portfolio, skills, personal) {
+  function extractExperience() {
+    const sec = $('#experience'); if (!sec) return [];
+    // Keep lightweight HTML so bold lines stay bold
+    const blocks = [];
+    $$('#experience p, #experience strong, #experience ul, #experience li').forEach(n => {
+      // capture paragraphs as HTML
+      if (n.tagName === 'P') {
+        const html = n.innerHTML.trim();
+        if (hasText(n.textContent)) blocks.push(`<p>${html}</p>`);
+      }
+    });
+    // If it was built as HTML strings wrapped in <p>, above will still work fine
+    if (!blocks.length) {
+      const raw = sec.innerText.split('\n').map(s => s.trim()).filter(hasText);
+      raw.forEach(s => blocks.push(`<p>${s}</p>`));
+    }
+    return blocks;
+  }
+
+  function extractProjects() {
+    const cards = $$('#projects-holder .project-card');
+    if (!cards.length) return [];
+    return cards.map(card => {
+      const titleStrong = card.querySelector('strong');
+      let title = titleStrong ? titleStrong.textContent.trim() : '';
+      let desc  = '';
+      // p after strong
+      const p = card.querySelector('p');
+      if (p) desc = p.textContent.trim();
+      const langs = $$('.language-tag', card).map(x => x.textContent.trim());
+      return { title, desc, langs };
+    });
+  }
+
+  function extractSkills() {
+    const table = $('#skills table.skills-table');
+    if (!table) return {};
+    const byCat = {};
+    let currentCat = 'Skills';
+    $$('#skills .category-row').forEach(catRow => {
+      const txt = catRow.textContent.trim();
+      if (hasText(txt)) currentCat = txt;
+      byCat[currentCat] = byCat[currentCat] || [];
+      // collect following non-category rows until next category-row
+      let r = catRow.nextElementSibling;
+      while (r && !r.classList.contains('category-row')) {
+        const cells = r.querySelectorAll('td');
+        if (cells.length >= 4) {
+          const name = cells[1].textContent.trim();
+          if (hasText(name)) byCat[currentCat].push(name);
+        }
+        r = r.nextElementSibling;
+      }
+    });
+    return byCat;
+  }
+
+  function extractEducation() {
+    const sec = $('#education'); if (!sec) return [];
+    // get text of lis if present, else fall back to plain text from p’s
+    const lis = $$('#education li');
+    if (lis.length) return lis.map(li => li.textContent.trim()).filter(hasText);
+    return $$('#education p').map(p => p.textContent.trim()).filter(hasText);
+  }
+
+  function extractContact() {
+    const sec = $('#contact'); if (!sec) return [];
+    const lis = $$('#contact li');
+    if (lis.length) return lis.map(li => li.textContent.trim()).filter(hasText);
+    return $$('#contact p').map(p => p.textContent.trim()).filter(hasText);
+  }
+
+  // ============= BUILD RESUME DOM =============
+  function buildResumeDOMFromTabs() {
     const root = document.getElementById('resumeRoot');
     root.innerHTML = '';
 
     const wrap = document.createElement('div');
     wrap.style.cssText = [
-      `width:${A4_WIDTH}px`,
+      `width:${A4_WIDTH_PX}px`,
       'padding:32px 40px',
       'font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif',
       'line-height:1.4',
@@ -35,28 +114,28 @@
       'background:#fff'
     ].join(';');
 
-    const profileImg = portfolio.profileImage || 'images/profile.jpg';
-
     const header = document.createElement('div');
     header.style.cssText = 'display:flex;gap:16px;align-items:center;border-bottom:2px solid #e5e7eb;padding-bottom:12px;margin-bottom:10px';
     header.innerHTML = `
-      <img src="${profileImg}" alt="Profile" style="width:72px;height:72px;border-radius:50%;object-fit:cover" crossorigin="anonymous">
+      <img src="images/profile.jpg" alt="Profile" style="width:72px;height:72px;border-radius:50%;object-fit:cover">
       <div>
         <h1 style="margin:0;font-size:22px">Tarun Khare</h1>
         <div style="color:#374151;font-size:13px;margin-top:2px">Sr. Software Engineer · Bengaluru, India</div>
-        <div style="font-size:12px;color:#374151">Portfolio: https://tarunkhare.in | LinkedIn: linkedin.com/in/tarun-khare-98ab5085</div>
-        <div style="font-size:12px;color:#374151">Email: tarun@tarunkhare.in | Phone: +91-8770057790</div>
+        <div style="font-size:12px;color:#374151">Portfolio: https://tarunkhare.in · LinkedIn: linkedin.com/in/tarun-khare-98ab5085</div>
+        <div style="font-size:12px;color:#374151">Email: tarun@tarunkhare.in · Phone: +91-8770057790</div>
       </div>`;
     wrap.appendChild(header);
 
     const makeSec = (title) => {
       const d = document.createElement('div');
+      d.className = 'resume-section';
       d.style.marginTop = '14px';
       d.innerHTML = `<h2 style="font-size:16px;margin:0 0 6px;color:#111827">${title}</h2>`;
       return d;
     };
 
-    const summary = (portfolio.tabs?.find(t => t.id === 'summary') || {}).content || [];
+    // Summary
+    const summary = extractSummary();
     if (summary.length) {
       const s = makeSec('Profile Summary');
       const ul = document.createElement('ul');
@@ -67,72 +146,61 @@
         li.textContent = txt;
         ul.appendChild(li);
       });
-      s.appendChild(ul);
-      wrap.appendChild(s);
+      s.appendChild(ul); wrap.appendChild(s);
     }
 
-    const exp = (portfolio.tabs?.find(t => t.id === 'experience') || {}).content || [];
-    if (exp.length) {
+    // Work Experience
+    const expBlocks = extractExperience();
+    if (expBlocks.length) {
       const e = makeSec('Work Experience');
-      e.innerHTML += exp.map(p => `<p style="margin:4px 0;font-size:12.5px">${p}</p>`).join('');
+      e.innerHTML += expBlocks.join('');
       wrap.appendChild(e);
     }
 
-    const projTab = portfolio.tabs?.find(t => t.id === 'projects');
-    if (projTab && Array.isArray(projTab.content)) {
+    // Professional Projects
+    const projects = extractProjects();
+    if (projects.length) {
       const pr = makeSec('Professional Projects');
-      projTab.content.forEach(item => {
-        if (item && typeof item === 'object' && item.description) {
-          const div = document.createElement('div');
-          div.style.margin = '8px 0';
-          const title = item.description.replace(/^<strong>|<\/strong>/g, '');
-          div.innerHTML = `<div style="font-weight:600;font-size:13.5px">${title}</div>`;
-          const langs = Array.isArray(item.languages) ? item.languages : [];
-          if (langs.length) {
-            const tags = document.createElement('div');
-            tags.style.cssText = 'margin-top:4px;display:flex;flex-wrap:wrap;gap:4px';
-            langs.forEach(l => {
-              const tag = document.createElement('span');
-              tag.textContent = l;
-              tag.style.cssText = 'font-size:11.5px;padding:2px 6px;background:#eef2ff;color:#4338ca;border-radius:999px';
-              tags.appendChild(tag);
-            });
-            div.appendChild(tags);
-          }
-          pr.appendChild(div);
+      projects.forEach(p => {
+        const div = document.createElement('div');
+        div.style.margin = '8px 0';
+        const title = p.title || '';
+        const desc  = p.desc  || '';
+        div.innerHTML = `<div style="font-weight:600;font-size:13.5px">${title}</div>
+                         ${hasText(desc) ? `<p style="margin:4px 0;font-size:12.5px;color:#374151">${desc}</p>` : ''}`;
+        if (p.langs && p.langs.length) {
+          const tags = document.createElement('div');
+          tags.style.cssText = 'margin-top:4px;display:flex;flex-wrap:wrap;gap:4px';
+          p.langs.forEach(l => {
+            const tag = document.createElement('span');
+            tag.textContent = l;
+            tag.style.cssText = 'font-size:11.5px;padding:2px 6px;background:#eef2ff;color:#4338ca;border-radius:999px';
+            tags.appendChild(tag);
+          });
+          div.appendChild(tags);
         }
+        pr.appendChild(div);
       });
       wrap.appendChild(pr);
     }
 
-    if (Array.isArray(personal) && personal.length) {
-      const pp = makeSec('Personal Projects (Selected)');
-      personal.slice(0, 6).forEach(p => {
-        const row = document.createElement('div');
-        row.style.margin = '8px 0';
-        const about = (p.description && p.description.about) ? p.description.about : '';
-        row.innerHTML = `<div style="font-weight:600;font-size:13.5px">${p.title}</div>
-                         <p style="margin:4px 0;font-size:12.5px;color:#374151">${about}</p>`;
-        pp.appendChild(row);
-      });
-      wrap.appendChild(pp);
-    }
-
-    if (Array.isArray(skills)) {
+    // Skills
+    const skillsByCat = extractSkills();
+    const cats = Object.keys(skillsByCat);
+    if (cats.length) {
       const sk = makeSec('Skills');
-      const byCat = skills.reduce((a, s) => { (a[s.category] = a[s.category] || []).push(s); return a; }, {});
       const grid = document.createElement('div');
       grid.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:10px';
-      Object.entries(byCat).forEach(([cat, list]) => {
+      cats.forEach(cat => {
         const col = document.createElement('div');
         col.innerHTML = `<div style="font-size:12px;color:#374151;font-weight:700;margin-bottom:4px">${cat}</div>`;
         const tags = document.createElement('div');
         tags.style.cssText = 'display:flex;flex-wrap:wrap;gap:4px';
-        list.forEach(x => {
-          const tag = document.createElement('span');
-          tag.textContent = x.name;
-          tag.style.cssText = 'font-size:11.5px;padding:2px 6px;background:#eef2ff;color:#4338ca;border-radius:999px';
-          tags.appendChild(tag);
+        skillsByCat[cat].forEach(name => {
+          const chip = document.createElement('span');
+          chip.textContent = name;
+          chip.style.cssText = 'font-size:11.5px;padding:2px 6px;background:#eef2ff;color:#4338ca;border-radius:999px';
+          tags.appendChild(chip);
         });
         col.appendChild(tags);
         grid.appendChild(col);
@@ -141,17 +209,19 @@
       wrap.appendChild(sk);
     }
 
-    const edu = (portfolio.tabs?.find(t => t.id === 'education') || {}).content || [];
+    // Education
+    const edu = extractEducation();
     if (edu.length) {
       const ed = makeSec('Education');
-      ed.innerHTML += edu.map(p => `<p style="margin:4px 0;font-size:12.5px">${p}</p>`).join('');
+      ed.innerHTML += edu.map(s => `<p style="margin:4px 0;font-size:12.5px">${s}</p>`).join('');
       wrap.appendChild(ed);
     }
 
-    const contact = (portfolio.tabs?.find(t => t.id === 'contact') || {}).content || [];
+    // Contact
+    const contact = extractContact();
     if (contact.length) {
       const ct = makeSec('Contact');
-      ct.innerHTML += contact.map(p => `<p style="margin:4px 0;font-size:12.5px">${p}</p>`).join('');
+      ct.innerHTML += contact.map(s => `<p style="margin:4px 0;font-size:12.5px">${s}</p>`).join('');
       wrap.appendChild(ct);
     }
 
@@ -163,15 +233,14 @@
     if (document.fonts && document.fonts.ready) {
       try { await document.fonts.ready; } catch {}
     }
-    await new Promise(r => requestAnimationFrame(r)); // one frame to settle layout
+    await new Promise(r => requestAnimationFrame(r));
   }
 
-  // Primary export path using html2pdf.js
   async function exportPDF(rootEl) {
     await ensureFontsReady();
 
     const opt = {
-      margin:       [0.5, 0.5, 0.6, 0.5], // inches
+      margin:       [0.5, 0.5, 0.6, 0.5],
       filename:     'Tarun_Khare_Resume.pdf',
       image:        { type: 'jpeg', quality: 0.98 },
       html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
@@ -179,31 +248,22 @@
       pagebreak:    { mode: ['css', 'legacy'] }
     };
 
-    // Temporarily make it visible to the renderer (opacity:1), but behind UI
-    const prev = {
-      position: rootEl.style.position,
-      left: rootEl.style.left,
-      top: rootEl.style.top,
-      width: rootEl.style.width,
-      opacity: rootEl.style.opacity,
-      pointerEvents: rootEl.style.pointerEvents,
-      zIndex: rootEl.style.zIndex
-    };
+    // Make it fully visible for capture (no opacity!)
+    const prev = { ...rootEl.style };
     Object.assign(rootEl.style, {
       position: 'fixed',
       left: '0',
       top: '0',
-      width: `${A4_WIDTH}px`,
-      opacity: '1',           // IMPORTANT: must be visible for capture
+      width: `${A4_WIDTH_PX}px`,
+      opacity: '1',
       pointerEvents: 'none',
-      zIndex: '-1'            // sits behind the page
+      zIndex: 2147483647 // on top; small flash is expected
     });
 
     try {
       await html2pdf().set(opt).from(rootEl).save();
     } finally {
-      // restore original styles
-      Object.assign(rootEl.style, prev);
+      Object.assign(rootEl.style, prev); // restore
     }
   }
 
@@ -214,31 +274,29 @@
 
     btn.addEventListener('click', async () => {
       try {
-        const { portfolio, skills, personal } = await getAllData();
-
-        if (!portfolio || !Array.isArray(portfolio.tabs) || !portfolio.tabs.length) {
-          alert('Could not load portfolio.json (tabs missing/empty). Check /data/portfolio.json path & casing.');
+        const ready = await waitForTabsReady();
+        if (!ready) {
+          alert('Content not loaded yet. Try after the page finishes rendering.');
           return;
         }
 
-        const rootEl = buildResumeDOM(portfolio, skills || [], personal || []);
+        const rootEl = buildResumeDOMFromTabs();
 
-        await ensureFontsReady();
         const h = rootEl.offsetHeight;
         if (!h || h < 10) {
-          alert('Resume content measured as empty. Check JSON loads and #resumeRoot CSS.');
+          alert('Resume appears empty. Check that tabs rendered content.');
           return;
         }
 
         if (typeof html2pdf === 'undefined') {
-          alert('html2pdf library failed to load. Check the CDN script tag.');
+          alert('html2pdf.js failed to load. Check the CDN tag in index.html.');
           return;
         }
 
         await exportPDF(rootEl);
       } catch (e) {
         console.error(e);
-        alert('Could not generate the resume. Open DevTools → Console/Network to see the exact error.');
+        alert('Could not generate the resume from the page content. See console for details.');
       }
     });
   });
