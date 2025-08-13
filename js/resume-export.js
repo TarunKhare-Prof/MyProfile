@@ -1,4 +1,4 @@
-// js/resume-export.js  (final)
+// js/resume-export.js (fixed)
 (function () {
   const A4_WIDTH = 794; // px @ ~96dpi
   const A4_HEIGHT_PT = 842; // pt (jsPDF A4 height)
@@ -163,67 +163,48 @@
     if (document.fonts && document.fonts.ready) {
       try { await document.fonts.ready; } catch {}
     }
-    await new Promise(r => requestAnimationFrame(r)); // 1 frame for layout settle
+    await new Promise(r => requestAnimationFrame(r)); // one frame to settle layout
   }
 
-  // Primary export path: html2pdf.js
+  // Primary export path using html2pdf.js
   async function exportPDF(rootEl) {
     await ensureFontsReady();
 
     const opt = {
-      margin:       [0.5, 0.5, 0.6, 0.5], // inches: top, left, bottom, right
+      margin:       [0.5, 0.5, 0.6, 0.5], // inches
       filename:     'Tarun_Khare_Resume.pdf',
       image:        { type: 'jpeg', quality: 0.98 },
       html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
-      jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+      jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' },
+      pagebreak:    { mode: ['css', 'legacy'] }
     };
 
-    // Ensure it participates in layout (opacity:0 means invisible but renderable)
+    // Temporarily make it visible to the renderer (opacity:1), but behind UI
+    const prev = {
+      position: rootEl.style.position,
+      left: rootEl.style.left,
+      top: rootEl.style.top,
+      width: rootEl.style.width,
+      opacity: rootEl.style.opacity,
+      pointerEvents: rootEl.style.pointerEvents,
+      zIndex: rootEl.style.zIndex
+    };
     Object.assign(rootEl.style, {
       position: 'fixed',
       left: '0',
       top: '0',
-      width: '794px',
-      opacity: '0',
-      pointerEvents: 'none'
+      width: `${A4_WIDTH}px`,
+      opacity: '1',           // IMPORTANT: must be visible for capture
+      pointerEvents: 'none',
+      zIndex: '-1'            // sits behind the page
     });
 
-    // sanity check height
-    const h = rootEl.offsetHeight;
-    if (!h || h < 10) {
-      throw new Error('Resume content measured empty. Check JSON loads & CSS for #resumeRoot.');
+    try {
+      await html2pdf().set(opt).from(rootEl).save();
+    } finally {
+      // restore original styles
+      Object.assign(rootEl.style, prev);
     }
-
-    await html2pdf().set(opt).from(rootEl).save();
-  }
-
-  // Optional fallback (kept for completeness; not used unless you wire it)
-  async function exportPDF_fallbackCanvas(rootEl) {
-    await ensureFontsReady();
-    const { jsPDF } = window.jspdf;
-    const canvas = await html2canvas(rootEl, {
-      scale: 2, useCORS: true, backgroundColor: '#ffffff', windowWidth: A4_WIDTH
-    });
-    const imgData = canvas.toDataURL('image/png');
-    const pdf = new jsPDF('p', 'pt', 'a4');
-
-    // fit width; paginate if needed
-    const pageW = A4_WIDTH_PT;
-    const pageH = A4_HEIGHT_PT;
-    const imgW = pageW;
-    const imgH = (canvas.height * imgW) / canvas.width;
-
-    let remaining = imgH;
-    let y = 0;
-
-    while (remaining > 0) {
-      pdf.addImage(imgData, 'PNG', 0, 0, imgW, Math.min(remaining, pageH));
-      remaining -= pageH;
-      if (remaining > 0) pdf.addPage();
-      y = 0;
-    }
-
-    pdf.save('Tarun_Khare_Resume.pdf');
   }
 
   // Wire button
@@ -242,11 +223,10 @@
 
         const rootEl = buildResumeDOM(portfolio, skills || [], personal || []);
 
-        // wait a frame & fonts, then verify height
         await ensureFontsReady();
         const h = rootEl.offsetHeight;
         if (!h || h < 10) {
-          alert('Resume content measured as empty. Check JSON loads and #resumeRoot CSS (must not use visibility:hidden or display:none).');
+          alert('Resume content measured as empty. Check JSON loads and #resumeRoot CSS.');
           return;
         }
 
