@@ -7,8 +7,8 @@
   <link rel="stylesheet" href="style.css?v=1.0.4" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
+  <!-- ADD: tiny style for the fixed button -->
   <style>
-    /* Download button (top-right) */
     .download-btn {
       position: fixed;
       top: 14px;
@@ -23,46 +23,15 @@
       box-shadow: 0 2px 8px rgba(0,0,0,.2);
       font-weight: 600;
     }
-    .download-btn:hover { background:#1e40af; }
-
-    /* Hidden resume container for PDF rendering */
-    #resumeRoot {
-      position: fixed; 
-      left: -99999px; 
-      top: 0; 
-      width: 794px;   /* A4 width at 96dpi ~ 794px */
-      background: #fff;
-      color: #111;
-      font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.4;
-    }
-    .resume-doc { padding: 32px 40px; }
-    .resume-header { display:flex; gap:16px; align-items:center; border-bottom:2px solid #e5e7eb; padding-bottom:12px; margin-bottom:10px; }
-    .resume-header img { width:72px; height:72px; border-radius:50%; object-fit:cover; }
-    .resume-header h1 { margin:0; font-size:22px; }
-    .resume-header .sub { color:#374151; font-size:13px; margin-top:2px; }
-    .resume-sec { margin-top:14px; }
-    .resume-sec h2 { font-size:16px; margin:0 0 6px; color:#111827; }
-    .resume-list { margin:0; padding-left:16px; font-size:12.5px; }
-    .resume-list li { margin:4px 0; }
-    .resume-p { margin:4px 0; font-size:12.5px; }
-    .resume-project { margin:8px 0; }
-    .resume-project .title { font-weight:600; font-size:13.5px; }
-    .tags { margin-top:4px; display:flex; flex-wrap:wrap; gap:4px; }
-    .tag { font-size:11.5px; padding:2px 6px; background:#eef2ff; color:#4338ca; border-radius:999px; }
-    .grid-2 { display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
-    .small { font-size:12px; color:#374151; }
-
-    /* Page breaks for clean PDF */
-    .page-break { page-break-before: always; }
-    @media print {
-      body { background:#fff; }
-      .download-btn { display:none; }
-    }
+    .download-btn:hover{ background:#1e40af; }
+    /* Hidden resume container for PDF composition (not visible on the page) */
+    #resumeRoot { position: fixed; left: -99999px; top: 0; width: 794px; background: #fff; color:#111; }
   </style>
 </head>
 <body>
-  <button id="downloadResume" class="download-btn">⬇ Download Resume (PDF)</button>
+
+  <!-- ADD: Download Resume button -->
+  <button id="downloadResume" class="download-btn" title="Download resume as PDF">⬇ Download Resume (PDF)</button>
 
   <header>
     <svg class="wave" viewBox="0 0 1440 90" preserveAspectRatio="none">
@@ -86,12 +55,7 @@
     <div class="lightbox-content"></div>
   </div>
 
-  <!-- Hidden resume DOM target -->
-  <div id="resumeRoot"></div>
-
-  <!-- PDF libs -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNa5lH9H5V2hHf1HqOu3cG7HqV2TnfJr1mQnQpS5t1N0qgxZr2m7wQ4iYl4m9BGb9vX2G8m9N1bC1xJcQx6Qvw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-/Fh7o4eW4kG4f7Q7xXbHcCk7wq9o1nN1i0tO9Jp6b7kz7Z7ZVq3B+0o7jXgmdqzYw0K2n8Hh5C7g1W+eQvGkTw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Your existing scripts are unchanged below... -->
 
   <script>
     const fetchJSON = async (p) => (await fetch(p)).json();
@@ -134,12 +98,13 @@
       lb.classList.add('hidden');
     }
 
-    // ============ renderer for Professional Projects ============
+    // ============ NEW: renderer for Professional Projects ============
     function renderProfessionalProjects(container, contentArray) {
       if (!Array.isArray(contentArray)) {
         container.innerHTML += `<p class="note">No projects to display.</p>`;
         return;
       }
+
       if (!document.getElementById('proj-inline-style')) {
         const s = document.createElement('style');
         s.id = 'proj-inline-style';
@@ -153,15 +118,21 @@
         `;
         document.head.appendChild(s);
       }
+
       const frag = document.createDocumentFragment();
+
       contentArray.forEach(entry => {
         const card = document.createElement('div');
         card.className = 'project-card';
+
         if (entry && typeof entry === 'object' && entry.description) {
           const langs = Array.isArray(entry.languages) ? entry.languages : [];
           card.innerHTML = `
             ${entry.description}
-            ${langs.length ? `<div class="languages">${langs.map(l => `<span class="language-tag">${l}</span>`).join('')}</div>` : `<div class="note">Languages not specified.</div>`}
+            ${langs.length ? `
+              <div class="languages">
+                ${langs.map(l => `<span class="language-tag">${l}</span>`).join('')}
+              </div>` : `<div class="note">Languages not specified.</div>`}
           `;
         } else if (typeof entry === 'string') {
           if (entry.includes('<strong>')) {
@@ -175,173 +146,19 @@
         } else {
           card.innerHTML = `<p>${String(entry)}</p>`;
         }
+
         frag.appendChild(card);
       });
+
       container.appendChild(frag);
     }
-    // ============================================================
-
-    // -------- Build Resume DOM from data --------
-    function buildResumeDOM(data, skillsData) {
-      const root = document.getElementById('resumeRoot');
-      root.innerHTML = ''; // clear
-      const wrap = document.createElement('div');
-      wrap.className = 'resume-doc';
-
-      const profileImg = (data.profileImage || 'images/profile.jpg');
-
-      // Header
-      wrap.innerHTML += `
-        <div class="resume-header">
-          <img src="${profileImg}" alt="Profile">
-          <div>
-            <h1>Tarun Khare</h1>
-            <div class="sub">Sr. Software Engineer &middot; Bengaluru, India</div>
-            <div class="small">Portfolio: https://tarunkhare.in &nbsp; | &nbsp; LinkedIn: linkedin.com/in/tarun-khare-98ab5085</div>
-            <div class="small">Email: tarun@tarunkhare.in &nbsp; | &nbsp; Phone: +91-8770057790</div>
-          </div>
-        </div>
-      `;
-
-      // Summary
-      const summary = (data.tabs.find(t => t.id === 'summary') || {}).content || [];
-      if (summary.length) {
-        wrap.innerHTML += `<div class="resume-sec"><h2>Profile Summary</h2><ul class="resume-list">${
-          summary.map(s => `<li>${s}</li>`).join('')
-        }</ul></div>`;
-      }
-
-      // Experience
-      const exp = (data.tabs.find(t => t.id === 'experience') || {}).content || [];
-      if (exp.length) {
-        wrap.innerHTML += `<div class="resume-sec"><h2>Work Experience</h2>${
-          exp.map(p => `<p class="resume-p">${p}</p>`).join('')
-        }</div>`;
-      }
-
-      // Professional Projects (with languages)
-      const projTab = data.tabs.find(t => t.id === 'projects');
-      if (projTab && Array.isArray(projTab.content)) {
-        const section = document.createElement('div'); section.className='resume-sec';
-        section.innerHTML = `<h2>Professional Projects</h2>`;
-        projTab.content.forEach(e => {
-          if (e && typeof e === 'object' && e.description) {
-            const langs = Array.isArray(e.languages) ? e.languages : [];
-            const div = document.createElement('div');
-            div.className = 'resume-project';
-            div.innerHTML = `
-              <div class="title">${e.description.replace(/^<strong>|<\/strong>/g,'')}</div>
-              ${langs.length ? `<div class="tags">${langs.map(l=>`<span class="tag">${l}</span>`).join('')}</div>` : ''}
-            `;
-            section.appendChild(div);
-          } else if (typeof e === 'string') {
-            const div = document.createElement('div');
-            div.className = 'resume-project';
-            div.innerHTML = `<div class="title">${e}</div>`;
-            section.appendChild(div);
-          }
-        });
-        wrap.appendChild(section);
-      }
-
-      // Personal Projects (text only)
-      // Optional: load brief summaries from personal_projects.json if present in window._personalData
-      if (window._personalData && Array.isArray(window._personalData)) {
-        const pp = document.createElement('div'); pp.className='resume-sec';
-        pp.innerHTML = `<h2>Personal Projects (Selected)</h2>`;
-        window._personalData.slice(0,6).forEach(p=>{
-          const d = p.description || {};
-          const row = document.createElement('div');
-          row.className = 'resume-project';
-          row.innerHTML = `<div class="title">${p.title}</div><p class="resume-p small">${(d.about||'').toString()}</p>`;
-          pp.appendChild(row);
-        });
-        wrap.appendChild(pp);
-      }
-
-      // Skills (flatten)
-      if (Array.isArray(skillsData)) {
-        const grid = document.createElement('div'); grid.className='resume-sec';
-        grid.innerHTML = `<h2>Skills</h2>`;
-        const byCat = skillsData.reduce((a,s)=>{(a[s.category]=a[s.category]||[]).push(s);return a;}, {});
-        const cont = document.createElement('div'); cont.className='grid-2';
-        Object.entries(byCat).forEach(([cat, list])=>{
-          const col = document.createElement('div');
-          col.innerHTML = `<div class="small" style="font-weight:700;margin-bottom:4px">${cat}</div>
-                           <div class="tags">${list.map(x=>`<span class="tag">${x.name}</span>`).join('')}</div>`;
-          cont.appendChild(col);
-        });
-        grid.appendChild(cont);
-        wrap.appendChild(grid);
-      }
-
-      // Education
-      const edu = (data.tabs.find(t => t.id === 'education') || {}).content || [];
-      if (edu.length) {
-        wrap.innerHTML += `<div class="resume-sec"><h2>Education</h2>${
-          edu.map(p => `<p class="resume-p">${p}</p>`).join('')
-        }</div>`;
-      }
-
-      // Contact
-      const contact = (data.tabs.find(t => t.id === 'contact') || {}).content || [];
-      if (contact.length) {
-        wrap.innerHTML += `<div class="resume-sec"><h2>Contact</h2>${
-          contact.map(p => `<p class="resume-p">${p}</p>`).join('')
-        }</div>`;
-      }
-
-      root.appendChild(wrap);
-      return root;
-    }
-
-    // -------- PDF Export --------
-    async function exportResumePDF(rootEl) {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF('p', 'pt', 'a4');
-
-      await doc.html(rootEl, {
-        callback: function (doc) {
-          doc.save('Tarun_Khare_Resume.pdf');
-        },
-        margin: [36, 36, 40, 36], // top, left, bottom, right (pts)
-        autoPaging: 'text',
-        x: 0,
-        y: 0,
-        html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' }
-      });
-    }
-
-    // media nav helpers (existing)
-    function showPrev(index) {
-      const items = document.querySelectorAll(`#project-${index} .media-item`);
-      const current = [...items].findIndex(i => i.classList.contains('active'));
-      if (current > 0) {
-        items[current].classList.remove('active');
-        items[current - 1].classList.add('active');
-      }
-    }
-    function showNext(index) {
-      const items = document.querySelectorAll(`#project-${index} .media-item`);
-      const current = [...items].findIndex(i => i.classList.contains('active'));
-      if (current < items.length - 1) {
-        items[current].classList.remove('active');
-        items[current + 1].classList.add('active');
-      }
-    }
+    // ================================================================
 
     (async () => {
       const data = await fetchJSON('data/portfolio.json');
       const skillsData = await fetchJSON('data/skills.json');
-      // Optional: personal projects for resume text
-      try { window._personalData = await fetchJSON('data/personal_projects.json'); } catch(e){}
-
       const nav = document.getElementById('tabs');
       const wrap = document.getElementById('tabWrapper');
-
-      // Expose for PDF build
-      window._portfolioData = data;
-      window._skillsData = skillsData;
 
       for (let i = 0; i < data.tabs.length; i++) {
         const tab = data.tabs[i];
@@ -360,7 +177,7 @@
         }
 
         if (tab.id === 'personal') {
-          const personalData = window._personalData || [];
+          const personalData = await fetchJSON('data/personal_projects.json');
           const grid = document.createElement('div');
           grid.className = 'projects-flex-list';
 
@@ -483,6 +300,15 @@
             sec.appendChild(grid);
           });
 
+        } else if (tab.skills) {
+          sec.innerHTML += `<div class="skills-bars">
+            ${tab.skills.map(sk => `
+              <div class="skill-bar">
+                <span>${sk.name}</span>
+                <div class="bar"><div class="fill" style="width:${sk.level}%"></div></div>
+              </div>`).join('')}
+          </div>`;
+
         } else if (tab.content) {
           sec.innerHTML += tab.content.map(t => `<p>${t}</p>`).join('');
         }
@@ -502,18 +328,24 @@
           closeLightbox();
         }
       });
-
-      // Hook up Download button
-      document.getElementById('downloadResume').addEventListener('click', async () => {
-        const rootEl = buildResumeDOM(window._portfolioData, window._skillsData);
-        await exportResumePDF(rootEl);
-      });
-
     })();
 
-    // Footer info
-    document.getElementById('year').textContent = new Date().getFullYear();
-    document.getElementById('lastModified').textContent = new Date(document.lastModified).toLocaleString();
+    function showPrev(index) {
+      const items = document.querySelectorAll(`#project-${index} .media-item`);
+      const current = [...items].findIndex(i => i.classList.contains('active'));
+      if (current > 0) {
+        items[current].classList.remove('active');
+        items[current - 1].classList.add('active');
+      }
+    }
+    function showNext(index) {
+      const items = document.querySelectorAll(`#project-${index} .media-item`);
+      const current = [...items].findIndex(i => i.classList.contains('active'));
+      if (current < items.length - 1) {
+        items[current].classList.remove('active');
+        items[current + 1].classList.add('active');
+      }
+    }
   </script>
 
   <footer>
@@ -528,5 +360,16 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('lastModified').textContent = new Date(document.lastModified).toLocaleString();
+  </script>
+
+  <!-- ADD: Hidden resume root and the 3 scripts (libs + your separate exporter) -->
+  <div id="resumeRoot"></div>
+  <script defer src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script defer src="js/resume-export.js"></script>
 </body>
 </html>
