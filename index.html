@@ -374,12 +374,15 @@
   </script>
 
   <!-- ADD: Hidden resume root and the 3 scripts (libs + your separate exporter) -->
-  <div id="resumeRoot"></div>
-	<script defer src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-	<script defer src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-	<script defer src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
-	<script defer src="js/resume-export.js"></script>
+  <!-- Hidden resume root -->
+	<div id="resumeRoot"></div>
 
+	<!-- Only these two libs (order doesn’t matter) -->
+	<script defer src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+	<!-- Your exporter -->
+	<script defer src="js/resume-export.js"></script>
 
 </body>
 </html>
