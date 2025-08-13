@@ -1,41 +1,43 @@
-// js/resume-export.js — DOM-scrape + jsPDF.html(), no html2pdf bundle
+// js/resume-export.js — DOM-scrape + jsPDF.html(), no html2pdf
 (function () {
-  const A4_WIDTH_PX = 794; // ~96dpi width
+  const A4_WIDTH_PX = 794; // ~96dpi width used for layout
 
   const $  = (sel, root=document) => root.querySelector(sel);
   const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
-  const hasText = (s) => s && s.replace(/\s+/g,'').length > 0;
+  const hasText = (s) => s && s.replace(/\s+/g, '').length > 0;
 
-  async function waitForTabsReady(timeoutMs = 6000) {
+  async function waitForTabsReady(timeoutMs = 7000) {
     const t0 = performance.now();
     while (performance.now() - t0 < timeoutMs) {
-      const hasAny =
+      const ready =
         $$('#summary p').length ||
         $$('#experience p, #experience strong, #experience li').length ||
         $$('#projects-holder .project-card').length ||
         $$('#skills table.skills-table').length;
-      if (hasAny) return true;
+      if (ready) return true;
       await new Promise(r => setTimeout(r, 120));
     }
     return false;
   }
 
-  // ---- extract content from already-rendered tabs ----
+  // ------- Extract content from current DOM -------
   function extractSummary() {
     return $$('#summary p').map(p => p.textContent.trim()).filter(hasText);
   }
+
   function extractExperience() {
     const parts = [];
     $$('#experience p').forEach(p => {
       if (hasText(p.textContent)) parts.push(`<p>${p.innerHTML.trim()}</p>`);
     });
+    // fallback if markup differs
     if (!parts.length) {
-      const raw = ($('#experience')?.innerText || '').split('\n')
-        .map(s => s.trim()).filter(hasText);
+      const raw = ($('#experience')?.innerText || '').split('\n').map(s => s.trim()).filter(hasText);
       raw.forEach(s => parts.push(`<p>${s}</p>`));
     }
     return parts;
   }
+
   function extractProjects() {
     return $$('#projects-holder .project-card').map(card => {
       const title = (card.querySelector('strong')?.textContent || '').trim();
@@ -44,6 +46,7 @@
       return { title, desc, langs };
     });
   }
+
   function extractSkills() {
     const byCat = {};
     $$('#skills .category-row').forEach(catRow => {
@@ -62,18 +65,20 @@
     });
     return byCat;
   }
+
   function extractEducation() {
     const lis = $$('#education li');
     if (lis.length) return lis.map(li => li.textContent.trim()).filter(hasText);
     return $$('#education p').map(p => p.textContent.trim()).filter(hasText);
   }
+
   function extractContact() {
     const lis = $$('#contact li');
     if (lis.length) return lis.map(li => li.textContent.trim()).filter(hasText);
     return $$('#contact p').map(p => p.textContent.trim()).filter(hasText);
   }
 
-  // ---- build the offscreen resume DOM ----
+  // ------- Build the hidden resume DOM -------
   function buildResumeDOMFromTabs() {
     const root = document.getElementById('resumeRoot');
     root.innerHTML = '';
@@ -192,8 +197,8 @@
       wrap.appendChild(ct);
     }
 
-    root.appendChild(wrap);
-    return root;
+    document.getElementById('resumeRoot').appendChild(wrap);
+    return document.getElementById('resumeRoot');
   }
 
   async function ensureFontsReady() {
@@ -206,19 +211,14 @@
   async function exportPDF_with_jsPDF(rootEl) {
     await ensureFontsReady();
     if (!window.jspdf || !window.jspdf.jsPDF) {
-      alert('jsPDF failed to load. Check CDN tag.');
-      return;
+      throw new Error('jsPDF not loaded');
     }
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF('p', 'pt', 'a4');
 
-    // Show the resume for capture
-    const prev = {
-      visibility: rootEl.style.visibility,
-      zIndex: rootEl.style.zIndex
-    };
+    // temporarily show for capture
+    const prevVis = rootEl.style.visibility;
     rootEl.style.visibility = 'visible';
-    rootEl.style.zIndex = '2147483647';
 
     try {
       await doc.html(rootEl, {
@@ -228,13 +228,45 @@
         callback: (d) => d.save('Tarun_Khare_Resume.pdf')
       });
     } finally {
-      // hide again
-      rootEl.style.visibility = prev.visibility || 'hidden';
-      rootEl.style.zIndex = prev.zIndex || '';
+      rootEl.style.visibility = prevVis || 'hidden';
     }
   }
 
-  // Bind the button
+  async function exportPDF_fallback_canvas(rootEl) {
+    await ensureFontsReady();
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF('p', 'pt', 'a4');
+
+    // show for capture
+    const prevVis = rootEl.style.visibility;
+    rootEl.style.visibility = 'visible';
+
+    try {
+      const canvas = await html2canvas(rootEl, { scale: 2, useCORS: true, backgroundColor: '#ffffff', windowWidth: rootEl.scrollWidth });
+      const imgData = canvas.toDataURL('image/jpeg', 0.98);
+      const pageW = pdf.internal.pageSize.getWidth();
+      const pageH = pdf.internal.pageSize.getHeight();
+      const imgW = pageW;
+      const imgH = canvas.height * imgW / canvas.width;
+
+      let heightLeft = imgH;
+      let position = 0;
+
+      pdf.addImage(imgData, 'JPEG', 0, position, imgW, imgH);
+      heightLeft -= pageH;
+
+      while (heightLeft > 0) {
+        position = heightLeft - imgH;
+        pdf.addPage();
+        pdf.addImage(imgData, 'JPEG', 0, position, imgW, imgH);
+        heightLeft -= pageH;
+      }
+      pdf.save('Tarun_Khare_Resume.pdf');
+    } finally {
+      rootEl.style.visibility = prevVis || 'hidden';
+    }
+  }
+
   window.addEventListener('DOMContentLoaded', () => {
     const btn = document.getElementById('downloadResume');
     if (!btn) return;
@@ -242,16 +274,18 @@
     btn.addEventListener('click', async () => {
       try {
         const ready = await waitForTabsReady();
-        if (!ready) {
-          alert('Content not loaded yet. Try again in a moment.');
-          return;
-        }
+        if (!ready) { alert('Content is still loading. Please try again.'); return; }
+
         const rootEl = buildResumeDOMFromTabs();
         const h = rootEl.offsetHeight;
-        if (!h || h < 20) {
-          alert('Resume appears empty after build.'); return;
+        if (!h || h < 20) { alert('Resume looks empty after build.'); return; }
+
+        try {
+          await exportPDF_with_jsPDF(rootEl);
+        } catch (e) {
+          console.warn('jsPDF.html() path failed, using canvas fallback:', e);
+          await exportPDF_fallback_canvas(rootEl);
         }
-        await exportPDF_with_jsPDF(rootEl);
       } catch (e) {
         console.error(e);
         alert('Could not generate PDF. See console for details.');

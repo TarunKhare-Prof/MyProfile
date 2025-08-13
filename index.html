@@ -7,38 +7,30 @@
   <link rel="stylesheet" href="style.css?v=1.0.4" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-  <!-- ADD: tiny style for the fixed button -->
-  <style>
-  .download-btn {
-    position: fixed; top: 14px; right: 14px; z-index: 2000;
-    background: #2563eb; color: #fff; border: none; padding: 10px 14px;
-    border-radius: 8px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.2);
-    font-weight: 600;
+  
+	<style>
+	  .download-btn{
+		position:fixed;top:14px;right:14px;z-index:2000;
+		background:#2563eb;color:#fff;border:none;padding:10px 14px;
+		border-radius:8px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.2);font-weight:600;
 	  }
-	  .download-btn:hover{ background:#1e40af; }
+	  .download-btn:hover{background:#1e40af}
 
-	  /* Was: position:fixed; left:-99999px (can yield blank) */
-	  /* Keep it in normal layout so size can be measured, but invisible */
-	#resumeRoot{
-	  position: fixed;
-	  left: 0;
-	  top: 0;
-	  width: 794px;           /* A4 at ~96dpi */
-	  background: #fff;
-	  color: #111;
-	  opacity: 0;             /* invisible but rendered */
-	  pointer-events: none;   /* can’t click it */
-	}
-
-
-
+	  /* Important: keep rendered but invisible (no opacity:0) */
+	  #resumeRoot{
+		position:fixed; left:0; top:0; width:794px;   /* A4-ish at 96dpi */
+		background:#fff; color:#111;
+		visibility:hidden;           /* <-- not opacity */
+		pointer-events:none;
+		z-index:2147483000;          /* above page when shown for capture */
+	  }
 	</style>
 
 </head>
 <body>
 
-  <!-- ADD: Download Resume button -->
-  <button id="downloadResume" class="download-btn" title="Download resume as PDF">⬇ Download Resume</button>
+  <!-- Fixed Download button (already present) -->
+	<button id="downloadResume" class="download-btn" title="Download resume as PDF">⬇ Download Resume</button>
 
   <header>
     <svg class="wave" viewBox="0 0 1440 90" preserveAspectRatio="none">
@@ -373,16 +365,15 @@
     document.getElementById('lastModified').textContent = new Date(document.lastModified).toLocaleString();
   </script>
 
-  <!-- ADD: Hidden resume root and the 3 scripts (libs + your separate exporter) -->
   <!-- Hidden resume root -->
 	<div id="resumeRoot"></div>
 
-	<!-- Only these two libs (order doesn’t matter) -->
+	<!-- Only these two libs -->
 	<script defer src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 	<script defer src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
-	<!-- Your exporter -->
-	<script defer src="js/resume-export.js"></script>
+	<!-- Exporter (no html2pdf usage) -->
+	<script defer src="js/resume-export.js?v=2"></script>
 
 </body>
 </html>
