@@ -1,4 +1,4 @@
-// js/resume-export.js  (patched)
+// js/resume-export.js  (final)
 (function () {
   const A4_WIDTH = 794; // px @ ~96dpi
   const A4_HEIGHT_PT = 842; // pt (jsPDF A4 height)
@@ -159,97 +159,107 @@
     return root;
   }
 
-  // ---- export helpers ----
   async function ensureFontsReady() {
     if (document.fonts && document.fonts.ready) {
       try { await document.fonts.ready; } catch {}
     }
-    await new Promise(r => setTimeout(r, 30)); // tiny layout settle
+    await new Promise(r => requestAnimationFrame(r)); // 1 frame for layout settle
   }
 
+  // Primary export path: html2pdf.js
   async function exportPDF(rootEl) {
-	  // wait for fonts/layout to settle
-	  if (document.fonts && document.fonts.ready) {
-		try { await document.fonts.ready; } catch {}
-	  }
-	  await new Promise(r => requestAnimationFrame(r)); // 1 frame
-
-	  const opt = {
-		margin:       [0.5, 0.5, 0.6, 0.5], // inches: top, left, bottom, right
-		filename:     'Tarun_Khare_Resume.pdf',
-		image:        { type: 'jpeg', quality: 0.98 },
-		html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
-		jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
-	  };
-
-	  // Make sure it participates in layout (opacity:0 already, so it won't flash)
-	  rootEl.style.opacity = '0';
-	  rootEl.style.position = 'fixed';
-	  rootEl.style.left = '0';
-	  rootEl.style.top = '0';
-	  rootEl.style.width = '794px';
-
-	  await html2pdf().set(opt).from(rootEl).save();
-	}
-
-
-  async function exportPDF_fallbackCanvas(rootEl) {
-    const { jsPDF } = window.jspdf;
     await ensureFontsReady();
+
+    const opt = {
+      margin:       [0.5, 0.5, 0.6, 0.5], // inches: top, left, bottom, right
+      filename:     'Tarun_Khare_Resume.pdf',
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
+      jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+    };
+
+    // Ensure it participates in layout (opacity:0 means invisible but renderable)
+    Object.assign(rootEl.style, {
+      position: 'fixed',
+      left: '0',
+      top: '0',
+      width: '794px',
+      opacity: '0',
+      pointerEvents: 'none'
+    });
+
+    // sanity check height
+    const h = rootEl.offsetHeight;
+    if (!h || h < 10) {
+      throw new Error('Resume content measured empty. Check JSON loads & CSS for #resumeRoot.');
+    }
+
+    await html2pdf().set(opt).from(rootEl).save();
+  }
+
+  // Optional fallback (kept for completeness; not used unless you wire it)
+  async function exportPDF_fallbackCanvas(rootEl) {
+    await ensureFontsReady();
+    const { jsPDF } = window.jspdf;
     const canvas = await html2canvas(rootEl, {
       scale: 2, useCORS: true, backgroundColor: '#ffffff', windowWidth: A4_WIDTH
     });
     const imgData = canvas.toDataURL('image/png');
     const pdf = new jsPDF('p', 'pt', 'a4');
 
-    // fit image width to page; compute height to keep aspect ratio
+    // fit width; paginate if needed
     const pageW = A4_WIDTH_PT;
     const pageH = A4_HEIGHT_PT;
     const imgW = pageW;
     const imgH = (canvas.height * imgW) / canvas.width;
 
-    let y = 0;
     let remaining = imgH;
+    let y = 0;
 
     while (remaining > 0) {
-      pdf.addImage(imgData, 'PNG', 0, y ? 0 : 0, imgW, Math.min(remaining, pageH));
+      pdf.addImage(imgData, 'PNG', 0, 0, imgW, Math.min(remaining, pageH));
       remaining -= pageH;
-      if (remaining > 0) {
-        pdf.addPage();
-        y = 0;
-      }
+      if (remaining > 0) pdf.addPage();
+      y = 0;
     }
 
     pdf.save('Tarun_Khare_Resume.pdf');
   }
 
+  // Wire button
   window.addEventListener('DOMContentLoaded', () => {
-	  const btn = document.getElementById('downloadResume');
-	  if (!btn) return;
+    const btn = document.getElementById('downloadResume');
+    if (!btn) return;
 
-	  btn.addEventListener('click', async () => {
-		try {
-		  const { portfolio, skills, personal } = await getAllData();
-		  if (!portfolio?.tabs?.length) {
-			alert('portfolio.json is missing or malformed.');
-			return;
-		  }
+    btn.addEventListener('click', async () => {
+      try {
+        const { portfolio, skills, personal } = await getAllData();
 
-		  const rootEl = buildResumeDOM(portfolio, skills || [], personal || []);
-		  // keep it in layout (CSS already sets opacity:0 so it won’t flash)
-		  rootEl.style.opacity = '0';
-		  rootEl.style.position = 'fixed';
-		  rootEl.style.left = '0';
-		  rootEl.style.top = '0';
-		  rootEl.style.width = '794px';
+        if (!portfolio || !Array.isArray(portfolio.tabs) || !portfolio.tabs.length) {
+          alert('Could not load portfolio.json (tabs missing/empty). Check /data/portfolio.json path & casing.');
+          return;
+        }
 
-		  await exportPDF(rootEl);  // <-- call the function you actually defined
-		} catch (e) {
-		  console.error(e);
-		  alert('Could not generate the resume. See console for details.');
-		}
-	  });
-	});
+        const rootEl = buildResumeDOM(portfolio, skills || [], personal || []);
 
+        // wait a frame & fonts, then verify height
+        await ensureFontsReady();
+        const h = rootEl.offsetHeight;
+        if (!h || h < 10) {
+          alert('Resume content measured as empty. Check JSON loads and #resumeRoot CSS (must not use visibility:hidden or display:none).');
+          return;
+        }
+
+        if (typeof html2pdf === 'undefined') {
+          alert('html2pdf library failed to load. Check the CDN script tag.');
+          return;
+        }
+
+        await exportPDF(rootEl);
+      } catch (e) {
+        console.error(e);
+        alert('Could not generate the resume. Open DevTools → Console/Network to see the exact error.');
+      }
+    });
   });
 })();
