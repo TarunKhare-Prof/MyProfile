@@ -1,16 +1,14 @@
-// js/resume-export.js  — tidy, multi-section PDF from your JSON on a static site
+// js/resume-export.js — tidy PDF with left-aligned text & page-break control
 (function () {
-  // ---- constants
-  const PX_A4_WIDTH = 794; // ~96dpi
-  const FILE_NAME = "Tarun_Khare_Resume.pdf";
+  const PX_A4_WIDTH = 794;           // ~96dpi
+  const FILE_NAME   = "Tarun_Khare_Resume.pdf";
 
-  // ---- data util
+  // ---------- data ----------
   async function loadJSON(path) {
     const r = await fetch(path, { cache: "no-store" });
     if (!r.ok) throw new Error(`${path} → ${r.status}`);
     return r.json();
   }
-
   async function getAllData() {
     const base = new URL(".", location.href);
     const portfolio = await loadJSON(new URL("data/portfolio.json", base));
@@ -20,107 +18,103 @@
     return { portfolio, skills, personal };
   }
 
-  // ---- helpers
+  // ---------- helpers ----------
   const el = (tag, attrs = {}, html = "") => {
     const n = document.createElement(tag);
-    Object.entries(attrs).forEach(([k, v]) => (n.style && k === "style" ? (n.style.cssText = v) : n.setAttribute(k, v)));
+    if (attrs.style) n.style.cssText = attrs.style;
+    Object.entries(attrs).forEach(([k, v]) => { if (k !== "style") n.setAttribute(k, v); });
     if (html) n.innerHTML = html;
     return n;
   };
-
-  function stripHTML(html) {
+  const stripHTML = (html) => {
     const tmp = document.createElement("div");
-    tmp.innerHTML = html;
+    tmp.innerHTML = html || "";
     return tmp.textContent || tmp.innerText || "";
-  }
+  };
 
-  // Parse your experience array into roles with bullet points
-  function parseExperience(expArray) {
+  function parseExperience(arr) {
     const out = [];
-    let current = null;
-    (expArray || []).forEach(line => {
+    let cur = null;
+    (arr || []).forEach(line => {
       const t = (line || "").trim();
       if (!t) return;
       if (t.startsWith("<strong")) {
-        if (current) out.push(current);
-        current = { title: stripHTML(t), bullets: [] };
+        if (cur) out.push(cur);
+        cur = { title: stripHTML(t), bullets: [] };
       } else {
-        // turn leading "• " into bullet text
         const bullet = t.replace(/^•\s*/, "").trim();
-        if (bullet) current ? current.bullets.push(bullet) : out.push({ title: bullet, bullets: [] });
+        if (bullet) cur ? cur.bullets.push(bullet) : out.push({ title: bullet, bullets: [] });
       }
     });
-    if (current) out.push(current);
+    if (cur) out.push(cur);
     return out;
   }
 
-  // Projects: extract <strong>Title –</strong> and keep remaining (optional)
   function parseProjects(list) {
     return (list || []).map(item => {
-      if (typeof item === "string") {
-        const text = stripHTML(item);
-        return { title: text, desc: "", tags: [] };
-      }
+      if (typeof item === "string") return { title: stripHTML(item), desc: "", tags: [] };
       if (item && typeof item === "object") {
         const tmp = document.createElement("div");
         tmp.innerHTML = item.description || "";
         const strong = tmp.querySelector("strong");
-        const title = strong ? strong.textContent.replace(/\s*–\s*$/, "").trim() : stripHTML(item.description || "");
+        const title = strong ? strong.textContent.replace(/\s*–\s*$/, "").trim() : stripHTML(item.description);
         if (strong) strong.remove();
         const desc = tmp.textContent.trim();
-        const tags = Array.isArray(item.languages) ? item.languages : [];
-        return { title, desc, tags };
+        return { title, desc, tags: Array.isArray(item.languages) ? item.languages : [] };
       }
       return { title: String(item || ""), desc: "", tags: [] };
     });
   }
-
-  // Education + contact are HTML strings with <li> — read items nicely
-  function parseListHTML(htmlPieces) {
+  const parseListHTML = (htmlPieces) => {
     const tmp = document.createElement("div");
     tmp.innerHTML = (htmlPieces || []).join("");
-    const items = [...tmp.querySelectorAll("li")].map(li => li.textContent.trim()).filter(Boolean);
-    return items;
-  }
+    return [...tmp.querySelectorAll("li")].map(li => li.textContent.trim()).filter(Boolean);
+  };
 
-  // ---- main DOM builder
-  function buildResumeDOM({ portfolio, skills, personal }) {
+  // ---------- builder ----------
+  function buildResumeDOM({ portfolio, skills /*, personal*/ }) {
     const root = document.getElementById("resumeRoot");
     root.innerHTML = "";
 
-    // local style just for the PDF (keeps your site’s CSS untouched)
+    // Styles are scoped to the resume to override your site’s justify styles.
     const css = `
-      .resume{ width:${PX_A4_WIDTH}px; padding:28px 36px; font-family:'Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif; color:#111; line-height:1.35; }
-      .hdr{ display:flex; gap:20px; justify-content:space-between; align-items:flex-start; border-bottom:2px solid #e5e7eb; padding-bottom:10px; margin-bottom:12px;}
-      .hdr .left h1{ font-size:22px; margin:0 0 4px; }
+      .resume{ width:${PX_A4_WIDTH}px; padding:30px 34px;
+        box-sizing:border-box; background:#fff; color:#111;
+        font-family: Arial, Helvetica, "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+        line-height:1.35; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      }
+      /* IMPORTANT: kill justification & odd spacing from site CSS */
+      .resume, .resume *{ text-align:left !important; letter-spacing:0 !important; word-spacing:0 !important;
+        white-space:normal !important; }
+      .hdr{ display:flex; gap:18px; align-items:flex-start; justify-content:space-between;
+        border-bottom:2px solid #e5e7eb; padding-bottom:10px; margin-bottom:12px; }
+      .hdr h1{ font-size:22px; margin:0 0 4px; }
       .muted{ color:#374151; }
       .hdr .right{ text-align:right; font-size:12px; line-height:1.4; }
       .section{ margin-top:14px; break-inside:avoid; }
-      .section h2{ font-size:15px; margin:0 0 8px; color:#111827; letter-spacing:.2px; }
-      .bullets{ margin:0; padding-left:18px; font-size:12.5px; }
+      .section h2{ font-size:15px; margin:0 0 6px; color:#111827; letter-spacing:.2px; }
+      .bullets{ margin:0; padding-left:18px; list-style:disc outside; font-size:12.6px; }
       .bullets li{ margin:4px 0; }
-      .role{ margin:8px 0 10px; }
-      .role-title{ font-weight:600; font-size:13.5px; margin-bottom:4px; }
-      .proj{ margin:8px 0; }
-      .proj-title{ font-weight:600; font-size:13.5px; }
-      .proj-desc{ margin:3px 0 0; font-size:12.5px; color:#374151; }
+      .role{ margin:8px 0 10px; break-inside:avoid; }
+      .role-title{ font-weight:700; font-size:13.5px; margin-bottom:4px; }
+      .proj{ margin:8px 0; break-inside:avoid; }
+      .proj-title{ font-weight:700; font-size:13.5px; }
+      .proj-desc{ margin:3px 0 0; font-size:12.6px; color:#374151; }
       .tags{ margin-top:6px; display:flex; flex-wrap:wrap; gap:4px; }
       .tag{ font-size:11.5px; padding:2px 6px; background:#eef2ff; color:#4338ca; border-radius:999px; }
-      .grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+      .grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
       .pill-list{ display:flex; flex-wrap:wrap; gap:6px; }
       .pill{ font-size:11.5px; padding:2px 6px; background:#f3f4f6; border-radius:999px; }
       .small{ font-size:11.5px; color:#4b5563; margin-top:8px; }
-      /* page breaks for html2pdf */
-      .html2pdf__page-break{ height:0; break-after:page; }
+      .page-break{ height:0; break-after:page; }
     `;
 
     const wrap = el("div", { class: "resume" });
     wrap.appendChild(el("style", {}, css));
 
     // header
-    const profileImg = portfolio.profileImage || "images/profile.jpg";
     const hdr = el("div", { class: "hdr" });
-    const left = el("div", { class: "left" }, `
+    const left = el("div", {}, `
       <h1>Tarun Khare</h1>
       <div class="muted" style="font-size:13px;">Sr. Software Engineer · Bengaluru, India</div>
     `);
@@ -134,20 +128,20 @@
     wrap.appendChild(hdr);
 
     // summary
-    const summaryTab = portfolio.tabs.find(t => t.id === "summary");
-    if (summaryTab?.content?.length) {
+    const summary = portfolio.tabs.find(t => t.id === "summary")?.content || [];
+    if (summary.length) {
       const sec = el("div", { class: "section" });
       sec.appendChild(el("h2", {}, "Profile Summary"));
       const ul = el("ul", { class: "bullets" });
-      summaryTab.content.filter(Boolean).forEach(t => ul.appendChild(el("li", {}, t)));
+      summary.forEach(s => ul.appendChild(el("li", {}, s)));
       sec.appendChild(ul);
       wrap.appendChild(sec);
     }
 
     // experience
-    const expTab = portfolio.tabs.find(t => t.id === "experience");
-    if (expTab?.content?.length) {
-      const roles = parseExperience(expTab.content);
+    const exp = portfolio.tabs.find(t => t.id === "experience")?.content || [];
+    if (exp.length) {
+      const roles = parseExperience(exp);
       const sec = el("div", { class: "section" });
       sec.appendChild(el("h2", {}, "Work Experience"));
       roles.forEach(r => {
@@ -163,30 +157,29 @@
       wrap.appendChild(sec);
     }
 
-    // page break after Experience (keeps page 1 tidy)
-    wrap.appendChild(el("div", { class: "html2pdf__page-break" }));
+    // page break keeps the first page tidy
+    wrap.appendChild(el("div", { class: "page-break" }));
 
     // projects
-    const projTab = portfolio.tabs.find(t => t.id === "projects");
-    if (projTab?.content?.length) {
-      const parsed = parseProjects(projTab.content);
+    const projects = parseProjects(portfolio.tabs.find(t => t.id === "projects")?.content || []);
+    if (projects.length) {
       const sec = el("div", { class: "section" });
       sec.appendChild(el("h2", {}, "Professional Projects"));
-      parsed.forEach(p => {
-        const item = el("div", { class: "proj" });
-        item.appendChild(el("div", { class: "proj-title" }, p.title));
-        if (p.desc) item.appendChild(el("div", { class: "proj-desc" }, p.desc));
+      projects.forEach(p => {
+        const row = el("div", { class: "proj" });
+        row.appendChild(el("div", { class: "proj-title" }, p.title));
+        if (p.desc) row.appendChild(el("div", { class: "proj-desc" }, p.desc));
         if (p.tags?.length) {
           const tags = el("div", { class: "tags" });
           p.tags.forEach(t => tags.appendChild(el("span", { class: "tag" }, t)));
-          item.appendChild(tags);
+          row.appendChild(tags);
         }
-        sec.appendChild(item);
+        sec.appendChild(row);
       });
       wrap.appendChild(sec);
     }
 
-    // skills (2 columns of tag chips by category)
+    // skills
     if (Array.isArray(skills) && skills.length) {
       const byCat = skills.reduce((a, s) => ((a[s.category] = a[s.category] || []).push(s), a), {});
       const sec = el("div", { class: "section" });
@@ -194,7 +187,7 @@
       const grid = el("div", { class: "grid-2" });
       Object.entries(byCat).forEach(([cat, list]) => {
         const col = el("div");
-        col.appendChild(el("div", { style: "font-weight:700; font-size:12.5px; margin-bottom:6px;" }, cat));
+        col.appendChild(el("div", { style: "font-weight:700; font-size:12.6px; margin-bottom:6px;" }, cat));
         const pills = el("div", { class: "pill-list" });
         list.forEach(s => pills.appendChild(el("span", { class: "pill" }, s.name)));
         col.appendChild(pills);
@@ -205,8 +198,7 @@
     }
 
     // education
-    const eduTab = portfolio.tabs.find(t => t.id === "education");
-    const eduItems = eduTab ? parseListHTML(eduTab.content) : [];
+    const eduItems = parseListHTML(portfolio.tabs.find(t => t.id === "education")?.content || []);
     if (eduItems.length) {
       const sec = el("div", { class: "section" });
       sec.appendChild(el("h2", {}, "Education"));
@@ -216,9 +208,8 @@
       wrap.appendChild(sec);
     }
 
-    // contact (clean text)
-    const contactTab = portfolio.tabs.find(t => t.id === "contact");
-    const contactItems = contactTab ? parseListHTML(contactTab.content) : [];
+    // contact
+    const contactItems = parseListHTML(portfolio.tabs.find(t => t.id === "contact")?.content || []);
     if (contactItems.length) {
       const sec = el("div", { class: "section" });
       sec.appendChild(el("h2", {}, "Contact"));
@@ -228,25 +219,22 @@
       wrap.appendChild(sec);
     }
 
-    // footer line
     wrap.appendChild(el("div", { class: "small" }, `Generated ${new Date().toLocaleString()}`));
 
-    // mount
     root.appendChild(wrap);
     return root;
   }
 
-  // ---- export with html2pdf (better pagination)
+  // ---------- export ----------
   async function exportPDF(rootEl) {
-    if (typeof html2pdf === "undefined") throw new Error("html2pdf bundle not loaded");
-    // one frame to settle layout/fonts
+    if (typeof html2pdf === "undefined") throw new Error("html2pdf not loaded");
     if (document.fonts?.ready) { try { await document.fonts.ready; } catch {} }
     await new Promise(r => requestAnimationFrame(r));
 
     const opt = {
-      margin: 14, // pt
+      margin: 18,                                // pt
       filename: FILE_NAME,
-      pagebreak: { mode: ["css", "legacy"] },
+      pagebreak: { mode: ["css", "legacy"] },    // respect .page-break / avoid
       image: { type: "jpeg", quality: 0.98 },
       html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff" },
       jsPDF: { unit: "pt", format: "a4", orientation: "portrait" }
@@ -254,32 +242,27 @@
     await html2pdf().set(opt).from(rootEl).save();
   }
 
-  // ---- wire button
+  // ---------- wire ----------
   window.addEventListener("DOMContentLoaded", () => {
     const btn = document.getElementById("downloadResume");
     if (!btn) return;
-
     btn.addEventListener("click", async () => {
       try {
         const data = await getAllData();
         const rootEl = buildResumeDOM(data);
 
-        // make sure the generator has real height before exporting
-        rootEl.style.opacity = "0";
-        rootEl.style.left = "0";
-        rootEl.style.top = "0";
-        rootEl.style.width = PX_A4_WIDTH + "px";
-
+        // ensure it participates in layout for measurement
+        Object.assign(rootEl.style, { opacity: "0", left: "0", top: "0", width: PX_A4_WIDTH + "px" });
         const h = rootEl.offsetHeight;
         if (!h || h < 30) {
-          console.error("Resume root measured empty height:", h);
-          alert("Resume content looks empty. Check console/network for JSON errors.");
+          console.error("Empty resume height", h);
+          alert("Resume looks empty. Check JSON fetch in the console.");
           return;
         }
         await exportPDF(rootEl);
       } catch (e) {
         console.error(e);
-        alert("Could not generate the PDF. Open DevTools → Console/Network for details.");
+        alert("Could not generate the PDF. See console for details.");
       }
     });
   });
