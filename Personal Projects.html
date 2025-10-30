@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Personal Projects</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 20px;
+      background: #f4f4f4;
+      color: #333;
+    }
+    h2 {
+      font-size: 28px;
+      color: #2c3e50;
+      margin-bottom: 16px;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 4px;
+    }
+    .project-row {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+      background: #fff;
+      padding: 16px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+    .media-column {
+      flex: 1;
+      min-width: 250px;
+      margin-right: 20px;
+    }
+    .desc-column {
+      flex: 2;
+    }
+    .desc-column h3 {
+      color: #2980b9;
+      margin-top: 0;
+    }
+    .desc-column p {
+      margin: 6px 0;
+    }
+    .media-item {
+      width: 100%;
+      max-height: 250px;
+      object-fit: contain;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2>My Personal Projects</h2>
+  <div id="projectList"></div>
+
+  <script>
+    fetch('data/personal_projects.json')
+      .then(res => res.json())
+      .then(projects => {
+        const container = document.getElementById('projectList');
+
+        projects.forEach((p, index) => {
+          const mediaList = Array.isArray(p.src) ? p.src.map(m => m.url) : [];
+          const desc = p.description || {};
+
+          const mediaHTML = mediaList.map((src) => {
+            const ext = src.split('.').pop().toLowerCase();
+            const mimeType = ext === 'mp4' ? 'video/mp4' :
+                             ext === 'webm' ? 'video/webm' :
+                             ext === 'ogg' ? 'video/ogg' : '';
+
+            return (ext === 'mp4' || ext === 'webm' || ext === 'ogg')
+              ? `<video class="media-item" controls muted>
+                   <source src="${src}" type="${mimeType}">
+                 </video>`
+              : `<img class="media-item" src="${src}" alt="${p.title}" />`;
+          }).join('');
+
+          const row = document.createElement('div');
+          row.className = 'project-row';
+          row.innerHTML = `
+            <div class="media-column">
+              ${mediaHTML}
+            </div>
+            <div class="desc-column">
+              <h3>${p.title}</h3>
+              <p><strong>About:</strong> ${desc.about || ''}</p>
+              <p><strong>Software:</strong> ${desc.coding || ''}</p>
+              <p><strong>Hardware:</strong> ${desc.hardware || ''}</p>
+              <p><strong>Additional Info:</strong> ${desc.additional || ''}</p>
+            </div>
+          `;
+
+          container.appendChild(row);
+        });
+      });
+  </script>
+</body>
+</html>

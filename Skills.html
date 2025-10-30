@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Skills</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 20px;
+      background: #f8f8f8;
+      color: #333;
+    }
+
+    h2 {
+      font-size: 28px;
+      color: #2c3e50;
+      margin-bottom: 16px;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 4px;
+    }
+
+    .skills-combined-card {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      align-items: flex-start;
+      margin-top: 20px;
+    }
+
+    .level-guide-card, .skills-wrapper {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .level-guide-card {
+      flex: 1;
+      max-width: 280px;
+    }
+
+    .skills-wrapper {
+      flex: 3;
+      overflow-x: auto;
+    }
+
+    .skills-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    .skills-table th, .skills-table td {
+      padding: 10px;
+      border: 1px solid #ddd;
+    }
+
+    .skills-table th {
+      background: #f0f0f0;
+      font-weight: bold;
+    }
+
+    .skills-table .category-row td {
+      background: #e8f4ff;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .highlight {
+      background-color: #eaffea !important;
+    }
+
+    .level-guide {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .level-guide th, .level-guide td {
+      padding: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .level-guide th {
+      background: #f0f0f0;
+    }
+
+    h3 {
+      margin-top: 0;
+      color: #34495e;
+    }
+  </style>
+</head>
+<body>
+  <h2>Skills</h2>
+  <div class="skills-combined-card">
+    <div class="level-guide-card">
+      <h3>Level Guide</h3>
+      <table class="level-guide">
+        <thead>
+          <tr><th>Level</th><th>Label</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>5</td><td>Advanced</td></tr>
+          <tr><td>4</td><td>Working Level</td></tr>
+          <tr><td>3</td><td>Intermediate</td></tr>
+          <tr><td>2</td><td>Basic</td></tr>
+          <tr><td>1</td><td>Learning</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="skills-wrapper">
+      <table class="skills-table" id="skillsTable">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Name</th>
+            <th>Level</th>
+            <th>Status / Last Used</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    fetch('data/skills.json')
+      .then(res => res.json())
+      .then(data => {
+        const tableBody = document.querySelector('#skillsTable tbody');
+
+        const grouped = data.reduce((acc, skill) => {
+          (acc[skill.category] = acc[skill.category] || []).push(skill);
+          return acc;
+        }, {});
+
+        const levelOrder = { "Advanced": 5, "Working Level": 4, "Intermediate": 3, "Basic": 2, "Learning": 1 };
+
+        Object.entries(grouped).forEach(([category, skills]) => {
+          const catRow = document.createElement('tr');
+          catRow.className = 'category-row';
+          catRow.innerHTML = `<td colspan="4">${category}</td>`;
+          tableBody.appendChild(catRow);
+
+          skills.sort((a, b) => (levelOrder[b.level] || 0) - (levelOrder[a.level] || 0)).forEach(skill => {
+            const tr = document.createElement('tr');
+            if ((skill.status || '').toLowerCase() === 'using') {
+              tr.className = 'highlight';
+            }
+            tr.innerHTML = `
+              <td></td>
+              <td>${skill.name}</td>
+              <td>${skill.level}</td>
+              <td>${skill.status || ''}</td>
+            `;
+            tableBody.appendChild(tr);
+          });
+        });
+      });
+  </script>
+</body>
+</html>

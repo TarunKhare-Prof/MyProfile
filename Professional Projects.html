@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Professional Projects</title>
+  <style>
+    :root { color-scheme: light; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+      margin: 20px;
+      background: #f9f9f9;
+      color: #333;
+    }
+    h2 {
+      color: #2c3e50;
+      font-size: 28px;
+      margin-bottom: 16px;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 4px;
+    }
+    .project-card {
+      background: #fff;
+      margin: 16px 0;
+      padding: 20px;
+      border-left: 5px solid #2980b9;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      border-radius: 10px;
+    }
+    .project-card strong {
+      display: block;
+      font-size: 18px;
+      color: #2c3e50;
+      margin-bottom: 8px;
+    }
+    .project-card p {
+      margin: 6px 0;
+      line-height: 1.5;
+    }
+    .languages {
+      margin-top: 10px;
+      font-size: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .language-tag {
+      display: inline-block;
+      background: #e8f0fe;
+      color: #1a73e8;
+      padding: 4px 8px;
+      border-radius: 14px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    /* Subtle fallback note */
+    .note {
+      color: #666; font-size: 14px; margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Professional Projects</h2>
+  <div id="projects" aria-live="polite"></div>
+
+  <script>
+    (function () {
+      const container = document.getElementById('projects');
+
+      function makeCardFromString(htmlString) {
+        const card = document.createElement('div');
+        card.className = 'project-card';
+        if (htmlString.includes('<strong>')) {
+          const splitIndex = htmlString.indexOf('</strong>') + 9;
+          const title = htmlString.slice(0, splitIndex);
+          const description = htmlString.slice(splitIndex).trim();
+          card.innerHTML = `${title}<p>${description}</p>`;
+        } else {
+          card.innerHTML = `<p>${htmlString}</p>`;
+        }
+        return card;
+      }
+
+      function makeCardFromObject(entryObj) {
+        const card = document.createElement('div');
+        card.className = 'project-card';
+        const desc = entryObj.description || '';
+        const langs = Array.isArray(entryObj.languages) ? entryObj.languages : [];
+
+        card.innerHTML = `
+          ${desc}
+          ${langs.length ? `
+            <div class="languages">
+              ${langs.map(l => `<span class="language-tag">${l}</span>`).join('')}
+            </div>` : `
+            <div class="note">Languages not specified.</div>
+          `}
+        `;
+        return card;
+      }
+
+      function clear(el) { while (el.firstChild) el.removeChild(el.firstChild); }
+
+      // Public renderer the parent can call after injecting this HTML.
+      // Usage from parent: window.renderProfessionalProjects(tab.content)
+      function renderProfessionalProjects(contentArray) {
+        clear(container);
+        if (!Array.isArray(contentArray)) {
+          container.innerHTML = `<p class="note">No projects to display.</p>`;
+          return;
+        }
+        contentArray.forEach(entry => {
+          let card;
+          if (entry && typeof entry === 'object' && entry.description) {
+            card = makeCardFromObject(entry);
+          } else if (typeof entry === 'string') {
+            card = makeCardFromString(entry);
+          } else if (entry && typeof entry === 'object' && entry.html) {
+            // Optional: if someone provides { html: "<strong>...</strong>..." }
+            card = makeCardFromString(entry.html);
+          } else {
+            // Safe fallback
+            card = makeCardFromString(String(entry));
+          }
+          container.appendChild(card);
+        });
+      }
+
+      // Expose to parent
+      window.renderProfessionalProjects = renderProfessionalProjects;
+
+      // Standalone mode: try to fetch portfolio.json and render
+      // (This will work when you open this file directly, or if your tab system lets scripts run.)
+      function tryStandaloneFetch() {
+        fetch('data/portfolio.json')
+          .then(res => res.json())
+          .then(data => {
+            // Support a few shapes:
+            // 1) { tabs: [...] }
+            // 2) { projects: [...] }
+            // 3) direct array (content array)
+            let content = null;
+
+            if (Array.isArray(data)) {
+              content = data; // direct array
+            } else if (data && Array.isArray(data.tabs)) {
+              const tab = data.tabs.find(t => t.id === 'projects');
+              content = tab ? tab.content : null;
+            } else if (data && Array.isArray(data.projects)) {
+              content = data.projects;
+            }
+
+            if (!content) {
+              container.innerHTML = `<p class="note">Could not find "projects" content in data/portfolio.json.</p>`;
+              return;
+            }
+            renderProfessionalProjects(content);
+          })
+          .catch(() => {
+            // Silently ignore in embedded mode; parent can call renderProfessionalProjects()
+            // Show a tiny hint for direct loads.
+            container.innerHTML = `<p class="note">Unable to load data/portfolio.json. If this tab is injected by a parent page, call <code>window.renderProfessionalProjects(tab.content)</code> from the parent.</p>`;
+          });
+      }
+
+      // Auto-attempt standalone rendering (safe no-op if parent will call the renderer)
+      tryStandaloneFetch();
+    })();
+  </script>
+</body>
+</html>

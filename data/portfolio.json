@@ -1,0 +1,167 @@
+{
+  "profileImage": "images/profile.jpg",
+  "tabs": [
+    {
+      "id": "summary",
+      "label": "Profile Summary",
+      "title": "Profile Summary",
+      "content": [
+      "Technically diverse Senior Software Engineer with about 7 years of experience in full-stack software development, embedded automation, and validation frameworks across transportation, fintech, and industrial domains.",
+      "Proficient in building desktop and web-based tools using C#, Python (Flask), VB.NET, and SQL for automation, validation, UI development, and backend operations.",
+      "Hands-on experience in HMI testing, SIL-level validations, and embedded controller interface testing using TestStand, Windchill Modeler, and CoDeSys.",
+      "Strong background in documenting and debugging large systems, including requirement traceability, root cause analysis, and test plan execution for 24+ train functions across global metro projects.",
+      "Capable of designing modular automation frameworks and utilities for tasks such as reporting, diagnostics, document generation, and KPI tracking.",
+      "Self-motivated learner actively engaged in personal projects: Python-Flask stock/crypto screeners using Delta and Dhan APIs, ESP32/ESP8266-based IoT devices, smart home automation via Sinric Pro, and functional 3D printed prototypes.",
+      "Skilled in version control and CI/CD using GitLab, GitHub, and automation toolchains; familiar with defect tracking using IBM EWM and integration platforms.",
+      "Strong communicator and mentor—driven to share knowledge through internal sessions, streamline team productivity, and deliver scalable, future-ready solutions.",
+      "Focused on leveraging automation, cross-platform integration, and software-hardware synergy to deliver robust and innovative engineering solutions."
+    ]
+    },
+    {
+	  "id": "experience",
+	  "label": "Work Experience",
+	  "title": "Work Experience",
+	  "content": [
+		"<strong>Sr. Software Engineer – Alstom Transport India Ltd, Bengaluru</strong> (Oct 2023 – Present)",
+		"• Developed reusable backend validation logic using Flask, WinForms, and embedded SQL operations to support large-scale train test systems.",
+		"• Automated documentation and reporting processes with VB.NET and Excel Macros, reducing manual efforts by over 60%.",
+		"• Built custom internal toolkits in Python and C# for system diagnostics, requirement traceability, and SIL-level testing.",
+		"• Collaborated with cross-functional teams on real-time validation of MPU/DDU and supported integrated test pipelines.",
+		"• Utilized Windchill Modeler to define model-based system architecture and behavior for train subsystems.",
+		"• Mentored junior engineers, contributed to documentation standards, and led internal knowledge-sharing sessions.",
+		" ",
+		" ",
+		
+		"<strong>Software Engineer – Tech Mahindra, Bengaluru</strong> (Feb 2022 – Oct 2023)",
+		"• Created desktop automation tools using VB.NET, C#, and Excel Interop to streamline validation of HMI systems and reporting workflows.",
+		"• Performed CoDeSys-based HMI validation and integrated test development for metro train platforms.",
+		"• Contributed to automation of TestStand sequences for hardware interface testing.",
+		"• Integrated GitLab/GitHub version control with CI/CD pipelines for internal tools, and participated in defect tracking using IBM EWM.",
+		"• Worked closely with validation teams to ensure early detection and reporting of critical issues.",
+		" ",
+		" ",
+		
+		"<strong>Software Engineer – Cyient Ltd, Bengaluru</strong> (Nov 2018 – Feb 2022)",
+		"• Validated 24+ train functionalities including BRK, TBS, OAS, MAS, DRS, JRU, and more across international metro projects (Dubai, Avelia, TGV2020, Amtrak, Shanghai, Delhi, etc.).",
+		"• Developed Excel-based utilities for test case tracking, requirement mapping, and KPI reporting.",
+		"• Created manual and Python-based test scripts based on Electrical Solution Schemes (SPS/PPS) and ADL1/ADL2 documents.",
+		"• Initiated multi-level trace-back testing to trace errors to root producers, helping reduce defect reproduction time.",
+		"• Collaborated with development teams to assist in debugging and validating embedded train control code.",
+		"• Proposed process improvements for better traceability and validation outcomes."
+	  ]
+	}
+	,
+		{
+	  "id": "projects",
+	  "label": "Professional Projects",
+	  "title": "Professional Projects",
+	  "content": [
+		{
+		  "description": "<strong>Add-ons for PTC Windchill Modeler –</strong> Enhanced the Windchill Modeler with custom menu options tailored to project-specific needs. These extensions dynamically updated based on evolving customer requirements, improving modeling efficiency and traceability.",
+		  "languages": ["C#", "WPF", "WinForms", "PTC Modeler", "Visual Studio (IDE)"]
+		},
+		{
+		  "description": "<strong>Report Generator for Train Validation –</strong> Developed an automation tool to generate comprehensive validation reports summarizing execution results. Included status tracking of each requirement with detailed Pass/Fail classification and summary insights.",
+		  "languages": ["Python", "Tkinter", "Pandas", "PyCharm (IDE)"]
+		},
+		{
+		  "description": "<strong>Review Tool for Train Validation –</strong> Implemented a validation assistant that parses and verifies test scripts. It performs multiple compliance and logical checks, highlighting errors in test cases and suggesting corrective actions to improve validation reliability.",
+		  "languages": ["Python", "Tkinter", "Pandas", "PyCharm (IDE)"]
+		},
+		{
+		  "description": "<strong>MPU Software Checker –</strong> Designed a static analysis tool to assess and review MPU software for potential issues or misconfigurations. It generates structured reports to aid debugging and quality assurance processes.",
+		  "languages": ["Python", "Tkinter", "Pandas", "PyCharm (IDE)"]
+		},
+		{
+		  "description": "<strong>Sequence Generator for TestStand –</strong> Built a translator tool that converts structured validation scripts into executable sequences compatible with NI TestStand. This automation significantly reduced manual effort in test setup and ensured test consistency.",
+		  "languages": ["VB.NET", "VB Macros", "Python", "Tkinter", "Pandas", "Visual Studio (IDE)", "Excel VBA Editor (IDE)", "PyCharm (IDE)", "NI TestStand Sequence Editor (IDE)"]
+		},
+		{
+		  "description": "<strong>Document Generator –</strong> Created a smart documentation generator that, based on user inputs, produces multiple types of documents including Guidelines, Installation Manuals, Requirement Documents, and User Manuals in predefined formats.",
+		  "languages": ["Python", "Tkinter", "Pandas", "PyCharm (IDE)"]
+		},
+		{
+		  "description": "<strong>Hours & KPI Tracker –</strong> Designed a productivity management tool that enables users to log daily working hours, track KPIs such as OTIF (On Time In Full) and RFT (Right First Time), and maintain deliverables data in a structured format.",
+		  "languages": ["Python", "Flask", "Tkinter", "Pandas", "Microsoft Graph API", "PyCharm (IDE)"]
+		},
+		{
+		  "description": "<strong>Comments Adder –</strong> The tool helps users avoid manually copying and updating repetitive literals for test cases by allowing them to add data directly with minimal intervention.",
+		  "languages": ["VB Macros", "Python", "Excel VBA Editor (IDE)", "PyCharm (IDE)"]
+		},
+		{
+		  "description": "<strong>Instance Generator –</strong> The Instance Generator is designed to automate the generation of different equipment and train function combinations. This significantly reduces the time required to create complex configurations and ensures thorough testing of all possible train setups.",
+		  "languages": ["VB Macros", "Excel VBA Editor (IDE)"]
+		},
+		{
+		  "description": "<strong>Proof Reader –</strong> The Proofreading Tool is designed to compare two input documents and identify differences, including changes, deletions, and new additions. It generates a detailed report highlighting the count and nature of differences in both HTML and Excel formats.",
+		  "languages": ["Python", "Tkinter", "OpenPyxl", "PyCharm (IDE)"]
+		},
+		{
+		  "description": "<strong>Train Functionality Validation Framework –</strong> Developed and executed test scenarios for PC-based testing of different train functionalities across various metro projects, including Dubai, Avelia, TGV2020, Amtrak, Delhi, and Shanghai. Validated over 24 critical functions such as BRK, JRU, DRS, LIG, TCN, OAS, MAS, and TBS. Conducted multi-level trace-back testing to identify root producers. Created test cases based on Electrical Solution Principles (SPS/PPS) and ADL1/ADL2 documentation. Also contributed to HMI development using CoDeSys with varying train configurations and screen layouts, supporting both manual and Python-based HMI validation.",
+		  "languages": ["SIL0/SIL2", "Component Testing", "Integration Testing", "DOORs", "ClearCase", "ClearQuest", "TestStand", "Excel Script", "Control Build", "NI TestStand Sequence Editor (IDE)", "CoDeSys IDE", "Excel VBA Editor (IDE)"]
+		}
+	  ]
+	}
+
+
+
+	,
+	{
+	  "id": "personal",
+	  "label": "Personal Projects",
+	  "title": "My Personal Projects"
+	}
+
+	,
+		
+	
+		{
+		  "id": "skills",
+		  "label": "Skills",
+		  "title": "Skills"
+		}
+
+
+
+
+,
+    {
+	  "id": "education",
+	  "label": "Education",
+	  "title": "Education",
+	  "content": [
+	  "<div class='info-card enhanced-education'>",
+	  "<ul class='edu-list'>",
+	  "  <li><i class='fa-solid fa-graduation-cap'></i> <strong>PG-Diploma:</strong> Embedded System and Design, CDAC-Knowledge Park Bangalore</li>",
+	  "  <li><i class='fa-solid fa-user-graduate'></i> <strong>Graduation:</strong> Bachelor of Engineering, Electrical & Electronics, LNCT Indore</li>",
+	  "  <li><i class='fa-solid fa-school'></i> <strong>Senior Secondary:</strong> PCM + Computer Science, St. Michael’s, Satna</li>",
+	  "  <li><i class='fa-solid fa-school-flag'></i> <strong>Higher Secondary:</strong> St. Michael’s, Satna</li>",
+	  "</ul>",
+	  "</div>"
+	]
+
+	}
+,
+   
+    {
+	  "id": "contact",
+	  "label": "Contact",
+	  "title": "Contact",
+	  "content": [
+		  "<div class='info-card enhanced-contact'>",
+		  "<ul class='contact-list'>",
+		  "  <li><i class='fa-solid fa-location-dot'></i> <strong>Location:</strong> Bengaluru, India 560102</li>",
+		  "  <li><i class='fa-solid fa-phone'></i> <strong>Primary Phone:</strong> +91-8770057790</li>",
+		  "  <li><i class='fa-solid fa-phone-volume'></i> <strong>Alternate Phone:</strong> +91-7338071923</li>",
+		  "  <li><i class='fa-solid fa-envelope'></i> <strong>Primary Email:</strong> <a href='mailto:tarun@tarunkhare.in'>tarun@tarunkhare.in</a></li>",
+		  "  <li><i class='fa-solid fa-envelope-open-text'></i> <strong>Alternate Email:</strong> <a href='mailto:tarun.vbc.gg@gmail.com'>tarun.vbc.gg@gmail.com</a></li>",
+		  "  <li><i class='fa-brands fa-linkedin'></i> <strong>LinkedIn:</strong> <a href='https://www.linkedin.com/in/tarun-khare-98ab5085/' target='_blank'>linkedin.com/in/tarun-khare-98ab5085</a></li>",
+		  "  <li><i class='fa-solid fa-globe'></i> <strong>Portfolio:</strong> <a href='https://tarunkhare.in' target='_blank'>https://tarunkhare.in</a></li>",
+		  "</ul>",
+		  "</div>"
+		]
+
+	}
+
+  ]
+}

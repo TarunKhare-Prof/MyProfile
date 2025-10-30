@@ -1,0 +1,342 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #eef3f9;
+}
+
+/* ===== HEADER ===== */
+header {
+  position: relative;
+  color: #fff;
+  padding: 40px 20px 70px;
+  background: linear-gradient(120deg, #004080, #0074cc);
+}
+header .wave {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 90px;
+  fill: #eef3f9;
+}
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  max-width: 1100px;
+  margin: auto;
+}
+.profile-pic {
+  width: 110px;
+  height: 110px;
+  border-radius: 10px;
+  border: 4px solid #fff;
+  object-fit: cover;
+}
+.text-content h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+}
+.text-content h2 {
+  margin: 6px 0;
+  font-size: 18px;
+  color: #cce4ff;
+  font-weight: 500;
+}
+.text-content h3 {
+  margin: 6px 0 0;
+  font-size: 16px;
+  font-weight: 600;
+  opacity: 0.95;
+}
+
+/* ===== NAVIGATION ===== */
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  padding: 15px;
+  background: #ffffffee;
+  backdrop-filter: blur(5px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+nav button {
+  background: #fff;
+  border: 1px solid #cdd1e1;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+nav button:hover {
+  background: #004080;
+  color: #fff;
+}
+
+/* ===== TABS ===== */
+.tab-content {
+  display: none;
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+.tab-content.active {
+  display: block;
+}
+
+/* ===== SKILLS SECTION ===== */
+.skills-combined-card {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 20px;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+.skills-wrapper {
+  flex: 3;
+  min-width: 600px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px 30px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  overflow-x: auto;
+}
+.level-guide-card {
+  flex: 1;
+  min-width: 240px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 0 10px #ccc;
+}
+.level-guide-card h3 {
+  margin-top: 0;
+  font-size: 18px;
+  color: #004080;
+  border-bottom: 1px solid #cdd1e1;
+  padding-bottom: 6px;
+}
+.level-guide-card .level-guide {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  margin-top: 10px;
+}
+.level-guide th,
+.level-guide td {
+  border: 1px solid #ccc;
+  padding: 8px 14px;
+  text-align: left;
+}
+.level-guide th {
+  background-color: #004080;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.skills-table {
+  border-collapse: collapse;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 10px #ccc;
+}
+.skills-table th,
+.skills-table td {
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+.skills-table th {
+  background-color: #004080;
+  color: white;
+}
+.skills-table .category-row td {
+  background-color: #e1ecf9;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #003366;
+}
+
+/* ===== PROJECTS ===== */
+.projects-flex-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+}
+.project-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  background: #f9fbfe;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.media-column {
+  flex: 1;
+  min-width: 280px;
+}
+.media-wrapper {
+  position: relative;
+}
+.media-wrapper img,
+.media-wrapper video {
+  width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+  border-radius: 10px;
+  display: none;
+}
+.media-wrapper .media-item.active {
+  display: block;
+}
+.media-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #004080;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 18px;
+  z-index: 2;
+  opacity: 0.7;
+  border-radius: 4px;
+}
+.media-nav:hover {
+  opacity: 1;
+}
+.media-nav.prev { left: 10px; }
+.media-nav.next { right: 10px; }
+.desc-column {
+  flex: 2;
+  min-width: 300px;
+}
+.desc-column h3 {
+  margin-top: 0;
+  color: #003366;
+}
+.desc-column p {
+  margin: 6px 0;
+  line-height: 1.5;
+}
+
+/* ===== LIGHTBOX ===== */
+#lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: none;
+  background: rgba(0, 0, 0, 0.85);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 20px;
+}
+.lightbox-content {
+  width: 100%;
+  max-width: 960px;
+  max-height: 90vh;
+  overflow: auto;
+  background: #000;
+  padding: 10px;
+  border-radius: 8px;
+}
+.lightbox-content img,
+.lightbox-content video {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+#lightbox .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  width: 100%;
+  background: #f2f5fa;
+  color: #555;
+  font-size: 14px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+.footer-inner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1000px;
+}
+.footer-inner p {
+  margin: 4px 0;
+}
+footer .social {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+footer .social a {
+  color: #004080;
+  font-size: 20px;
+  transition: color 0.2s;
+}
+footer .social a:hover {
+  color: #0074cc;
+}
+
+/* ===== TILE LAYOUT ===== */
+.tile-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+.tile-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+}
+.tile-card h3 {
+  margin-top: 0;
+  font-size: 18px;
+  color: #08356f;
+}
+.tile-card ul {
+  padding-left: 18px;
+  margin: 0;
+}
+.tile-card li {
+  margin-bottom: 6px;
+  line-height: 1.4;
+}

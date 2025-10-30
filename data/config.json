@@ -1,0 +1,12 @@
+{
+  "profileImage": "images/profile.jpg",
+  "tabs": [
+    { "id": "summary", "label": "Profile Summary", "file": "data/summary.json" },
+    { "id": "experience", "label": "Work Experience", "file": "data/experience.json" },
+    { "id": "projects", "label": "Projects", "file": "data/projects.json" },
+    { "id": "personal", "label": "Personal Projects", "file": "data/personal_projects.json" },
+    { "id": "skills", "label": "Skills", "file": "data/skills.json" },
+    { "id": "education", "label": "Education", "file": "data/education.json" },
+    { "id": "contact", "label": "Contact", "file": "data/contact.json" }
+  ]
+}
